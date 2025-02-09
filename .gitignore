@@ -1,0 +1,20 @@
+# Ignorar carpetas de Unity
+Library/
+Temp/
+Logs/
+UserSettings/
+MemoryCaptures/
+
+# Ignorar caché y archivos de compilación de Gradle
+.gradle/
+**/build/
+**/Cache/
+
+# Otros archivos innecesarios
+.vs/
+*.csproj
+*.sln
+Packages/com.ptc.vuforia.engine-*.tgz
+
+ 
+ 
