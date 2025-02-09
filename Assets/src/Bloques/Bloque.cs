@@ -18,8 +18,7 @@ public abstract class Bloque : MonoBehaviour
     private TextMeshProUGUI bloqueText;
 
     public abstract bool isConectable(Bloque other);
-    public abstract void Action();
-
+    public abstract IEnumerator Action();
 
     private void Start(){
         

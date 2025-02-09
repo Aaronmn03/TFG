@@ -11,7 +11,7 @@ public class ActionableObject : MonoBehaviour
     private bool isMoving = false;
 
     // Variables para la rotación
-    public float rotationSpeed = 90f; // grados por segundo
+    public float rotationSpeed = 90f;
     private Quaternion startRotation;
     private Quaternion destinationRotation;
     private float rotationStartTime;
@@ -21,7 +21,7 @@ public class ActionableObject : MonoBehaviour
         if (!isMoving)
         {
             startPosition = transform.position;
-            destination = startPosition + new Vector3(0, 0, 0.6f);
+            destination = startPosition + transform.forward * 0.6f;
             journeyLength = Vector3.Distance(startPosition, destination);
             moveStartTime = Time.time;
             isMoving = true;
@@ -58,7 +58,7 @@ public class ActionableObject : MonoBehaviour
         if (isRotating)
         {
             float angleCovered = (Time.time - rotationStartTime) * rotationSpeed;
-            float t = angleCovered / 90f; // 90° es la rotación total deseada
+            float t = angleCovered / 90f; 
             t = Mathf.SmoothStep(0, 1, t);
             transform.rotation = Quaternion.Slerp(startRotation, destinationRotation, t);
 
@@ -68,5 +68,10 @@ public class ActionableObject : MonoBehaviour
                 transform.rotation = destinationRotation;
             }
         }
+        
+    }
+    public bool IsMoving()
+    {
+        return isMoving || isRotating;
     }
 }

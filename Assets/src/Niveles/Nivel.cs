@@ -81,7 +81,7 @@ public class Nivel : MonoBehaviour
     public void Play(){
         List<BloqueRaiz> bloquesRaiz = GetBloquesRaiz(areaTrabajo);
         foreach (Bloque bloque in bloquesRaiz){
-            bloque.Action();
+            StartCoroutine(bloque.Action());
         }
     }
     private List<BloqueRaiz> GetBloquesRaiz(GameObject parent)
