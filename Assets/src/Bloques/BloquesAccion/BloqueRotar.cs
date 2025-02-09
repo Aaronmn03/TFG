@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BloqueRotar : BloqueAccion{
     public override void Action(){
-        Debug.Log("Roto");
+        actionableObject = FindObjectOfType<ActionableObject>();
+        actionableObject.RotateRight();
     }
 }

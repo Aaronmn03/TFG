@@ -8,13 +8,10 @@ using System.Linq;
 public class Nivel : MonoBehaviour
 {
     private string nombre;
-    private GameObject prefabToSpawn;
+    public int id;
     private string objetivo;
     private List<DatosBloque> bloques;
-    private GameObject spawnedObject;
-
-    private bool hasSpawned = false;
-    
+    public Transform groundPlane;   
 
     /*---UI DATA---*/
     public GameObject startCanvas;
@@ -28,45 +25,40 @@ public class Nivel : MonoBehaviour
         winCanvas = GameObject.Find("WinCanvas");
         playCanvas = GameObject.Find("PrincipalCanvas");
         areaTrabajo = GameObject.Find("AreaTrabajo");
-
+        groundPlane = GameObject.Find("Ground Plane Stage").transform;
     }
-    public void AsignarNivel(string nombre, string objetivo, GameObject nuevoPrefab, List<DatosBloque> bloques)
+    public void AsignarNivel(string nombre, string objetivo, int id, List<DatosBloque> bloques)
     {
         this.nombre = nombre;
         this.objetivo = objetivo;
-        prefabToSpawn = nuevoPrefab;
+        this.id = id;
         this.bloques = bloques;
         InicializarNivel();  
     }
 
-
-
     public void InicializarNivel(){
+        MostrarPrefab();
         LimpiarAreaTrabajo();
-        if (hasSpawned){
-            Destroy(spawnedObject);
-            spawnedObject = null;
-            hasSpawned = false;
-        }
         startCanvas.SetActive(true);
         winCanvas.SetActive(false);
         playCanvas.SetActive(false);
         LimpiarAreaTrabajo();
+        GenerarBloques();
     }
-    public void OnInteractiveHitTest(HitTestResult hitTestResult)
-    {
-        if (!hasSpawned && prefabToSpawn != null)
-        {
-            startCanvas.SetActive(false);
-            playCanvas.SetActive(true);
-            GenerarBloques();
-            spawnedObject = Instantiate(prefabToSpawn, hitTestResult.Position, hitTestResult.Rotation);
-            hasSpawned = true;
+    private void MostrarPrefab(){
+        foreach (Transform child in groundPlane){
+            child.gameObject.SetActive(false);
         }
+        Debug.Log($"Mostrando prefab {id - 1}");
+        groundPlane.GetChild(id-1).gameObject.SetActive(true);
     }
 
-    private void GenerarBloques()
-    {
+    public void NivelInstanciado(){
+        startCanvas.SetActive(false);
+        playCanvas.SetActive(true);   
+    }
+
+    private void GenerarBloques(){
         Transform contenedorBloques = playCanvas.transform.GetChild(2).GetChild(0).GetChild(0);
         LimpiarBloques(contenedorBloques);
 
