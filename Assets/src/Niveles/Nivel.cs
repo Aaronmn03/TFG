@@ -37,8 +37,10 @@ public class Nivel : MonoBehaviour
     }
 
     public void InicializarNivel(){
-        MostrarPrefab();
         LimpiarAreaTrabajo();
+        if (id-2 >= 0){
+            groundPlane.GetChild(id-2).gameObject.SetActive(false);
+        }  
         startCanvas.SetActive(true);
         winCanvas.SetActive(false);
         playCanvas.SetActive(false);
@@ -56,6 +58,7 @@ public class Nivel : MonoBehaviour
     public void NivelInstanciado(){
         startCanvas.SetActive(false);
         playCanvas.SetActive(true);   
+        MostrarPrefab();
     }
 
     private void GenerarBloques(){
