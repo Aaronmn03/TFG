@@ -20,6 +20,8 @@ public abstract class Bloque : MonoBehaviour
     public abstract bool isConectable(Bloque other);
     public abstract IEnumerator Action();
 
+    protected Nivel nivel;
+
     private void Start(){
         
         if (gameObject.GetComponent<BloqueArrastrable>() == null){
@@ -35,6 +37,7 @@ public abstract class Bloque : MonoBehaviour
         {
             Debug.LogError("No se encontró el componente TextMeshProUGUI en el primer hijo.");
         }
+        nivel = GameObject.Find("LevelController").GetComponent<Nivel>();
     }
 
     public void SetColor(Color color)

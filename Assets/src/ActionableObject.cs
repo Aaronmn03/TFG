@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class ActionableObject : MonoBehaviour
 {
+    private Vector3 initialLocalPosition;
+    private Quaternion initialLocalRotation;
+
     // Variables para el movimiento
     public float moveSpeed = 0.3f;
     private Vector3 startPosition;
@@ -16,6 +19,24 @@ public class ActionableObject : MonoBehaviour
     private Quaternion destinationRotation;
     private float rotationStartTime;
     private bool isRotating = false;
+
+    private void Awake()
+    {
+        initialLocalPosition = transform.localPosition;
+        initialLocalRotation = transform.localRotation;
+    }
+
+
+    public void ResetObject()
+    {
+        transform.localPosition = initialLocalPosition;
+        transform.localRotation = initialLocalRotation;
+        isMoving = false;
+        isRotating = false;
+    }
+
+
+
     public void MoveForward()
     {
         if (!isMoving)

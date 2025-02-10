@@ -9,7 +9,7 @@ public class BloqueMover : BloqueAccion{
         actionableObject = FindObjectOfType<ActionableObject>();
         actionableObject.MoveForward();
         while (actionableObject.IsMoving()) {
-            yield return null; // Espera un frame y vuelve a comprobar
+            yield return null;
         }
     }
 }

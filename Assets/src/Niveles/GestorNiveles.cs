@@ -39,4 +39,8 @@ public class GestorNiveles : MonoBehaviour
             Debug.Log("¡Has completado todos los niveles!");
         }
     }
+
+    public void ReiniciarNivel(){
+        CargarNivel(nivelActual);
+    }
 }

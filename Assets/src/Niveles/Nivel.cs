@@ -18,6 +18,7 @@ public class Nivel : MonoBehaviour
     public GameObject startCanvas;
     public GameObject winCanvas;
     public GameObject playCanvas;
+    public GameObject loseCanvas;
     private GameObject areaTrabajo;
     /*-------------*/
     
@@ -26,6 +27,7 @@ public class Nivel : MonoBehaviour
         winCanvas = GameObject.Find("WinCanvas");
         playCanvas = GameObject.Find("PrincipalCanvas");
         areaTrabajo = GameObject.Find("AreaTrabajo");
+        loseCanvas = GameObject.Find("LoseCanvas");
         groundPlane = GameObject.Find("Ground Plane Stage").transform;
         PlaneFinder = GameObject.Find("Plane Finder");
     }
@@ -41,11 +43,12 @@ public class Nivel : MonoBehaviour
     public void InicializarNivel(){
         PlaneFinder.SetActive(true);
         LimpiarAreaTrabajo();
-        if (id-2 >= 0){
-            groundPlane.GetChild(id-2).gameObject.SetActive(false);
-        }  
+        foreach (Transform child in groundPlane){
+            child.gameObject.SetActive(false);
+        }
         startCanvas.SetActive(true);
         winCanvas.SetActive(false);
+        loseCanvas.SetActive(false);
         playCanvas.SetActive(false);
         LimpiarAreaTrabajo();
         GenerarBloques();
@@ -56,6 +59,10 @@ public class Nivel : MonoBehaviour
         }
         Debug.Log($"Mostrando prefab {id - 1}");
         groundPlane.GetChild(id-1).gameObject.SetActive(true);
+        GameObject actionableObject = GameObject.FindObjectOfType<ActionableObject>()?.gameObject;
+        if (actionableObject != null){
+            actionableObject.GetComponent<ActionableObject>().ResetObject();
+        }
     }
 
     public void NivelInstanciado(){
@@ -84,6 +91,11 @@ public class Nivel : MonoBehaviour
     public void Win(){
         playCanvas.SetActive(false);
         winCanvas.SetActive(true);
+    }
+
+    public void Lose(){
+        playCanvas.SetActive(false);
+        loseCanvas.SetActive(true);
     }
     public void Play(){
         List<BloqueRaiz> bloquesRaiz = GetBloquesRaiz(areaTrabajo);

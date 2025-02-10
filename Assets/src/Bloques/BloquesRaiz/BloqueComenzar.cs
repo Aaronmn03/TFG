@@ -7,5 +7,6 @@ public class BloqueComenzar : BloqueRaiz {
         foreach (Bloque bloque in bloquesConectados) {
             yield return StartCoroutine(bloque.Action());
         }
+        nivel.Lose();
     }
 }
