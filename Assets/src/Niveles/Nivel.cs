@@ -12,6 +12,7 @@ public class Nivel : MonoBehaviour
     private string objetivo;
     private List<DatosBloque> bloques;
     public Transform groundPlane;   
+    public GameObject PlaneFinder;   
 
     /*---UI DATA---*/
     public GameObject startCanvas;
@@ -26,6 +27,7 @@ public class Nivel : MonoBehaviour
         playCanvas = GameObject.Find("PrincipalCanvas");
         areaTrabajo = GameObject.Find("AreaTrabajo");
         groundPlane = GameObject.Find("Ground Plane Stage").transform;
+        PlaneFinder = GameObject.Find("Plane Finder");
     }
     public void AsignarNivel(string nombre, string objetivo, int id, List<DatosBloque> bloques)
     {
@@ -37,6 +39,7 @@ public class Nivel : MonoBehaviour
     }
 
     public void InicializarNivel(){
+        PlaneFinder.SetActive(true);
         LimpiarAreaTrabajo();
         if (id-2 >= 0){
             groundPlane.GetChild(id-2).gameObject.SetActive(false);
@@ -59,6 +62,7 @@ public class Nivel : MonoBehaviour
         startCanvas.SetActive(false);
         playCanvas.SetActive(true);   
         MostrarPrefab();
+        PlaneFinder.SetActive(false);
     }
 
     private void GenerarBloques(){
