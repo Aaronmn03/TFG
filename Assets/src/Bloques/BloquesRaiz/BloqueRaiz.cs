@@ -8,5 +8,12 @@ public abstract class BloqueRaiz : Bloque
     public override bool isConectable(Bloque other){
         return false;
     }
+    
+    public void PutBloque(){
+        programableObject.PutBloqueRaiz(this);
+    }
 
+    public void RemoveBloque(){
+        programableObject.RemoveBloqueRaiz(this);
+    }
 }

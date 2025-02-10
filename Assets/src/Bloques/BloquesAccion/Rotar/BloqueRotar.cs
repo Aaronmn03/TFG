@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class BloqueRotar : BloqueAccion{
     public override IEnumerator Action(){
-        actionableObject = FindObjectOfType<ActionableObject>();
+        actionableObject = programableObject.GetComponent<ActionableObject>();
         actionableObject.RotateRight();
         while (actionableObject.IsMoving()) {
-            yield return null; // Espera un frame y vuelve a comprobar
+            yield return null;
         }
     }
 }

@@ -85,6 +85,7 @@ public class Nivel : MonoBehaviour
             bloque.SetColor(datos.color);
             bloque.SetText(datos.texto, datos.colorTexto);
             bloque.SetName(datos.nombre);
+            bloque.gameObject.SetActive(false);
         }
     }
 

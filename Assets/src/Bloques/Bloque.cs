@@ -16,11 +16,11 @@ public abstract class Bloque : MonoBehaviour
     public bool isConnect = false;   
     private Image bloqueImagen;
     private TextMeshProUGUI bloqueText;
+    protected Nivel nivel;
+    protected ProgramableObject programableObject;
 
     public abstract bool isConectable(Bloque other);
     public abstract IEnumerator Action();
-
-    protected Nivel nivel;
 
     private void Start(){
         
@@ -74,6 +74,10 @@ public abstract class Bloque : MonoBehaviour
 
     public void SetParent(Bloque value){
         parent = value;
+    }
+
+    public void SetProgramableObject(ProgramableObject programableObject){
+        this.programableObject = programableObject;
     }
 
     public bool ConnectTo(Bloque parent){
@@ -149,5 +153,22 @@ public abstract class Bloque : MonoBehaviour
             Destroy(bloque.gameObject);
         }
         Destroy(this.gameObject);
+    }
+
+    public void Hide(){
+        Image bloqueRaizImage = gameObject.GetComponent<Image>();
+        bloqueRaizImage.enabled = false;
+        foreach (Transform child in this.transform)
+        {
+            if (child != null)
+            {
+                child.gameObject.SetActive(false);
+            }
+        } 
+    }
+    public void Show(){
+        Image bloqueImage = gameObject.GetComponent<Image>();
+        bloqueImage.enabled = true; 
+        this.transform.GetChild(0).gameObject.SetActive(true);
     }
 }

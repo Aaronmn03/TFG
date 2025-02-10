@@ -12,6 +12,8 @@ public class BloqueArrastrable : MonoBehaviour, IBeginDragHandler, IDragHandler,
     private bool hasBeenPut;
     private GameObject shadow;
 
+    public ObjectManipulator objectManipulator;
+
 
     public GameObject GetShadow(){
         return shadow;
@@ -27,10 +29,15 @@ public class BloqueArrastrable : MonoBehaviour, IBeginDragHandler, IDragHandler,
         canvasGroup = GetComponent<CanvasGroup>();
         bloque = GetComponent<Bloque>();
         shadow = transform.GetChild(1).gameObject;
+        objectManipulator = GameObject.Find("ARManipulator").GetComponent<ObjectManipulator>();
     }
 
 public void OnBeginDrag(PointerEventData eventData)
 {
+    if(!objectManipulator.GetIsARObjectSelected()){
+        Debug.Log("No se ha seleccionado ningun objeto");
+        return;
+    }
     if (!hasBeenPut)
     {
         GameObject duplicatedObject = Instantiate(gameObject, gameObject.transform.parent.transform.parent);
@@ -39,9 +46,8 @@ public void OnBeginDrag(PointerEventData eventData)
         duplicatedRectTransform.position = gameObject.transform.position;
         duplicatedObject.transform.localScale = gameObject.transform.localScale * 2;
         eventData.pointerDrag = duplicatedObject;
-
+        duplicatedObject.GetComponent<Bloque>().SetProgramableObject(objectManipulator.getARObject());
         BloqueArrastrable duplicatedScript = duplicatedObject.GetComponent<BloqueArrastrable>();
-
         duplicatedScript.canvasGroup = duplicatedObject.GetComponent<CanvasGroup>();
         duplicatedScript.canvasGroup.alpha = 0.75f;
         duplicatedScript.canvasGroup.blocksRaycasts = false;
@@ -92,12 +98,10 @@ public void OnDrag(PointerEventData eventData)
         hasBeenPut = true;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-
+        
         var targetBloque = eventData.pointerCurrentRaycast.gameObject.GetComponent<Bloque>();
         if (targetBloque != null && targetBloque != bloque)
         {
-
-            //Esto luego cambialo y pon primero la comprobacion de COnnectTo es solo para probar
             if(bloque.ConnectTo(targetBloque)){
                 RectTransform targetRectTransform = targetBloque.GetComponent<RectTransform>();
                 Vector2 targetPosition = new Vector2(targetRectTransform.anchoredPosition.x, targetRectTransform.anchoredPosition.y);
