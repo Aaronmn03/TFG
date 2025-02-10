@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class BloqueArrastrable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerExitHandler
 {
@@ -28,20 +29,33 @@ public class BloqueArrastrable : MonoBehaviour, IBeginDragHandler, IDragHandler,
         shadow = transform.GetChild(1).gameObject;
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+public void OnBeginDrag(PointerEventData eventData)
+{
+    if (!hasBeenPut)
     {
-        if(!hasBeenPut){
-            GameObject duplicatedObject = Instantiate(gameObject);
-            duplicatedObject.transform.SetParent(this.transform.parent);
-            duplicatedObject.transform.localScale = Vector3.one;
-            this.transform.SetParent(this.transform.parent.parent);
-        }
-        canvasGroup.alpha = 0.8f;
-        canvasGroup.blocksRaycasts = false;
-        if(bloque.HasParent()){
-            bloque.GetParent().UnConnectTo(bloque);
-        }
+        GameObject duplicatedObject = Instantiate(gameObject, gameObject.transform.parent.transform.parent);
+        duplicatedObject.name = gameObject.name; 
+        RectTransform duplicatedRectTransform = duplicatedObject.GetComponent<RectTransform>();
+        duplicatedRectTransform.position = gameObject.transform.position;
+        duplicatedObject.transform.localScale = gameObject.transform.localScale * 2;
+        eventData.pointerDrag = duplicatedObject;
+
+        BloqueArrastrable duplicatedScript = duplicatedObject.GetComponent<BloqueArrastrable>();
+
+        duplicatedScript.canvasGroup = duplicatedObject.GetComponent<CanvasGroup>();
+        duplicatedScript.canvasGroup.alpha = 0.75f;
+        duplicatedScript.canvasGroup.blocksRaycasts = false;
+        return;
     }
+    canvasGroup.alpha = 0.75f;
+    canvasGroup.blocksRaycasts = false;
+
+    if (bloque.HasParent())
+    {
+        bloque.GetParent().UnConnectTo(bloque);
+    }
+}
+
 
 public void OnDrag(PointerEventData eventData)
 {

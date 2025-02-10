@@ -36,9 +36,9 @@ RectTransform:
   - {fileID: 8787439823747432569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -720, y: -1280}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3838207410408862821
@@ -103,7 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ece0a9108878146bd84b43361f06aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  datos: {fileID: 0}
   bloquesConectados: []
   parent: {fileID: 0}
   isConnect: 0

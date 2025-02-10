@@ -502,7 +502,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0000038147, y: -1220.6417}
+  m_AnchoredPosition: {x: 0, y: -1220.6417}
   m_SizeDelta: {x: 439.32, y: 1373.2219}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &150560317
@@ -1682,6 +1682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   groundPlane: {fileID: 0}
+  PlaneFinder: {fileID: 0}
   startCanvas: {fileID: 1846318614}
   winCanvas: {fileID: 900102591}
   playCanvas: {fileID: 1556127748}
