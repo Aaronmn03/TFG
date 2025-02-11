@@ -27,7 +27,7 @@ public abstract class Bloque : MonoBehaviour
         if (gameObject.GetComponent<BloqueArrastrable>() == null){
             gameObject.AddComponent<BloqueArrastrable>();
         }
-        bloqueImagen = GetComponent<Image>();
+        /*bloqueImagen = GetComponent<Image>();
         if (bloqueImagen == null)
         {
             Debug.LogError("No se encontró el componente Image en el objeto.");
@@ -36,7 +36,7 @@ public abstract class Bloque : MonoBehaviour
         if (bloqueText == null)
         {
             Debug.LogError("No se encontró el componente TextMeshProUGUI en el primer hijo.");
-        }
+        }*/
         nivel = GameObject.Find("LevelController").GetComponent<Nivel>();
     }
 

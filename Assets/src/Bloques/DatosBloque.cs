@@ -10,4 +10,5 @@ public class DatosBloque : ScriptableObject
     public Color colorTexto;   
     public Color color;            
     public GameObject prefab; 
+    public GameObject prefabIcon; 
 }

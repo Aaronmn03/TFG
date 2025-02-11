@@ -87,7 +87,7 @@ public class Nivel : MonoBehaviour
         foreach (DatosBloque datos in this.bloques)
         {
             if (datos == null) continue;
-            GameObject nuevoBloque = Instantiate(datos.prefab, contenedorBloques);
+            GameObject nuevoBloque = Instantiate(datos.prefabIcon, contenedorBloques);
             Bloque bloque = nuevoBloque.GetComponent<Bloque>();
             Debug.Log($"Bloque instanciado: {bloque.name}");
             bloque.SetColor(datos.color);
@@ -126,6 +126,7 @@ public class Nivel : MonoBehaviour
 
     public void LimpiarAreaTrabajo(){
         List<Bloque> list = GetAllChildren(areaTrabajo);
+        if(list.Count <= 1) return;
         foreach (Bloque bloque in list){
             bloque.DeleteBloque();
         }

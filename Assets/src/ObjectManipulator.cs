@@ -6,8 +6,10 @@ using UnityEngine.EventSystems;
 public class ObjectManipulator : MonoBehaviour
 {
     public GameObject ARObject;
+    public BloqueArrastrable bloqueObject;
     [SerializeField] private Camera ARCamera;
     private bool isARObjectSelected;
+    private bool isARBloqueSelected;
     private string selectedObjectTag = "ARObject";
     private Vector2 touchPosition;
 
@@ -17,7 +19,8 @@ public class ObjectManipulator : MonoBehaviour
 
     private ZonaDespliegue zonaDespliegue;
 
-    [SerializeField] private float ScreenFactor = 0.001f;
+    [SerializeField] private float ScreenFactor = 0.8f;
+
 
     public bool GetIsARObjectSelected(){
         return isARObjectSelected;
@@ -39,12 +42,17 @@ public class ObjectManipulator : MonoBehaviour
                 touchPosition = firstInput;
                 isARObjectSelected = CheckTouchOnARObject(touchPosition);
             }
-            if (Input.GetMouseButton(0) && isARObjectSelected)
+            if (Input.GetMouseButton(0) && bloqueObject != null)
             {
                 touchPosition = Input.mousePosition;
                 Vector2 diff = (firstInput - touchPosition) * ScreenFactor;
-                ARObject.transform.position = ARObject.transform.position - new Vector3(diff.x, diff.y, 0);
+                bloqueObject.Move(diff);
+                //bloqueObject.transform.position = bloqueObject.transform.position - new Vector3(diff.x * movementSpeed, diff.y * movementSpeed, 0);
                 firstInput = touchPosition;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                bloqueObject = null;
             }
         #else
             if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject())
@@ -58,12 +66,16 @@ public class ObjectManipulator : MonoBehaviour
                             touchPosition = firstTouch.position;
                             isARObjectSelected = CheckTouchOnARObject(touchPosition);
                         }
-                        if (firstTouch.phase == TouchPhase.Moved && isARObjectSelected)
+                        if (firstTouch.phase == TouchPhase.Moved && bloqueObject != null)
                         {
                             touchPosition = firstTouch.position;
                             Vector2 diff = (firstInput - touchPosition) * ScreenFactor;
-                            ARObject.transform.position = ARObject.transform.position - new Vector3(diff.x, diff.y, 0);
+                            bloqueObject.transform.position = bloqueObject.transform.position - new Vector3(diff.x * movementSpeed, diff.y * movementSpeed, 0);
                             firstInput = touchPosition;
+                        }
+                        if (firstTouch.phase == TouchPhase.Ended)
+                        {
+                            bloqueObject = null;
                         }
                     }
                 }
@@ -92,18 +104,17 @@ public class ObjectManipulator : MonoBehaviour
     }
 
     private void SelectObject(GameObject hit){
-        ARObject = hit.transform.gameObject;
-        //Aqui habra que detectar si lo que estamos seleccionando es un bloque programable o un bloque
-        if (ARObject.TryGetComponent<ProgramableObject>(out ProgramableObject ProgramableObject))
+        Debug.Log("Queremos mover el:" + hit.transform.gameObject.name);        
+        if (hit.transform.gameObject.TryGetComponent<ProgramableObject>(out ProgramableObject ProgramableObject))
         {
+            ARObject = hit.transform.gameObject;
             ProgramableObject.SelectObject();
             zonaBloques.SelectedObject();
-            zonaDespliegue.SelectedObject();
+            //zonaDespliegue.SelectedObject();
         }
-        else if (ARObject.TryGetComponent<BloquePrueba>(out BloquePrueba bloque))
+        if (hit.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
         {
-            //bloque.SelectBlock();
-            Debug.Log("Bloque seleccionado");
+            bloqueObject = bloque;  
         }
         else
         {
@@ -116,12 +127,7 @@ public class ObjectManipulator : MonoBehaviour
         {
             ProgramableObject.DeselectObject();
             zonaBloques.NonSelectedObject();
-            zonaDespliegue.NonSelectedObject();
-        }
-        else if (ARObject.TryGetComponent<BloquePrueba>(out BloquePrueba bloque))
-        {
-            //bloque.DeselectBlock();
-            Debug.Log("Bloque desseleccionado");
+            //zonaDespliegue.NonSelectedObject();
         }
         else
         {
