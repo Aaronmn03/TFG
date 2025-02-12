@@ -70,7 +70,8 @@ public class ObjectManipulator : MonoBehaviour
                         {
                             touchPosition = firstTouch.position;
                             Vector2 diff = (firstInput - touchPosition) * ScreenFactor;
-                            bloqueObject.transform.position = bloqueObject.transform.position - new Vector3(diff.x * movementSpeed, diff.y * movementSpeed, 0);
+                            bloqueObject.Move(diff);
+                            //bloqueObject.transform.position = bloqueObject.transform.position - new Vector3(diff.x * movementSpeed, diff.y * movementSpeed, 0);
                             firstInput = touchPosition;
                         }
                         if (firstTouch.phase == TouchPhase.Ended)

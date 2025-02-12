@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8736cc23e6e7ac54f9120f978e6177d7, type: 3}
   m_Name: BloqueMover aux
   m_EditorClassIdentifier: 
+  id: 1
   nombre: Bloque mover
   texto: Avanzar
   colorTexto: {r: 1, g: 1, b: 1, a: 1}

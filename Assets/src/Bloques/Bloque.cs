@@ -37,7 +37,7 @@ public abstract class Bloque : MonoBehaviour
         {
             Debug.LogError("No se encontró el componente TextMeshProUGUI en el primer hijo.");
         }*/
-        nivel = GameObject.Find("LevelController").GetComponent<Nivel>();
+        nivel = GameObject.Find("LevelHandler").GetComponent<Nivel>();
     }
 
     public void SetColor(Color color)

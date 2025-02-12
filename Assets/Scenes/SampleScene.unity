@@ -681,7 +681,7 @@ PrefabInstance:
     - target: {fileID: 973644812749269160, guid: 3803998c247eea54babcf05eeb57896a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3257958493725962256, guid: 3803998c247eea54babcf05eeb57896a,
         type: 3}
@@ -1544,6 +1544,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bloque Mover aux
       objectReference: {fileID: 0}
+    - target: {fileID: 973644812749269160, guid: 188f65c80f832ee42b87a1d9a334ab21,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3916281861868112107, guid: 188f65c80f832ee42b87a1d9a334ab21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2242,7 +2247,6 @@ GameObject:
   - component: {fileID: 942559266}
   - component: {fileID: 942559265}
   - component: {fileID: 942559264}
-  - component: {fileID: 942559267}
   m_Layer: 0
   m_Name: Ground Plane Stage
   m_TagString: Untagged
@@ -2314,7 +2318,7 @@ MonoBehaviour:
   mSelectedStageType: 0
   mPlaneReference: {fileID: 0}
   mMidAirReference: {fileID: 0}
-  mPreview: {fileID: 942559267}
+  mPreview: {fileID: 0}
 --- !u!4 &942559266
 Transform:
   m_ObjectHideFlags: 0
@@ -2332,23 +2336,6 @@ Transform:
   - {fileID: 33807327}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &942559267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942559262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1308684972, guid: 8a9a760f95896c34689febc965510927, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mObserverBehaviour: {fileID: 942559265}
-  mHiddenRoot: {fileID: 0}
-  mTargetName: 
-  mDatasetName: 
-  mCastedBehaviour: {fileID: 942559265}
 --- !u!1 &947688706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,8 +2347,9 @@ GameObject:
   - component: {fileID: 947688708}
   - component: {fileID: 947688707}
   - component: {fileID: 947688709}
+  - component: {fileID: 947688710}
   m_Layer: 0
-  m_Name: LevelController
+  m_Name: LevelHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2382,7 +2370,6 @@ MonoBehaviour:
   id: 0
   groundPlane: {fileID: 0}
   PlaneFinder: {fileID: 0}
-  airFinder: {fileID: 0}
   startCanvas: {fileID: 1846318614}
   winCanvas: {fileID: 900102591}
   playCanvas: {fileID: 1556127748}
@@ -2396,7 +2383,7 @@ Transform:
   m_GameObject: {fileID: 947688706}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.081274725, y: 0.12010124, z: -0.08602205}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2417,6 +2404,19 @@ MonoBehaviour:
   niveles:
   - {fileID: 11400000, guid: 59727ed0acca19e47ae7ca4e45aea110, type: 2}
   nivelEnEscena: {fileID: 0}
+--- !u!114 &947688710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947688706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49243213d9f01cc46b1e2ce1cdb93823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nivel: {fileID: 0}
 --- !u!1 &1094590082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2731,7 +2731,6 @@ GameObject:
   - component: {fileID: 1398444296}
   - component: {fileID: 1398444295}
   - component: {fileID: 1398444294}
-  - component: {fileID: 1398444297}
   m_Layer: 0
   m_Name: Mid Air Stage(Spawner)
   m_TagString: Untagged
@@ -2803,7 +2802,7 @@ MonoBehaviour:
   mSelectedStageType: 1
   mPlaneReference: {fileID: 0}
   mMidAirReference: {fileID: 0}
-  mPreview: {fileID: 1398444297}
+  mPreview: {fileID: 0}
 --- !u!4 &1398444296
 Transform:
   m_ObjectHideFlags: 0
@@ -2821,23 +2820,6 @@ Transform:
   - {fileID: 766320203}
   m_Father: {fileID: 2094108384}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1398444297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398444292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1308684972, guid: 8a9a760f95896c34689febc965510927, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mObserverBehaviour: {fileID: 1398444295}
-  mHiddenRoot: {fileID: 0}
-  mTargetName: 
-  mDatasetName: 
-  mCastedBehaviour: {fileID: 1398444295}
 --- !u!1 &1418617965
 GameObject:
   m_ObjectHideFlags: 0

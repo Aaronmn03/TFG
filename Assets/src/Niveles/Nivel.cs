@@ -11,9 +11,13 @@ public class Nivel : MonoBehaviour
     public int id;
     private string objetivo;
     private List<DatosBloque> bloques;
+    
+    private BloqueManager bloqueManager;
+    /*---VUFORIA DATA---*/
     public Transform groundPlane;   
     public GameObject PlaneFinder;   
-    public GameObject airFinder;   
+    private GameObject airFinder;   
+    private GameObject airPlane;   
 
     /*---UI DATA---*/
     public GameObject startCanvas;
@@ -32,7 +36,21 @@ public class Nivel : MonoBehaviour
         groundPlane = GameObject.Find("Ground Plane Stage").transform;
         PlaneFinder = GameObject.Find("Plane Finder");
         airFinder = GameObject.Find("Mid Air Positioner");
+        airPlane = GameObject.Find("Mid Air Stage(Spawner)");
+        bloqueManager = GetComponent<BloqueManager>();
     }
+
+    public GameObject GetAirFinder(){
+        return airFinder;
+    }
+    public GameObject GetAirPlane(){
+        return airPlane;
+    }
+
+    public List<DatosBloque> GetBloques(){
+        return bloques;
+    }
+
     public void AsignarNivel(string nombre, string objetivo, int id, List<DatosBloque> bloques)
     {
         this.nombre = nombre;
@@ -54,13 +72,12 @@ public class Nivel : MonoBehaviour
         loseCanvas.SetActive(false);
         playCanvas.SetActive(false);
         LimpiarAreaTrabajo();
-        GenerarBloques();
+        bloqueManager.GenerarBloques(bloques, playCanvas);
     }
     private void MostrarPrefab(){
         foreach (Transform child in groundPlane){
             child.gameObject.SetActive(false);
         }
-        Debug.Log($"Mostrando prefab {id - 1}");
         groundPlane.GetChild(id-1).gameObject.SetActive(true);
         GameObject actionableObject = GameObject.FindObjectOfType<ActionableObject>()?.gameObject;
         if (actionableObject != null){
@@ -73,28 +90,10 @@ public class Nivel : MonoBehaviour
         playCanvas.SetActive(true);   
         MostrarPrefab();
         PlaneFinder.SetActive(false);
-        airFinder.SetActive(true);
     }
 
     public void OnObjectPositioned(){
         airFinder.SetActive(false);
-    }
-
-    private void GenerarBloques(){
-        Transform contenedorBloques = playCanvas.transform.GetChild(2).GetChild(0).GetChild(0);
-        LimpiarBloques(contenedorBloques);
-
-        foreach (DatosBloque datos in this.bloques)
-        {
-            if (datos == null) continue;
-            GameObject nuevoBloque = Instantiate(datos.prefabIcon, contenedorBloques);
-            Bloque bloque = nuevoBloque.GetComponent<Bloque>();
-            Debug.Log($"Bloque instanciado: {bloque.name}");
-            bloque.SetColor(datos.color);
-            bloque.SetText(datos.texto, datos.colorTexto);
-            bloque.SetName(datos.nombre);
-            bloque.gameObject.SetActive(false);
-        }
     }
 
     public void Win(){
@@ -117,12 +116,6 @@ public class Nivel : MonoBehaviour
         return GetAllChildren(parent).OfType<BloqueRaiz>().ToList();
     }
 
-    private void LimpiarBloques(Transform contenedorBloques){
-        foreach (Transform child in contenedorBloques)
-        {
-            Destroy(child.gameObject);
-        }
-    }
 
     public void LimpiarAreaTrabajo(){
         List<Bloque> list = GetAllChildren(areaTrabajo);

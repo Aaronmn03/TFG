@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3838207410408862821}
   - component: {fileID: 3096689513641545744}
   - component: {fileID: 4427968834808272870}
-  - component: {fileID: 330030730571991329}
+  - component: {fileID: 4506110140033283751}
   m_Layer: 0
   m_Name: Bloque Mover
   m_TagString: Untagged
@@ -91,7 +91,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &330030730571991329
+--- !u!114 &4506110140033283751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
