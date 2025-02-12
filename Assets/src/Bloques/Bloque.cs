@@ -23,10 +23,6 @@ public abstract class Bloque : MonoBehaviour
     public abstract IEnumerator Action();
 
     private void Start(){
-        
-        if (gameObject.GetComponent<BloqueArrastrable>() == null){
-            gameObject.AddComponent<BloqueArrastrable>();
-        }
         /*bloqueImagen = GetComponent<Image>();
         if (bloqueImagen == null)
         {
@@ -81,7 +77,9 @@ public abstract class Bloque : MonoBehaviour
     }
 
     public bool ConnectTo(Bloque parent){
+        Debug.Log("Intentamos conectar a: " + parent.gameObject.name);
         if(isConectable(parent)){
+            Debug.Log( this.gameObject.name + "Conectando a: " + parent.gameObject.name);
             List<Bloque> bloquesHijos = new List<Bloque>(parent.getListConectados());
             List<Bloque> bloquesConectar = new List<Bloque>(bloquesConectados);
             bloquesConectar.Insert(0, this);

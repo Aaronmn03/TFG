@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using Vuforia;
 
 public class BloqueManager : MonoBehaviour
 {
     public Nivel nivel;
 
-
+    private DatosBloque datosBloqueSelected;
 
     private void Awake()
     {
@@ -19,7 +20,12 @@ public class BloqueManager : MonoBehaviour
 
     public void OnShowBloqueButtonClicked(DatosBloque datosBloque)
     {
+        this.datosBloqueSelected = datosBloque;
         nivel.GetAirFinder().SetActive(true);
+        foreach (Transform child in nivel.GetAirPlane().transform)
+        {
+            child.gameObject.SetActive(false);
+        }
         nivel.GetAirPlane().transform.GetChild(datosBloque.id).gameObject.SetActive(true);
     }
 
@@ -44,6 +50,11 @@ public class BloqueManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    public void OnObjectPositioned()
+    {
+        nivel.GetAirFinder().SetActive(false);
     }
 
 }

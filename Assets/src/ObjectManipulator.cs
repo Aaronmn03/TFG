@@ -47,11 +47,11 @@ public class ObjectManipulator : MonoBehaviour
                 touchPosition = Input.mousePosition;
                 Vector2 diff = (firstInput - touchPosition) * ScreenFactor;
                 bloqueObject.Move(diff);
-                //bloqueObject.transform.position = bloqueObject.transform.position - new Vector3(diff.x * movementSpeed, diff.y * movementSpeed, 0);
                 firstInput = touchPosition;
             }
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && bloqueObject != null)
             {
+                bloqueObject.OnEndDrag();
                 bloqueObject = null;
             }
         #else
@@ -71,11 +71,11 @@ public class ObjectManipulator : MonoBehaviour
                             touchPosition = firstTouch.position;
                             Vector2 diff = (firstInput - touchPosition) * ScreenFactor;
                             bloqueObject.Move(diff);
-                            //bloqueObject.transform.position = bloqueObject.transform.position - new Vector3(diff.x * movementSpeed, diff.y * movementSpeed, 0);
                             firstInput = touchPosition;
                         }
-                        if (firstTouch.phase == TouchPhase.Ended)
+                        if (firstTouch.phase == TouchPhase.Ended && bloqueObject != null)
                         {
+                            bloqueObject.OnEndDrag();
                             bloqueObject = null;
                         }
                     }
@@ -94,11 +94,6 @@ public class ObjectManipulator : MonoBehaviour
                 }
                 SelectObject(hit.transform.gameObject);
                 return true;
-            }else{
-                if(ARObject != null){
-                    DeselectObject();
-                    return false;
-                }
             }
         }
         return false;

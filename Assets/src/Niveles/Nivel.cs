@@ -74,7 +74,7 @@ public class Nivel : MonoBehaviour
         LimpiarAreaTrabajo();
         bloqueManager.GenerarBloques(bloques, playCanvas);
     }
-    private void MostrarPrefab(){
+    private void MostrarNivel(){
         foreach (Transform child in groundPlane){
             child.gameObject.SetActive(false);
         }
@@ -88,13 +88,11 @@ public class Nivel : MonoBehaviour
     public void NivelInstanciado(){
         startCanvas.SetActive(false);
         playCanvas.SetActive(true);   
-        MostrarPrefab();
+        MostrarNivel();
         PlaneFinder.SetActive(false);
     }
 
-    public void OnObjectPositioned(){
-        airFinder.SetActive(false);
-    }
+
 
     public void Win(){
         playCanvas.SetActive(false);
