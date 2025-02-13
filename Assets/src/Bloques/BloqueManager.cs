@@ -22,11 +22,8 @@ public class BloqueManager : MonoBehaviour
     {
         this.datosBloqueSelected = datosBloque;
         nivel.GetAirFinder().SetActive(true);
-        foreach (Transform child in nivel.GetAirPlane().transform)
-        {
-            child.gameObject.SetActive(false);
-        }
-        nivel.GetAirPlane().transform.GetChild(datosBloque.id).gameObject.SetActive(true);
+        nivel.GetAirFinder().GetComponent<ContentPositioningBehaviour>().AnchorStage = datosBloque.prefab.GetComponent<AnchorBehaviour>();
+        nivel.GetAirFinder().GetComponent<ContentPositioningBehaviour>().OnContentPlaced.AddListener(OnContentPlacedHandler);
     }
 
     public void GenerarBloques(List<DatosBloque> bloques, GameObject playCanvas){
@@ -52,8 +49,9 @@ public class BloqueManager : MonoBehaviour
         }
     }
 
-    public void OnObjectPositioned()
+    public void OnContentPlacedHandler(GameObject placedObject)
     {
+        placedObject.transform.parent = GameObject.Find("AreaTrabajo").transform;
         nivel.GetAirFinder().SetActive(false);
     }
 

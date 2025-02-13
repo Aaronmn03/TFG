@@ -39,10 +39,10 @@ public class BloqueArrastrable : MonoBehaviour
     }
 
     private void Update() {
-        Vector3 targetPosition = Camera.main.transform.position;
+        /*Vector3 targetPosition = Camera.main.transform.position;
         targetPosition.y = transform.position.y; 
         transform.position = new Vector3(transform.position.x,transform.position.y,targetPosition.z + 0.5f);
-        transform.LookAt(targetPosition);
+        transform.LookAt(targetPosition);*/
     }
 
     public void Move(Vector2 delta){
@@ -90,7 +90,8 @@ public class BloqueArrastrable : MonoBehaviour
         }
     }
     public void MoveTargetBlocks(Bloque targetbloque,Vector3 position){
-        float offsetY = GetComponent<Transform>().localScale.y * 1.2f;
+        float offsetY = GetComponent<Transform>().localScale.y;
+        transform.rotation = targetbloque.transform.rotation;
         List<Bloque> bloquesConectados = targetbloque.getListConectados();
         for (int i = 0; i < bloquesConectados.Count; i++)
         {
@@ -105,7 +106,7 @@ public class BloqueArrastrable : MonoBehaviour
 
     //Con esto movemos el bloque que hayamos conectado a la posicion esa asi como si ese objeto tiene hijos a su posicion
     public void MoveConnectedBlocks(Vector3 parentPosition){
-        float offsetY = GetComponent<Transform>().localScale.y * 1.2f;
+        float offsetY = GetComponent<Transform>().localScale.y;
         List<Bloque> bloquesConectados = this.GetComponent<Bloque>().getListConectados();
         for (int i = 0; i < bloquesConectados.Count; i++)
         {

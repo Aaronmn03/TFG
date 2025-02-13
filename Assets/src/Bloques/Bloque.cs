@@ -23,16 +23,6 @@ public abstract class Bloque : MonoBehaviour
     public abstract IEnumerator Action();
 
     private void Start(){
-        /*bloqueImagen = GetComponent<Image>();
-        if (bloqueImagen == null)
-        {
-            Debug.LogError("No se encontró el componente Image en el objeto.");
-        }
-        bloqueText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        if (bloqueText == null)
-        {
-            Debug.LogError("No se encontró el componente TextMeshProUGUI en el primer hijo.");
-        }*/
         nivel = GameObject.Find("LevelHandler").GetComponent<Nivel>();
     }
 
