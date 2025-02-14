@@ -10,14 +10,15 @@ public class Nivel : MonoBehaviour
     private string nombre;
     public int id;
     private string objetivo;
+    private bool win;
     private List<DatosBloque> bloques;
-    
     private BloqueManager bloqueManager;
+    private ZonaBloques zonaBloques;
+
     /*---VUFORIA DATA---*/
     public Transform groundPlane;   
     public GameObject PlaneFinder;   
     private GameObject airFinder;   
-    private GameObject airPlane;   
 
     /*---UI DATA---*/
     public GameObject startCanvas;
@@ -35,16 +36,25 @@ public class Nivel : MonoBehaviour
         loseCanvas = GameObject.Find("LoseCanvas");
         groundPlane = GameObject.Find("Ground Plane Stage").transform;
         PlaneFinder = GameObject.Find("Plane Finder");
-        airFinder = GameObject.Find("Mid Air Positioner");
-        airPlane = GameObject.Find("Mid Air Stage(Spawner)");
+        airFinder = GameObject.Find("AreaTrabajoFinder");
         bloqueManager = GetComponent<BloqueManager>();
+        zonaBloques = GameObject.Find("Zona_programacion").GetComponent<ZonaBloques>();
+        win = false;
+    }
+
+    public void ActivateZonaBloques(){
+        zonaBloques.SelectedObject();
+    }
+    public void UnActivateZonaBloques(){
+        zonaBloques.NonSelectedObject();
     }
 
     public GameObject GetAirFinder(){
         return airFinder;
     }
-    public GameObject GetAirPlane(){
-        return airPlane;
+
+    public void ActivateAirFinder(){
+        airFinder.SetActive(true);
     }
 
     public List<DatosBloque> GetBloques(){
@@ -92,18 +102,22 @@ public class Nivel : MonoBehaviour
         PlaneFinder.SetActive(false);
     }
 
-
-
     public void Win(){
+        win = true;
         playCanvas.SetActive(false);
         winCanvas.SetActive(true);
     }
 
     public void Lose(){
-        playCanvas.SetActive(false);
-        loseCanvas.SetActive(true);
+        if(!win){
+            playCanvas.SetActive(false);
+            loseCanvas.SetActive(true);
+        }
+        
     }
     public void Play(){
+        //Tambien habra que comprobar todas las areas de trabajo y que todas ellas ejecuten sus codigos
+        areaTrabajo = GameObject.Find("AreaTrabajo");
         List<BloqueRaiz> bloquesRaiz = GetBloquesRaiz(areaTrabajo);
         foreach (Bloque bloque in bloquesRaiz){
             StartCoroutine(bloque.Action());
@@ -116,14 +130,17 @@ public class Nivel : MonoBehaviour
 
 
     public void LimpiarAreaTrabajo(){
-        List<Bloque> list = GetAllChildren(areaTrabajo);
-        if(list.Count <= 1) return;
-        foreach (Bloque bloque in list){
-            bloque.DeleteBloque();
+        if(areaTrabajo != null){
+            List<Bloque> list = GetAllChildren(areaTrabajo);
+            if(list.Count <= 1) return;
+            foreach (Bloque bloque in list){
+                bloque.DeleteBloque();
+            }
+            Destroy(areaTrabajo.transform.parent.gameObject);
         }
     }
 
-    public List<Bloque> GetAllChildren(GameObject parent){
+    private List<Bloque> GetAllChildren(GameObject parent){
         List<Bloque> children = new List<Bloque>();
         foreach (Transform child in parent.transform)
         {

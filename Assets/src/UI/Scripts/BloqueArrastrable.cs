@@ -13,10 +13,11 @@ public class BloqueArrastrable : MonoBehaviour
     private GameObject shadow;
     private GameObject BloqueInContact;
     private float movementSpeed = 2.5f;
-
     public ObjectManipulator objectManipulator;
 
-
+    public Bloque GetBloque(){
+        return bloque;
+    }
     public GameObject GetShadow(){
         return shadow;
     }
@@ -34,30 +35,21 @@ public class BloqueArrastrable : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         bloque = GetComponent<Bloque>();
-        //shadow = transform.GetChild(1).gameObject;
         objectManipulator = GameObject.Find("ARManipulator").GetComponent<ObjectManipulator>();
+        bloque.SetProgramableObject(objectManipulator.GetProgramableObject());
     }
-
-    private void Update() {
-        /*Vector3 targetPosition = Camera.main.transform.position;
-        targetPosition.y = transform.position.y; 
-        transform.position = new Vector3(transform.position.x,transform.position.y,targetPosition.z + 0.5f);
-        transform.LookAt(targetPosition);*/
-    }
-
     public void Move(Vector2 delta){
-        transform.position = transform.position - new Vector3(delta.x * movementSpeed, delta.y * movementSpeed, 0);
+        transform.localPosition = transform.localPosition - new Vector3(delta.x * movementSpeed,0 , delta.y * movementSpeed);
         MoveChilds(delta);
     }
-
-
     public void MoveChilds(Vector2 delta)
     {
         List<Bloque> list = bloque.getListConectados();
         if (list.Count != 0)
         {
             BloqueArrastrable bloque_aux = list[0].GetComponent<BloqueArrastrable>();
-            bloque_aux.MoveChilds(delta);
+            Debug.Log(bloque_aux);
+            bloque_aux.Move(delta);
         }
     }
 
@@ -84,21 +76,20 @@ public class BloqueArrastrable : MonoBehaviour
         var targetBloque = BloqueInContact.GetComponent<Bloque>();
         if(targetBloque != null){
             if(bloque.ConnectTo(targetBloque)){
-                Vector3 targetTransform = targetBloque.GetComponent<Transform>().position;
+                Vector3 targetTransform = targetBloque.GetComponent<Transform>().localPosition;
                 MoveTargetBlocks(targetBloque, targetTransform);
             }
         }
     }
-    public void MoveTargetBlocks(Bloque targetbloque,Vector3 position){
-        float offsetY = GetComponent<Transform>().localScale.y;
-        transform.rotation = targetbloque.transform.rotation;
+    public void MoveTargetBlocks(Bloque targetbloque,Vector3 localPosition){
+        float offsetZ = GetComponent<Transform>().localScale.y * 1.1f;
         List<Bloque> bloquesConectados = targetbloque.getListConectados();
         for (int i = 0; i < bloquesConectados.Count; i++)
         {
             Bloque bloqueHijo = bloquesConectados[i];
             Transform transformHijo = bloqueHijo.GetComponent<Transform>();
-            Vector3 nuevaPosicion = new Vector3(position.x, position.y - (offsetY * (i + 1)), position.z);
-            transformHijo.position = nuevaPosicion;
+            Vector3 nuevaPosicion = new Vector3(localPosition.x, localPosition.y , localPosition.z - (offsetZ * (i + 1)));
+            transformHijo.localPosition = nuevaPosicion;
             transformHijo.transform.parent.rotation = transform.parent.rotation;
             bloqueHijo.GetComponent<BloqueArrastrable>().MoveConnectedBlocks(nuevaPosicion);
         }
@@ -106,14 +97,14 @@ public class BloqueArrastrable : MonoBehaviour
 
     //Con esto movemos el bloque que hayamos conectado a la posicion esa asi como si ese objeto tiene hijos a su posicion
     public void MoveConnectedBlocks(Vector3 parentPosition){
-        float offsetY = GetComponent<Transform>().localScale.y;
+        float offsetZ = GetComponent<Transform>().localScale.y * 1.1f;
         List<Bloque> bloquesConectados = this.GetComponent<Bloque>().getListConectados();
         for (int i = 0; i < bloquesConectados.Count; i++)
         {
             Bloque bloqueHijo = bloquesConectados[i];
             Transform transformHijo = bloqueHijo.GetComponent<Transform>();
-            Vector3 nuevaPosicion = new Vector3(parentPosition.x, parentPosition.y - (offsetY * (i + 1)), parentPosition.z);
-            transformHijo.position = nuevaPosicion;
+            Vector3 nuevaPosicion = new Vector3(parentPosition.x, parentPosition.y , parentPosition.z - (offsetZ * (i + 1)));
+            transformHijo.localPosition = nuevaPosicion;
             bloqueHijo.GetComponent<BloqueArrastrable>().MoveConnectedBlocks(nuevaPosicion);
         }
     }

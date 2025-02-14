@@ -1,24 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class ZonaBloques: MonoBehaviour, IDropHandler
+public class ZonaBloques: MonoBehaviour
 {
 
     private void Start() {
         NonSelectedObject();
-    }
-    public void OnDrop(PointerEventData eventData)
-    {
-        GameObject draggedObject = eventData.pointerDrag;
-        if (draggedObject != null && draggedObject.GetComponent<Bloque>() != null)
-        {
-            BloqueRaiz bloqueRaiz = draggedObject.GetComponent<BloqueRaiz>();
-            if (bloqueRaiz != null)
-            {
-                bloqueRaiz.RemoveBloque();
-            }
-            draggedObject.GetComponent<Bloque>().DeleteBloque();
-        }
     }
 
     public void NonSelectedObject(){

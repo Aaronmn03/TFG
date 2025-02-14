@@ -7,7 +7,6 @@ using Vuforia;
 public class BloqueManager : MonoBehaviour
 {
     public Nivel nivel;
-
     private DatosBloque datosBloqueSelected;
 
     private void Awake()
@@ -21,9 +20,7 @@ public class BloqueManager : MonoBehaviour
     public void OnShowBloqueButtonClicked(DatosBloque datosBloque)
     {
         this.datosBloqueSelected = datosBloque;
-        nivel.GetAirFinder().SetActive(true);
-        nivel.GetAirFinder().GetComponent<ContentPositioningBehaviour>().AnchorStage = datosBloque.prefab.GetComponent<AnchorBehaviour>();
-        nivel.GetAirFinder().GetComponent<ContentPositioningBehaviour>().OnContentPlaced.AddListener(OnContentPlacedHandler);
+        GameObject bloque = Instantiate(datosBloque.prefab, GameObject.Find("AreaTrabajo").transform);
     }
 
     public void GenerarBloques(List<DatosBloque> bloques, GameObject playCanvas){
@@ -33,6 +30,7 @@ public class BloqueManager : MonoBehaviour
         {
             if (datos == null) continue;
             GameObject nuevoBloque = Instantiate(datos.prefabIcon, contenedorBloques);
+            Debug.Log("Generando bloque: " + datos.nombre);
             Bloque bloque = nuevoBloque.GetComponent<Bloque>();
             bloque.SetColor(datos.color);
             bloque.SetText(datos.texto, datos.colorTexto);
@@ -48,11 +46,11 @@ public class BloqueManager : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
-
-    public void OnContentPlacedHandler(GameObject placedObject)
+    public void OnContentPlacedHandler()
     {
-        placedObject.transform.parent = GameObject.Find("AreaTrabajo").transform;
         nivel.GetAirFinder().SetActive(false);
+        ProgramableObject programableObject = GameObject.Find("ARManipulator").GetComponent<ObjectManipulator>().GetProgramableObject();
+        programableObject.SetZonaProgramacion(GameObject.Find("AreaTrabajo").GetComponent<ZonaProgramacion>());
+        nivel.ActivateZonaBloques();
     }
-
 }

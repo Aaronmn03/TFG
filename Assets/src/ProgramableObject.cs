@@ -11,21 +11,37 @@ public class ProgramableObject : MonoBehaviour
 
     [SerializeField] private List<Bloque> bloquesRaiz;
 
+    public ZonaProgramacion zonaProgramacion;
+    private Nivel nivel;
+
     void Start()
     {
         gameObject.AddComponent<ActionableObject>();        
         objectRenderer = GetComponent<Renderer>();
         originalMaterial = objectRenderer.material;
+        nivel = GameObject.Find("LevelHandler").GetComponent<Nivel>();
+    }
+
+    public void SetZonaProgramacion(ZonaProgramacion zonaProgramacion){
+        this.zonaProgramacion = zonaProgramacion;
     }
 
     public void SelectObject()
     {
         objectRenderer.material = selectedMaterial;
+        if(zonaProgramacion == null){
+            nivel.ActivateAirFinder();
+        }else{
+            nivel.ActivateZonaBloques();
+            zonaProgramacion.SelectedObject();
+        }
         ShowBloques();
     }
     public void DeselectObject()
     {
         objectRenderer.material = originalMaterial;
+        zonaProgramacion.NonSelectedObject();
+        nivel.UnActivateZonaBloques();
         HideBloques();
     }
     

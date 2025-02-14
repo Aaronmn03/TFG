@@ -15,24 +15,17 @@ public class ObjectManipulator : MonoBehaviour
 
     private Vector2 firstInput = Vector2.zero;
 
-    private ZonaBloques zonaBloques;
-
-    private ZonaDespliegue zonaDespliegue;
-
     [SerializeField] private float ScreenFactor = 0.8f;
 
 
     public bool GetIsARObjectSelected(){
         return isARObjectSelected;
     }
-    public ProgramableObject getARObject(){
+    public ProgramableObject GetProgramableObject(){
         return ARObject.GetComponent<ProgramableObject>();
     }
 
-    private void Start() {
-        zonaBloques = GameObject.Find("Zona_programacion").GetComponent<ZonaBloques>();
-        zonaDespliegue = GameObject.Find("AreaTrabajo").GetComponent<ZonaDespliegue>();
-    }
+
     void Update()
     {
         #if UNITY_EDITOR
@@ -46,6 +39,11 @@ public class ObjectManipulator : MonoBehaviour
             {
                 touchPosition = Input.mousePosition;
                 Vector2 diff = (firstInput - touchPosition) * ScreenFactor;
+                Bloque bloque = bloqueObject.GetBloque();
+                if (bloque.HasParent())
+                {
+                    bloque.GetParent().UnConnectTo(bloque);
+                }
                 bloqueObject.Move(diff);
                 firstInput = touchPosition;
             }
@@ -70,6 +68,11 @@ public class ObjectManipulator : MonoBehaviour
                         {
                             touchPosition = firstTouch.position;
                             Vector2 diff = (firstInput - touchPosition) * ScreenFactor;
+                            Bloque bloque = bloqueObject.GetBloque();
+                            if (bloque.HasParent())
+                            {
+                                bloque.GetParent().UnConnectTo(bloque);
+                            }
                             bloqueObject.Move(diff);
                             firstInput = touchPosition;
                         }
@@ -105,8 +108,7 @@ public class ObjectManipulator : MonoBehaviour
         {
             ARObject = hit.transform.gameObject;
             ProgramableObject.SelectObject();
-            zonaBloques.SelectedObject();
-            //zonaDespliegue.SelectedObject();
+            
         }
         if (hit.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
         {
@@ -122,8 +124,6 @@ public class ObjectManipulator : MonoBehaviour
         if (ARObject.TryGetComponent<ProgramableObject>(out ProgramableObject ProgramableObject))
         {
             ProgramableObject.DeselectObject();
-            zonaBloques.NonSelectedObject();
-            //zonaDespliegue.NonSelectedObject();
         }
         else
         {

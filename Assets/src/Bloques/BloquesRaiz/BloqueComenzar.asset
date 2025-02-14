@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8736cc23e6e7ac54f9120f978e6177d7, type: 3}
   m_Name: BloqueComenzar
   m_EditorClassIdentifier: 
+  id: 0
   nombre: Bloque Comenzar
   texto: Comenzar
   colorTexto: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 1}
   color: {r: 1, g: 0.8863184, b: 0.3726415, a: 1}
-  prefab: {fileID: 973644812749269160, guid: 003d74def11424d4e8d15a016cb58488, type: 3}
+  prefab: {fileID: 973644812749269160, guid: 368281425c14cb54483955a574859d74, type: 3}
+  prefabIcon: {fileID: 973644812749269160, guid: 003d74def11424d4e8d15a016cb58488,
+    type: 3}

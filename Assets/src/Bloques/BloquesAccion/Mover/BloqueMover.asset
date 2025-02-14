@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8736cc23e6e7ac54f9120f978e6177d7, type: 3}
   m_Name: BloqueMover
   m_EditorClassIdentifier: 
-  nombre: Bloque Mover
-  texto: Avanzo
+  id: 1
+  nombre: Bloque mover
+  texto: Avanzar
   colorTexto: {r: 1, g: 1, b: 1, a: 1}
-  color: {r: 0.49803925, g: 0.83921576, b: 0.9921569, a: 1}
-  prefab: {fileID: 973644812749269160, guid: 150ccd74a276a60408072d3a3ab06c21, type: 3}
+  color: {r: 0.37254906, g: 0.8306017, b: 1, a: 1}
+  prefab: {fileID: 973644812749269160, guid: 188f65c80f832ee42b87a1d9a334ab21, type: 3}
+  prefabIcon: {fileID: 973644812749269160, guid: 150ccd74a276a60408072d3a3ab06c21,
+    type: 3}
