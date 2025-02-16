@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3838207410408862821}
   - component: {fileID: 3096689513641545744}
   - component: {fileID: 4427968834808272870}
-  - component: {fileID: 4506110140033283751}
+  - component: {fileID: -5672424444115008922}
   m_Layer: 0
   m_Name: IconMover
   m_TagString: Untagged
@@ -90,7 +90,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &4506110140033283751
+--- !u!114 &-5672424444115008922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,12 +99,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 973644812749269160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82ece0a9108878146bd84b43361f06aa, type: 3}
+  m_Script: {fileID: 11500000, guid: fc70f2eb1f073ee409850a16f4a51ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloquesConectados: []
-  parent: {fileID: 0}
-  isConnect: 0
 --- !u!1 &5445133700721864371
 GameObject:
   m_ObjectHideFlags: 0

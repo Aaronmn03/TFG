@@ -16,12 +16,12 @@ public class ZonaProgramacion : MonoBehaviour
     }
     public void NonSelectedObject(){
         GetComponent<MeshRenderer>().enabled = false;
-        HideBloques(gameObject);
+        HideBloques();
     }
 
     public void SelectedObject(){
         GetComponent<MeshRenderer>().enabled = true;
-        ShowBloques(gameObject);
+        ShowBloques();
     }
 
     public void LimpiarBloques(){
@@ -34,35 +34,23 @@ public class ZonaProgramacion : MonoBehaviour
             StartCoroutine(bloque.Action());
         }
     }
-
-
-    private void HideBloques(GameObject parent)
+    private void HideBloques()
     {
-        SetChildrenVisibility(parent, false);
+        SetChildrenVisibility(false);
     }
 
-    private void ShowBloques(GameObject parent)
+    private void ShowBloques()
     {
-        SetChildrenVisibility(parent, true);
+        SetChildrenVisibility(true);
     }
-    private void SetChildrenVisibility(GameObject parent, bool visible)
+    private void SetChildrenVisibility(bool visible)
     {
-        if (parent == null)
-        {
-            Debug.LogWarning("SetChildrenVisibility: parent is null.");
-            return;
-        }
-        
-        foreach (Transform child in parent.transform)
+        foreach (Transform child in this.transform)
         {
             Bloque bloque = child.GetComponent<Bloque>();
             if (bloque != null)
             {
-                MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
-                if (meshRenderer != null)
-                {
-                    meshRenderer.enabled = visible;
-                }
+                bloque.Visibility(visible);
             }
         }
     }

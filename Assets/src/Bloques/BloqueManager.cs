@@ -16,27 +16,14 @@ public class BloqueManager : MonoBehaviour
             nivel = GetComponent<Nivel>();
         }
     }
-
-    public void OnShowBloqueButtonClicked(DatosBloque datosBloque)
-    {
-        this.datosBloqueSelected = datosBloque;
-        GameObject bloque = Instantiate(datosBloque.prefab, GameObject.Find("AreaTrabajo").transform);
-    }
-
     public void GenerarBloques(List<DatosBloque> bloques, GameObject playCanvas){
         Transform contenedorBloques = playCanvas.transform.GetChild(2).GetChild(0).GetChild(0);
         LimpiarBloques(contenedorBloques);
         foreach (DatosBloque datos in bloques)
         {
             if (datos == null) continue;
-            GameObject nuevoBloque = Instantiate(datos.prefabIcon, contenedorBloques);
-            Debug.Log("Generando bloque: " + datos.nombre);
-            Bloque bloque = nuevoBloque.GetComponent<Bloque>();
-            bloque.SetColor(datos.color);
-            bloque.SetText(datos.texto, datos.colorTexto);
-            bloque.SetName(datos.nombre);
-            bloque.gameObject.SetActive(false);
-            nuevoBloque.AddComponent<Button>().onClick.AddListener(() => OnShowBloqueButtonClicked(datos));
+            BloqueButton nuevoBloque = Instantiate(datos.prefabIcon, contenedorBloques).GetComponent<BloqueButton>();
+            nuevoBloque.InicializarBloque(datos);
         }
     }
 

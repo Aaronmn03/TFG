@@ -8,16 +8,11 @@ using System.Linq;
 
 public abstract class Bloque : MonoBehaviour
 {
-
-    public List<Bloque> bloquesConectados = new List<Bloque>();
-
+    protected List<Bloque> bloquesConectados = new List<Bloque>();
     public Bloque parent;
-    
-    public bool isConnect = false;   
-    private Image bloqueImagen;
-    private TextMeshProUGUI bloqueText;
     protected Nivel nivel;
     protected ProgramableObject programableObject;
+
 
     public abstract bool isConectable(Bloque other);
     public abstract IEnumerator Action();
@@ -25,57 +20,25 @@ public abstract class Bloque : MonoBehaviour
     private void Start(){
         nivel = GameObject.Find("LevelHandler").GetComponent<Nivel>();
     }
-
-    public void SetColor(Color color)
-    {
-        bloqueImagen = GetComponent<Image>();
-        if (bloqueImagen != null)
-        {
-            bloqueImagen.color = color;
-            Debug.Log("cambiamos el color a: " + color.ToString());
-        }
-    }
-
-    public void SetText(string texto, Color color)
-    {
-        bloqueText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        if (bloqueText != null)
-        {
-            bloqueText.text = texto;
-            bloqueText.color = color;
-        }
-    }
-
-    public void SetName(string name){
-        gameObject.name = name;
-    }
-
     public List<Bloque> getListConectados(){
         return bloquesConectados;
     }
-
     public Bloque GetParent(){
         return parent;
     }
-
     public void SetParent(Bloque value){
         parent = value;
     }
-
     public void SetProgramableObject(ProgramableObject programableObject){
         this.programableObject = programableObject;
     }
-
     public bool ConnectTo(Bloque parent){
-        Debug.Log("Intentamos conectar a: " + parent.gameObject.name);
         if(isConectable(parent)){
-            Debug.Log( this.gameObject.name + "Conectando a: " + parent.gameObject.name);
             List<Bloque> bloquesHijos = new List<Bloque>(parent.getListConectados());
             List<Bloque> bloquesConectar = new List<Bloque>(bloquesConectados);
             bloquesConectar.Insert(0, this);
             parent.AddBloques(0, bloquesConectar); 
             this.parent = parent;
-            isConnect = true;
             if(bloquesHijos.Count != 0){
                 foreach (Bloque bloque in this.bloquesConectados){
                     bloque.getListConectados().AddRange(bloquesHijos);
@@ -91,26 +54,18 @@ public abstract class Bloque : MonoBehaviour
         }
         return false;       
     }
-
     public void UnConnectTo(Bloque child){  
         if (bloquesConectados.Contains(child)){
             RemoveBloque(child);
-            isConnect = false;
             child.SetParent(null);
         }
     }
-
-    public string toString(){
-        return gameObject.name;
-    }
-
     public void AddBloques(int index, List<Bloque> childs){
         bloquesConectados.InsertRange(index, childs);
         if (this.HasParent()){
             this.parent.AddBloques(index + 1, childs);
         }
     }
-
     public void RemoveBloque(Bloque child){
         List<Bloque> list = child.getListConectados();
         this.getListConectados().Remove(child);
@@ -120,9 +75,7 @@ public abstract class Bloque : MonoBehaviour
         if(this.HasParent()){
             this.parent.RemoveBloque(child);
         }
-
     }
-
     public bool HasParent(){
         return parent != null;
     }
@@ -130,33 +83,10 @@ public abstract class Bloque : MonoBehaviour
     public bool HasChild(){
         return bloquesConectados.Count != 0;
     }
-
-    public int NumChilds(){
-        return bloquesConectados.Count;
-    }
-    
-    public void DeleteBloque(){
-        List<Bloque> list = GetComponent<Bloque>().getListConectados();
-        foreach (Bloque bloque in list){
-            Destroy(bloque.gameObject);
+    public void Visibility(bool visible){
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer != null){
+            meshRenderer.enabled = visible;
         }
-        Destroy(this.gameObject);
-    }
-
-    public void Hide(){
-        Image bloqueRaizImage = gameObject.GetComponent<Image>();
-        bloqueRaizImage.enabled = false;
-        foreach (Transform child in this.transform)
-        {
-            if (child != null)
-            {
-                child.gameObject.SetActive(false);
-            }
-        } 
-    }
-    public void Show(){
-        Image bloqueImage = gameObject.GetComponent<Image>();
-        bloqueImage.enabled = true; 
-        this.transform.GetChild(0).gameObject.SetActive(true);
     }
 }

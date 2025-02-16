@@ -9,7 +9,7 @@ public class ProgramableObject : MonoBehaviour
     private Material originalMaterial;
     [SerializeField] private Material selectedMaterial;
 
-    public ZonaProgramacion zonaProgramacion;
+    private ZonaProgramacion zonaProgramacion;
     private Nivel nivel;
 
     void Start()
@@ -32,7 +32,6 @@ public class ProgramableObject : MonoBehaviour
         }else{
             nivel.ActivateZonaBloques();
             zonaProgramacion.SelectedObject();
-            ShowBloques();
         }
     }
     public void DeselectObject()
@@ -42,27 +41,7 @@ public class ProgramableObject : MonoBehaviour
             zonaProgramacion.NonSelectedObject();
         }
         nivel.UnActivateZonaBloques();
-        HideBloques();
     }
-    
-    private void ShowBloques(){
-        foreach (Bloque bloqueRaiz in zonaProgramacion.GetBloquesRaiz()){
-            bloqueRaiz.Show();
-            foreach (Bloque bloque in bloqueRaiz.getListConectados()){
-                bloque.Show();
-            }
-        }
-    }
-
-    private void HideBloques(){
-        foreach (Bloque bloqueRaiz in zonaProgramacion.GetBloquesRaiz()){
-            bloqueRaiz.Hide();
-            foreach (Bloque bloque in bloqueRaiz.getListConectados()){
-                bloque.Hide();
-            }
-        }
-    }
-
 
     public void PutBloqueRaiz(BloqueRaiz bloqueRaiz){
         if (!zonaProgramacion.GetBloquesRaiz().Contains(bloqueRaiz))
