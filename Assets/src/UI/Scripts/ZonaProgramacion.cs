@@ -1,11 +1,18 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using System.Collections;
+using System.Collections.Generic;
 public class ZonaProgramacion : MonoBehaviour
 {
+    public List<BloqueRaiz> bloquesRaiz;
     private void Start() {
         NonSelectedObject();
+        bloquesRaiz = new List<BloqueRaiz>();
+    }
+
+    public List<BloqueRaiz> GetBloquesRaiz(){
+        return bloquesRaiz;
     }
     public void NonSelectedObject(){
         GetComponent<MeshRenderer>().enabled = false;
@@ -16,6 +23,18 @@ public class ZonaProgramacion : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = true;
         ShowBloques(gameObject);
     }
+
+    public void LimpiarBloques(){
+        Destroy(this.transform.parent.gameObject);
+    }
+
+    public void Play(){
+        if(bloquesRaiz.Count <= 0) return;
+        foreach (BloqueRaiz bloque in bloquesRaiz){
+            StartCoroutine(bloque.Action());
+        }
+    }
+
 
     private void HideBloques(GameObject parent)
     {

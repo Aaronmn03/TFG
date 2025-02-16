@@ -4,49 +4,27 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 
-
 public class Nivel : MonoBehaviour
 {
-    private string nombre;
-    public int id;
-    private string objetivo;
-    private bool win;
-    private List<DatosBloque> bloques;
-    private BloqueManager bloqueManager;
+    private DatosNivel datosNivel;
     private ZonaBloques zonaBloques;
+    public List<ProgramableObject> programableObjects;
+    private bool win;
+
+    [SerializeField] private IUNivelController iUNivelController;
 
     /*---VUFORIA DATA---*/
     public Transform groundPlane;   
-    public GameObject PlaneFinder;   
+    [SerializeField] public GameObject PlaneFinder;   
     private GameObject airFinder;   
 
-    /*---UI DATA---*/
-    public GameObject startCanvas;
-    public GameObject winCanvas;
-    public GameObject playCanvas;
-    public GameObject loseCanvas;
-    private GameObject areaTrabajo;
-    /*-------------*/
     
     private void Awake() {
-        startCanvas = GameObject.Find("StartCanvas");
-        winCanvas = GameObject.Find("WinCanvas");
-        playCanvas = GameObject.Find("PrincipalCanvas");
-        areaTrabajo = GameObject.Find("AreaTrabajo");
-        loseCanvas = GameObject.Find("LoseCanvas");
         groundPlane = GameObject.Find("Ground Plane Stage").transform;
         PlaneFinder = GameObject.Find("Plane Finder");
         airFinder = GameObject.Find("AreaTrabajoFinder");
-        bloqueManager = GetComponent<BloqueManager>();
         zonaBloques = GameObject.Find("Zona_programacion").GetComponent<ZonaBloques>();
-        win = false;
-    }
-
-    public void ActivateZonaBloques(){
-        zonaBloques.SelectedObject();
-    }
-    public void UnActivateZonaBloques(){
-        zonaBloques.NonSelectedObject();
+        iUNivelController = GetComponent<IUNivelController>();
     }
 
     public GameObject GetAirFinder(){
@@ -57,95 +35,71 @@ public class Nivel : MonoBehaviour
         airFinder.SetActive(true);
     }
 
-    public List<DatosBloque> GetBloques(){
-        return bloques;
-    }
-
-    public void AsignarNivel(string nombre, string objetivo, int id, List<DatosBloque> bloques)
-    {
-        this.nombre = nombre;
-        this.objetivo = objetivo;
-        this.id = id;
-        this.bloques = bloques;
+    public void AsignarNivel(DatosNivel datosNivel){
+        this.datosNivel = datosNivel;
         InicializarNivel();  
     }
 
     public void InicializarNivel(){
+        foreach (ProgramableObject programableObject in programableObjects){
+            programableObject.LimpiarBloques();
+        }
+        win = false;
         PlaneFinder.SetActive(true);
         airFinder.SetActive(false);
-        LimpiarAreaTrabajo();
         foreach (Transform child in groundPlane){
             child.gameObject.SetActive(false);
         }
-        startCanvas.SetActive(true);
-        winCanvas.SetActive(false);
-        loseCanvas.SetActive(false);
-        playCanvas.SetActive(false);
-        LimpiarAreaTrabajo();
-        bloqueManager.GenerarBloques(bloques, playCanvas);
-    }
-    private void MostrarNivel(){
-        foreach (Transform child in groundPlane){
-            child.gameObject.SetActive(false);
-        }
-        groundPlane.GetChild(id-1).gameObject.SetActive(true);
-        GameObject actionableObject = GameObject.FindObjectOfType<ActionableObject>()?.gameObject;
-        if (actionableObject != null){
-            actionableObject.GetComponent<ActionableObject>().ResetObject();
-        }
+        iUNivelController.IniciarNivel(datosNivel);
     }
 
     public void NivelInstanciado(){
-        startCanvas.SetActive(false);
-        playCanvas.SetActive(true);   
+        iUNivelController.NivelInstanciado();
         MostrarNivel();
         PlaneFinder.SetActive(false);
     }
 
+    private void MostrarNivel(){
+        foreach (Transform child in groundPlane){
+            child.gameObject.SetActive(false);
+        }
+        groundPlane.GetChild(datosNivel.id-1).gameObject.SetActive(true);
+        ObtenerProgramableObjects();
+        ReiniciarPosiciones();        
+    }
+
+    private void ObtenerProgramableObjects(){
+        programableObjects = GameObject.FindObjectsOfType<ProgramableObject>().ToList();
+    }
+
+    private void ReiniciarPosiciones(){
+        GameObject actionableObject = GameObject.FindObjectOfType<ActionableObject>()?.gameObject;
+        foreach (ProgramableObject programableObject in programableObjects) {
+            ActionableObject actionable = programableObject.GetComponent<ActionableObject>();
+            if (actionable != null) {
+                actionable.ResetObject();
+            }
+        }
+    }
     public void Win(){
         win = true;
-        playCanvas.SetActive(false);
-        winCanvas.SetActive(true);
+        iUNivelController.Win();
     }
 
     public void Lose(){
         if(!win){
-            playCanvas.SetActive(false);
-            loseCanvas.SetActive(true);
+            iUNivelController.Lose();
         }
-        
     }
     public void Play(){
-        //Tambien habra que comprobar todas las areas de trabajo y que todas ellas ejecuten sus codigos
-        areaTrabajo = GameObject.Find("AreaTrabajo");
-        List<BloqueRaiz> bloquesRaiz = GetBloquesRaiz(areaTrabajo);
-        foreach (Bloque bloque in bloquesRaiz){
-            StartCoroutine(bloque.Action());
+        foreach (ProgramableObject programableObject in programableObjects){
+            programableObject.ExecuteBloques();
         }
     }
-    private List<BloqueRaiz> GetBloquesRaiz(GameObject parent)
-    {
-        return GetAllChildren(parent).OfType<BloqueRaiz>().ToList();
+    public void ActivateZonaBloques(){
+        zonaBloques.SelectedObject();
     }
-
-
-    public void LimpiarAreaTrabajo(){
-        if(areaTrabajo != null){
-            List<Bloque> list = GetAllChildren(areaTrabajo);
-            if(list.Count <= 1) return;
-            foreach (Bloque bloque in list){
-                bloque.DeleteBloque();
-            }
-            Destroy(areaTrabajo.transform.parent.gameObject);
-        }
-    }
-
-    private List<Bloque> GetAllChildren(GameObject parent){
-        List<Bloque> children = new List<Bloque>();
-        foreach (Transform child in parent.transform)
-        {
-            children.Add(child.gameObject.GetComponent<Bloque>());
-        }
-        return children;
+    public void UnActivateZonaBloques(){
+        zonaBloques.NonSelectedObject();
     }
 }

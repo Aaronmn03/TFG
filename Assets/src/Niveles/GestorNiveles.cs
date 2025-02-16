@@ -21,7 +21,7 @@ public class GestorNiveles : MonoBehaviour
             DatosNivel datos = niveles[indice];
             if (nivelEnEscena != null)
             {
-                nivelEnEscena.AsignarNivel(niveles[nivelActual].nombre, niveles[nivelActual].objetivo, niveles[nivelActual].id, niveles[nivelActual].bloquesDisponibles);
+                nivelEnEscena.AsignarNivel(niveles[nivelActual]);
             }
             
         }

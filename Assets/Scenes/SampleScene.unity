@@ -2022,6 +2022,7 @@ GameObject:
   - component: {fileID: 947688707}
   - component: {fileID: 947688709}
   - component: {fileID: 947688710}
+  - component: {fileID: 947688711}
   m_Layer: 0
   m_Name: LevelHandler
   m_TagString: Untagged
@@ -2041,13 +2042,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c79fbcb5ecdc65d409d2f9fff6625513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  iUNivelController: {fileID: 0}
   groundPlane: {fileID: 0}
   PlaneFinder: {fileID: 0}
-  startCanvas: {fileID: 1846318614}
-  winCanvas: {fileID: 900102591}
-  playCanvas: {fileID: 1556127748}
-  loseCanvas: {fileID: 0}
 --- !u!4 &947688708
 Transform:
   m_ObjectHideFlags: 0
@@ -2092,6 +2089,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nivel: {fileID: 0}
+--- !u!114 &947688711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947688706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9a91a4c127fe64f95cfc1224876a84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startCanvas: {fileID: 1846318614}
+  winCanvas: {fileID: 900102591}
+  playCanvas: {fileID: 1556127748}
+  loseCanvas: {fileID: 598214942}
 --- !u!1 &1010322156
 GameObject:
   m_ObjectHideFlags: 0

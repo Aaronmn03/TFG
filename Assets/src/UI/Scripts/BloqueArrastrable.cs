@@ -37,6 +37,10 @@ public class BloqueArrastrable : MonoBehaviour
         bloque = GetComponent<Bloque>();
         objectManipulator = GameObject.Find("ARManipulator").GetComponent<ObjectManipulator>();
         bloque.SetProgramableObject(objectManipulator.GetProgramableObject());
+        if(bloque is BloqueRaiz){
+            BloqueRaiz bloqueRaiz = (BloqueRaiz) bloque;
+            bloqueRaiz.PutBloque();
+        }
     }
     public void Move(Vector2 delta){
         transform.localPosition = transform.localPosition - new Vector3(delta.x * movementSpeed,0 , delta.y * movementSpeed);

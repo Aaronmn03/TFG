@@ -9,8 +9,6 @@ public class ProgramableObject : MonoBehaviour
     private Material originalMaterial;
     [SerializeField] private Material selectedMaterial;
 
-    [SerializeField] private List<Bloque> bloquesRaiz;
-
     public ZonaProgramacion zonaProgramacion;
     private Nivel nivel;
 
@@ -34,19 +32,21 @@ public class ProgramableObject : MonoBehaviour
         }else{
             nivel.ActivateZonaBloques();
             zonaProgramacion.SelectedObject();
+            ShowBloques();
         }
-        ShowBloques();
     }
     public void DeselectObject()
     {
         objectRenderer.material = originalMaterial;
-        zonaProgramacion.NonSelectedObject();
+        if (zonaProgramacion != null){
+            zonaProgramacion.NonSelectedObject();
+        }
         nivel.UnActivateZonaBloques();
         HideBloques();
     }
     
     private void ShowBloques(){
-        foreach (Bloque bloqueRaiz in bloquesRaiz){
+        foreach (Bloque bloqueRaiz in zonaProgramacion.GetBloquesRaiz()){
             bloqueRaiz.Show();
             foreach (Bloque bloque in bloqueRaiz.getListConectados()){
                 bloque.Show();
@@ -55,7 +55,7 @@ public class ProgramableObject : MonoBehaviour
     }
 
     private void HideBloques(){
-        foreach (Bloque bloqueRaiz in bloquesRaiz){
+        foreach (Bloque bloqueRaiz in zonaProgramacion.GetBloquesRaiz()){
             bloqueRaiz.Hide();
             foreach (Bloque bloque in bloqueRaiz.getListConectados()){
                 bloque.Hide();
@@ -64,13 +64,21 @@ public class ProgramableObject : MonoBehaviour
     }
 
 
-    public void PutBloqueRaiz(Bloque bloqueRaiz){
-        if (!bloquesRaiz.Contains(bloqueRaiz))
+    public void PutBloqueRaiz(BloqueRaiz bloqueRaiz){
+        if (!zonaProgramacion.GetBloquesRaiz().Contains(bloqueRaiz))
         {
-            bloquesRaiz.Add(bloqueRaiz);
+            zonaProgramacion.GetBloquesRaiz().Add(bloqueRaiz);
         }
     }
-    public void RemoveBloqueRaiz(Bloque bloqueRaiz){
-        bloquesRaiz.Remove(bloqueRaiz);
+    public void RemoveBloqueRaiz(BloqueRaiz bloqueRaiz){
+        zonaProgramacion.GetBloquesRaiz().Remove(bloqueRaiz);
+    }
+
+    public void ExecuteBloques(){
+        zonaProgramacion.Play();
+    }
+
+    public void LimpiarBloques(){
+        zonaProgramacion.LimpiarBloques();
     }
 }

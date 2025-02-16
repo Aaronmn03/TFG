@@ -1,12 +1,16 @@
 using UnityEngine;
 
-public class DetectarColision : MonoBehaviour
+public class WinController : MonoBehaviour
 {
+    private Nivel nivel;
+
+    private void Start() {
+        nivel = FindObjectOfType<Nivel>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("win"))
         {
-            Nivel nivel = FindObjectOfType<Nivel>();
             if (nivel != null)
             {
                 nivel.Win(); 
