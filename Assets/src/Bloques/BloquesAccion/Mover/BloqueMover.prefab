@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8749968076413095458}
   - component: {fileID: 4305751909720759560}
   - component: {fileID: 375795283698033675}
-  - component: {fileID: 8804769129335891276}
   m_Layer: 0
   m_Name: BloqueMover
   m_TagString: ARObject
@@ -147,20 +146,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ece0a9108878146bd84b43361f06aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloquesConectados: []
   parent: {fileID: 0}
-  isConnect: 0
---- !u!114 &8804769129335891276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973644812749269160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa940ca791d5d344e928129af4ab7fe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasBeenPut: 0
-  objectManipulator: {fileID: 0}

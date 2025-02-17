@@ -12,11 +12,14 @@ public class MovableObject : MonoBehaviour
         if (!isMoving)
         {
             StartMovement(transform.position, transform.position + transform.forward * 0.6f);
+
         }
     }
 
     public void StartMovement(Vector3 from, Vector3 to)
     {
+        AnimatorHandlerPlayer animatorHandler = transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>();
+        animatorHandler.Walk();
         startPosition = from;
         destination = to;
         journeyLength = Vector3.Distance(from, to);
@@ -40,6 +43,7 @@ public class MovableObject : MonoBehaviour
         if (progress >= 1.0f)
         {
             transform.position = destination;
+            transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>().StopWalk();
             return false;
         }
         return true;
