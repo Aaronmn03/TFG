@@ -17,10 +17,6 @@ public class ObjectManipulator : MonoBehaviour
 
     [SerializeField] private float ScreenFactor = 0.8f;
 
-
-    public bool GetIsARObjectSelected(){
-        return isARObjectSelected;
-    }
     public ProgramableObject GetProgramableObject(){
         return ARObject.GetComponent<ProgramableObject>();
     }

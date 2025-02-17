@@ -12,8 +12,6 @@ public abstract class Bloque : MonoBehaviour
     public Bloque parent;
     protected Nivel nivel;
     protected ProgramableObject programableObject;
-
-
     public abstract bool isConectable(Bloque other);
     public abstract IEnumerator Action();
 
