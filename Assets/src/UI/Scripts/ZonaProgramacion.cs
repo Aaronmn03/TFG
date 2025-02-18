@@ -9,6 +9,10 @@ public class ZonaProgramacion : MonoBehaviour
     private void Start() {
         NonSelectedObject();
         bloquesRaiz = new List<BloqueRaiz>();
+        transform.parent.LookAt(Camera.main.transform.position);
+        Vector3 euler = transform.parent.eulerAngles;
+        euler.z = -90;
+        transform.parent.eulerAngles = euler;
     }
 
     public List<BloqueRaiz> GetBloquesRaiz(){
