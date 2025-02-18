@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3708984, g: 0.37837017, b: 0.35722536, a: 1}
+  m_IndirectSpecularColor: {r: 0.44847625, g: 0.49759167, b: 0.57131135, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -524,7 +524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 1328.0347, y: -66.445}
+  m_AnchoredPosition: {x: 1272.158, y: -66.445}
   m_SizeDelta: {x: 1972.6431, y: 74.756}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &150560317
@@ -869,7 +869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8248379, b: 0.14509803, a: 1}
+  m_Color: {r: 1, g: 0.8248379, b: 0.14509803, a: 0.6431373}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1153,7 +1153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.6655884, y: 304.74652}
+  m_AnchoredPosition: {x: 2.6655273, y: 304.74652}
   m_SizeDelta: {x: -62.1978, y: -796.6527}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &733272123
@@ -1169,7 +1169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9150943, g: 0.01672031, b: 0, a: 0.74509805}
+  m_Color: {r: 0.9150943, g: 0.01672031, b: 0, a: 0.6431373}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1569,7 +1569,7 @@ MonoBehaviour:
   ARObject: {fileID: 0}
   bloqueObject: {fileID: 0}
   ARCamera: {fileID: 1926416915}
-  ScreenFactor: 0.001
+  ScreenFactor: 0.0025
 --- !u!4 &860188271
 Transform:
   m_ObjectHideFlags: 0
@@ -3031,7 +3031,7 @@ PrefabInstance:
     - target: {fileID: 8798405964189335968, guid: 23ad19565f2012445840bbcbd8fb5088,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

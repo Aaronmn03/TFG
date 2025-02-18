@@ -1,12 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 public class BloqueButton : MonoBehaviour
 {
-    private Image bloqueImagen;
-    private TextMeshProUGUI bloqueText;
     private DatosBloque datosBloque;
-
     public void InicializarBloque(DatosBloque datosBloque){
         SetName(datosBloque.nombre);
         gameObject.SetActive(false);

@@ -6,25 +6,28 @@ using System.Collections.Generic;
 public class ZonaProgramacion : MonoBehaviour
 {
     public List<BloqueRaiz> bloquesRaiz;
+    private Animator anim;
     private void Start() {
-        NonSelectedObject();
+        anim = transform.parent.gameObject.GetComponent<Animator>();
+        SelectedObject();
         bloquesRaiz = new List<BloqueRaiz>();
         transform.parent.LookAt(Camera.main.transform.position);
         Vector3 euler = transform.parent.eulerAngles;
         euler.z = -90;
         transform.parent.eulerAngles = euler;
+
     }
 
     public List<BloqueRaiz> GetBloquesRaiz(){
         return bloquesRaiz;
     }
     public void NonSelectedObject(){
-        transform.parent.GetComponent<MeshRenderer>().enabled = false;
+        anim.SetBool("active",false);
         HideBloques();
     }
 
     public void SelectedObject(){
-        transform.parent.GetComponent<MeshRenderer>().enabled = true;
+        anim.SetBool("active",true);
         ShowBloques();
     }
 
