@@ -83,7 +83,7 @@ public abstract class Bloque : MonoBehaviour
         return bloquesConectados.Count != 0;
     }
     public void Visibility(bool visible){
-        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = transform.GetChild(0).gameObject.GetComponent<MeshRenderer>();
         if (meshRenderer != null){
             meshRenderer.enabled = visible;
         }

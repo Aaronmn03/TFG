@@ -50,13 +50,13 @@ public class BloqueArrastrable : MonoBehaviour
         }
     }
     public void MoveConnectedBlocks(Vector3 parentPosition){
-        float offsetZ = GetComponent<Transform>().localScale.y * 1.1f;
-        List<Bloque> bloquesConectados = this.GetComponent<Bloque>().getListConectados(); // Cambia
+        float offsetX = GetComponent<Transform>().localScale.x * 1.1f;
+        List<Bloque> bloquesConectados = this.GetComponent<Bloque>().getListConectados();
         for (int i = 0; i < bloquesConectados.Count; i++)
         {
             Bloque bloqueHijo = bloquesConectados[i];
             Transform transformHijo = bloqueHijo.GetComponent<Transform>();
-            Vector3 nuevaPosicion = new Vector3(parentPosition.x, parentPosition.y , parentPosition.z - (offsetZ * (i + 1)));
+            Vector3 nuevaPosicion = new Vector3(parentPosition.x + (offsetX * (i + 1)), parentPosition.y , parentPosition.z );
             transformHijo.localPosition = nuevaPosicion;
             transformHijo.transform.parent.rotation = transform.parent.rotation;
             bloqueHijo.GetComponent<BloqueArrastrable>().MoveConnectedBlocks(nuevaPosicion);

@@ -15,12 +15,12 @@ public class ZonaProgramacion : MonoBehaviour
         return bloquesRaiz;
     }
     public void NonSelectedObject(){
-        GetComponent<MeshRenderer>().enabled = false;
+        transform.parent.GetComponent<MeshRenderer>().enabled = false;
         HideBloques();
     }
 
     public void SelectedObject(){
-        GetComponent<MeshRenderer>().enabled = true;
+        transform.parent.GetComponent<MeshRenderer>().enabled = true;
         ShowBloques();
     }
 

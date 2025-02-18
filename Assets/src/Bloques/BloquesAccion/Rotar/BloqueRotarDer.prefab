@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3916281861868112107}
   - component: {fileID: 8749968076413095458}
   - component: {fileID: 4305751909720759560}
-  - component: {fileID: 375795283698033675}
+  - component: {fileID: 2414740289337668973}
   m_Layer: 0
-  m_Name: BloqueMover
+  m_Name: BloqueRotarDer
   m_TagString: ARObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &375795283698033675
+--- !u!114 &2414740289337668973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 973644812749269160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82ece0a9108878146bd84b43361f06aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d7a249c377490c4bb2500fc3d458944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
@@ -178,7 +178,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 125d693d50d17534b910b44589db942a, type: 2}
+      objectReference: {fileID: -3227957777099648203, guid: 05116349a2852344aa271a08a6beb0fa,
+        type: 3}
+    - target: {fileID: -5754084199372789682, guid: 01eed42fd3919cd45b19ce11e0c4f187,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3622964345283801422, guid: 05116349a2852344aa271a08a6beb0fa,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 01eed42fd3919cd45b19ce11e0c4f187,
         type: 3}
       propertyPath: m_Name
