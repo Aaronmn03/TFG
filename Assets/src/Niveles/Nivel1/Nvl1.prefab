@@ -1306,6 +1306,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: Directional Light
       objectReference: {fileID: 0}
+    - target: {fileID: 5849999503207485220, guid: 882c4fa24ae7bcb4a868e2b57b9d92f4,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849999503207485220, guid: 882c4fa24ae7bcb4a868e2b57b9d92f4,
+        type: 3}
+      propertyPath: m_ShadowAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849999503207485220, guid: 882c4fa24ae7bcb4a868e2b57b9d92f4,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849999503207485220, guid: 882c4fa24ae7bcb4a868e2b57b9d92f4,
+        type: 3}
+      propertyPath: m_Shadows.m_Bias
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849999503207485220, guid: 882c4fa24ae7bcb4a868e2b57b9d92f4,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849999503207485220, guid: 882c4fa24ae7bcb4a868e2b57b9d92f4,
+        type: 3}
+      propertyPath: m_Shadows.m_Strength
+      value: 0.483
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849999503207485220, guid: 882c4fa24ae7bcb4a868e2b57b9d92f4,
+        type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849999503207485220, guid: 882c4fa24ae7bcb4a868e2b57b9d92f4,
+        type: 3}
+      propertyPath: m_Shadows.m_NormalBias
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849999503207485220, guid: 882c4fa24ae7bcb4a868e2b57b9d92f4,
+        type: 3}
+      propertyPath: m_Shadows.m_Resolution
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
