@@ -8,7 +8,11 @@ public class DetectarBloque : MonoBehaviour
     {
         if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
         {
+            if(bloqueInContact != null){
+                SetNullBloqueInContact();
+            }
             bloqueInContact = other.gameObject;
+            bloqueInContact.GetComponent<BloqueArrastrable>().Brillar();
         }
     }
 
@@ -18,14 +22,20 @@ public class DetectarBloque : MonoBehaviour
         {
             if (bloqueInContact == other.gameObject)
             {
-                bloqueInContact = null;
+                SetNullBloqueInContact();              
             }
         }
+    }
+
+    private void SetNullBloqueInContact(){
+        bloqueInContact.GetComponent<BloqueArrastrable>().NoBrillar();
+        bloqueInContact = null;       
     }
 
     public Bloque GetBloqueEnContacto()
     {
         if(bloqueInContact == null){return null;}
         return bloqueInContact.GetComponent<Bloque>();
+        SetNullBloqueInContact();
     }
 }

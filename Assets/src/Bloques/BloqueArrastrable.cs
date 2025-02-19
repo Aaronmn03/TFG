@@ -9,7 +9,7 @@ public class BloqueArrastrable : MonoBehaviour
     public ObjectManipulator objectManipulator;
 
     private DetectarBloque detectarBloque;
-
+    private Color emissionColor; 
     public Bloque GetBloque(){
         return bloque;
     }
@@ -23,6 +23,7 @@ public class BloqueArrastrable : MonoBehaviour
             BloqueRaiz bloqueRaiz = (BloqueRaiz) bloque;
             bloqueRaiz.PutBloque();
         }
+        emissionColor = GetComponentInChildren<Renderer>().material.GetColor("_EmissionColor");
     }
     public void Move(Vector2 delta){
         transform.localPosition = transform.localPosition - new Vector3(delta.x * movementSpeed,0 , delta.y * movementSpeed);
@@ -45,7 +46,11 @@ public class BloqueArrastrable : MonoBehaviour
         if(targetBloque != null){
             if(bloque.ConnectTo(targetBloque)){
                 Vector3 targetTransform = targetBloque.GetComponent<Transform>().localPosition;
-                targetBloque.GetComponent<BloqueArrastrable>().MoveConnectedBlocks(targetTransform);
+                BloqueArrastrable targetArrastrable = targetBloque.GetComponent<BloqueArrastrable>();
+                targetArrastrable.MoveConnectedBlocks(targetTransform);
+                targetArrastrable.NoBrillar();
+                this.NoBrillar();
+
             }
         }
     }
@@ -61,5 +66,17 @@ public class BloqueArrastrable : MonoBehaviour
             transformHijo.transform.parent.rotation = transform.parent.rotation;
             bloqueHijo.GetComponent<BloqueArrastrable>().MoveConnectedBlocks(nuevaPosicion);
         }
+    }
+
+    public void Brillar(){
+        Color newEmissionColor = emissionColor * 2;
+        Material material = GetComponentInChildren<Renderer>().material;
+        material.SetColor("_EmissionColor", newEmissionColor);
+    }
+
+    public void NoBrillar(){
+        Color newEmissionColor = emissionColor;
+        Material material = GetComponentInChildren<Renderer>().material;
+        material.SetColor("_EmissionColor", newEmissionColor);
     }
 }

@@ -10,6 +10,7 @@ public class Nivel : MonoBehaviour
     private ZonaBloques zonaBloques;
     public List<ProgramableObject> programableObjects;
     private bool win;
+    private bool lose;
 
     [SerializeField] private IUNivelController iUNivelController;
 
@@ -45,6 +46,7 @@ public class Nivel : MonoBehaviour
             programableObject.LimpiarBloques();
         }
         win = false;
+        lose = false;
         PlaneFinder.SetActive(true);
         airFinder.SetActive(false);
         foreach (Transform child in groundPlane){
@@ -82,12 +84,16 @@ public class Nivel : MonoBehaviour
         }
     }
     public void Win(){
-        win = true;
-        iUNivelController.Win();
+        if(!lose){
+            win = true;
+            iUNivelController.Win();
+        }
+        
     }
 
     public void Lose(){
         if(!win){
+            lose = true;
             iUNivelController.Lose();
         }
     }
