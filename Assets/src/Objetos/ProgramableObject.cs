@@ -36,11 +36,14 @@ public class ProgramableObject : MonoBehaviour
     }
     public void DeselectObject()
     {
-        objectRenderer.material = originalMaterial;
-        if (zonaProgramacion != null){
+        if(zonaProgramacion == null){
+            nivel.GetAirFinder().SetActive(false);
+        }else{
             zonaProgramacion.NonSelectedObject();
+            nivel.UnActivateZonaBloques();
         }
-        nivel.UnActivateZonaBloques();
+        objectRenderer.material = originalMaterial;
+
     }
 
     public void PutBloqueRaiz(BloqueRaiz bloqueRaiz){
