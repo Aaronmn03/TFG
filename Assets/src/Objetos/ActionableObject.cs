@@ -16,6 +16,13 @@ public class ActionableObject : MonoBehaviour
     }
     public void ResetObject()
     {
+        Rigidbody rb = GetComponent<Rigidbody>();        
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero; 
+            rb.angularVelocity = Vector3.zero;
+            rb.Sleep();
+        }
         transform.localPosition = initialLocalPosition;
         transform.localRotation = initialLocalRotation;
     }
