@@ -40,6 +40,14 @@ public class ActionableObject : MonoBehaviour
             rotatableObject.StartRotation(transform.rotation, transform.rotation * Quaternion.Euler(0, 90f, 0));
         }
     }
+
+    public void RotateLeft()
+    {
+        if (!rotatableObject.IsRotating())
+        {
+            rotatableObject.StartRotation(transform.rotation, transform.rotation * Quaternion.Euler(0, -90f, 0));
+        }
+    }
     public bool IsMoving()
     {
         return movebleObject.IsMoving() || rotatableObject.IsRotating();

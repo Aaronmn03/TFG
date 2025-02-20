@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4427968834808272870}
   - component: {fileID: -2386109838458174111}
   m_Layer: 0
-  m_Name: IconRotar
+  m_Name: IconRotarDer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8736cc23e6e7ac54f9120f978e6177d7, type: 3}
-  m_Name: BloqueRotar
+  m_Name: BloqueRotarIzquierda
   m_EditorClassIdentifier: 
-  id: 3
-  nombre: Bloque Rotar
-  texto: Roto
-  colorTexto: {r: 1, g: 1, b: 1, a: 1}
-  color: {r: 0.49803925, g: 0.83921576, b: 0.9921569, a: 1}
-  prefab: {fileID: 973644812749269160, guid: b0f97261337917b468cc8314809bcaf0, type: 3}
-  prefabIcon: {fileID: 973644812749269160, guid: 5bb8173130264a94aa92bc93bd9aee4b,
+  id: 4
+  nombre: Bloque Rotar Izquierda
+  prefab: {fileID: 973644812749269160, guid: fc622f727ef84174ca93ec804243be55, type: 3}
+  prefabIcon: {fileID: 973644812749269160, guid: aa39dc8343678bd42be29231fec8534a,
     type: 3}
