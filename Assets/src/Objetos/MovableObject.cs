@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class MovableObject : MonoBehaviour
 {
-    public float moveSpeed = 0.3f;
+    public float moveSpeed = 0.075f;
     private Vector3 startPosition, destination;
     private float journeyLength, moveStartTime;
     private bool isMoving = false;
 
+    private float step;
+
+    private void Start() {
+        step = 0.1f;
+    }
     public void MoveForward()
     {
         if (!isMoving)
         {
-            StartMovement(transform.position, transform.position + transform.forward * 0.6f);
+            StartMovement(transform.position, transform.position + transform.forward * step);
 
         }
     }

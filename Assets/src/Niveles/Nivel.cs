@@ -66,6 +66,7 @@ public class Nivel : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         groundPlane.GetChild(datosNivel.id-1).gameObject.SetActive(true);
+        UnActivateZonaBloques();
         ObtenerProgramableObjects();
         ReiniciarPosiciones();        
     }

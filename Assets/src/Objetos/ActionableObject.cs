@@ -30,7 +30,7 @@ public class ActionableObject : MonoBehaviour
     {
         if (!movebleObject.IsMoving())
         {
-            movebleObject.StartMovement(transform.position, transform.position + transform.forward * 0.6f);
+            movebleObject.MoveForward();
         }
     }
     public void RotateRight()
