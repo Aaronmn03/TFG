@@ -41,6 +41,6 @@ public class GestorNiveles : MonoBehaviour
     }
 
     public void ReiniciarNivel(){
-        CargarNivel(nivelActual);
+        nivelEnEscena.Reiniciar();
     }
 }

@@ -22,6 +22,11 @@ public class IUNivelController : MonoBehaviour
         SetLevelInfo(datosNivel);
     }
 
+    public void ReiniciarNivel(){
+        playCanvas.SetActive(true);
+        loseCanvas.SetActive(false);
+    }
+
     public void NivelInstanciado(){
         startCanvas.SetActive(false);
         playCanvas.SetActive(true);

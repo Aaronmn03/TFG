@@ -71,6 +71,16 @@ public class Nivel : MonoBehaviour
         ReiniciarPosiciones();        
     }
 
+    public void Reiniciar(){
+        win = false;
+        lose = false;
+        foreach (ProgramableObject programableObject in programableObjects){
+            programableObject.DeselectObject();
+        }
+        iUNivelController.ReiniciarNivel();
+        ReiniciarPosiciones();
+    }
+
     private void ObtenerProgramableObjects(){
         programableObjects = GameObject.FindObjectsOfType<ProgramableObject>().ToList();
     }

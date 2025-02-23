@@ -15,7 +15,7 @@ public class ObjectManipulator : MonoBehaviour
 
     private Vector2 firstInput = Vector2.zero;
 
-    [SerializeField] private float ScreenFactor = 0.8f;
+    [SerializeField] private float ScreenFactor;
 
     public ProgramableObject GetProgramableObject(){
         return ARObject.GetComponent<ProgramableObject>();

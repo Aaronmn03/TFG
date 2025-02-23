@@ -866,21 +866,6 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 0.3
       objectReference: {fileID: 0}
-    - target: {fileID: 7117801180020541445, guid: fcd9a3871b7fc544f9120b4db26d39aa,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7117801180020541445, guid: fcd9a3871b7fc544f9120b4db26d39aa,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 7117801180020541445, guid: fcd9a3871b7fc544f9120b4db26d39aa,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8798405964189335968, guid: fcd9a3871b7fc544f9120b4db26d39aa,
         type: 3}
       propertyPath: m_Name
@@ -1656,7 +1641,7 @@ MonoBehaviour:
   ARObject: {fileID: 0}
   bloqueObject: {fileID: 0}
   ARCamera: {fileID: 1926416915}
-  ScreenFactor: 0.0025
+  ScreenFactor: 0.004
 --- !u!4 &860188271
 Transform:
   m_ObjectHideFlags: 0
@@ -4271,11 +4256,6 @@ PrefabInstance:
     - target: {fileID: 3627751852098794400, guid: f6b1cf794b760e648bac3823afd8ba79,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3643629310989464797, guid: f6b1cf794b760e648bac3823afd8ba79,
-        type: 3}
-      propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8798405964189335968, guid: f6b1cf794b760e648bac3823afd8ba79,
