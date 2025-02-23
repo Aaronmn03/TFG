@@ -18,6 +18,7 @@ public class MessageManager : MonoBehaviour
         tutorialFinalizado = false;
         if(datosTutorial == null){
             Debug.Log("No has agregado mensajes");
+            return;
         }
         this.datosTutorial = datosTutorial;
         boton.onClick.AddListener(ShowNextMessage);

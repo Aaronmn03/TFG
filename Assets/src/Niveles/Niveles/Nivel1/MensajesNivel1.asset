@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MensajesNivel1
   m_EditorClassIdentifier: 
   mensajesBasicos:
-  - "Hola! Soy Blabla y ser\xE9 tu asistente en esta aventura."
+  - "Hola! Soy Pipiolo y ser\xE9 tu asistente en esta aventura."
   - "Para empezar, solo tienes que pulsar sobre la chica y colocar el \xE1rea de
     trabajo."
   - 'Como puedes ver, hay dos tipos de piezas de puzzle: las amarillas, que son piezas
