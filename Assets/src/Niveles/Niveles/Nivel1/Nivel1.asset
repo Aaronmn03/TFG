@@ -18,3 +18,4 @@ MonoBehaviour:
   bloquesDisponibles:
   - {fileID: 11400000, guid: 8f0fd0c3ca92fb9408de114f133bc60e, type: 2}
   - {fileID: 11400000, guid: 85618cbcad3443048a21f781ea562037, type: 2}
+  datosTutorial: {fileID: 11400000, guid: 1b9445de54804444f833d3d3eaaedfb5, type: 2}

@@ -1178,100 +1178,25 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1926416915}
-    - target: {fileID: 5719072206624809464, guid: 23ad19565f2012445840bbcbd8fb5088,
+    - target: {fileID: 7876660603490080377, guid: 23ad19565f2012445840bbcbd8fb5088,
         type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0.3
+      propertyPath: m_fontSize
+      value: 0.4
       objectReference: {fileID: 0}
-    - target: {fileID: 5719072206624809464, guid: 23ad19565f2012445840bbcbd8fb5088,
+    - target: {fileID: 7876660603490080377, guid: 23ad19565f2012445840bbcbd8fb5088,
         type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.2
+      propertyPath: m_fontSizeMax
+      value: 0.4
       objectReference: {fileID: 0}
-    - target: {fileID: 5719072206624809464, guid: 23ad19565f2012445840bbcbd8fb5088,
+    - target: {fileID: 7876660603490080377, guid: 23ad19565f2012445840bbcbd8fb5088,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5719072206624809464, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7821670307077867998, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: floatSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7821670307077867998, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: floatHeight
+      propertyPath: m_fontSizeMin
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7876660603490080377, guid: 23ad19565f2012445840bbcbd8fb5088,
         type: 3}
-      propertyPath: m_text
-      value: 'Bla Bla Bla Bla Bla Bla Bla Bla '
-      objectReference: {fileID: 0}
-    - target: {fileID: 7876660603490080377, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7876660603490080377, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7876660603490080377, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 7876660603490080377, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8084657797377333257, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8084657797377333257, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8084657797377333257, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8084657797377333257, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9843615
-      objectReference: {fileID: 0}
-    - target: {fileID: 8084657797377333257, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.17616008
-      objectReference: {fileID: 0}
-    - target: {fileID: 8084657797377333257, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8084657797377333257, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 8084657797377333257, guid: 23ad19565f2012445840bbcbd8fb5088,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 20.292
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8798405964189335968, guid: 23ad19565f2012445840bbcbd8fb5088,
         type: 3}

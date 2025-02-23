@@ -9,5 +9,6 @@ public class DatosNivel : ScriptableObject
     public string nombre;               
     public string objetivo;             
     public List<DatosBloque> bloquesDisponibles; 
+    public DatosTutorial datosTutorial;
     
 }

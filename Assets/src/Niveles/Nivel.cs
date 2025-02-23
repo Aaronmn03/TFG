@@ -11,7 +11,6 @@ public class Nivel : MonoBehaviour
     public List<ProgramableObject> programableObjects;
     private bool win;
     private bool lose;
-
     [SerializeField] private IUNivelController iUNivelController;
 
     /*---VUFORIA DATA---*/
@@ -28,6 +27,9 @@ public class Nivel : MonoBehaviour
         iUNivelController = GetComponent<IUNivelController>();
     }
 
+    public DatosNivel GetData(){
+        return datosNivel;
+    }
     public GameObject GetAirFinder(){
         return airFinder;
     }
@@ -66,6 +68,8 @@ public class Nivel : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         groundPlane.GetChild(datosNivel.id-1).gameObject.SetActive(true);
+        Debug.Log("si " + datosNivel.datosTutorial);
+        groundPlane.GetChild(datosNivel.id-1).transform.GetComponentInChildren<MessageManager>().Empezar(datosNivel.datosTutorial);
         UnActivateZonaBloques();
         ObtenerProgramableObjects();
         ReiniciarPosiciones();        

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23e68548a882cf498f2066d939946f4, type: 3}
+  m_Name: MensajesNivel1
+  m_EditorClassIdentifier: 
+  mensajesBasicos:
+  - "Hola! Soy Blabla y ser\xE9 tu asistente en esta aventura."
+  - "Para empezar, solo tienes que pulsar sobre la chica y colocar el \xE1rea de
+    trabajo."
+  - 'Como puedes ver, hay dos tipos de piezas de puzzle: las amarillas, que son piezas
+    de evento. Estas se ejecutan solas y siguen el orden que hayas puesto.'
+  - "Tambi\xE9n tienes una pieza azul. Cuando se ejecute, el objeto que tengas seleccionado
+    avanzar\xE1 un paso."
+  - "\xA1Ahora, intenta alcanzar la tienda de campa\xF1a! \xA1T\xFA puedes!"
+  pistas: []
