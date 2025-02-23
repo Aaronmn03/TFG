@@ -21,4 +21,6 @@ MonoBehaviour:
   - "Tambi\xE9n tienes una pieza azul. Cuando se ejecute, el objeto que tengas seleccionado
     avanzar\xE1 un paso."
   - "\xA1Ahora, intenta alcanzar la tienda de campa\xF1a! \xA1T\xFA puedes!"
-  pistas: []
+  pistas:
+  - Prueba a contar los cuadrados del suelo
+  - Cada paso avanza una cuadricula
