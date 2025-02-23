@@ -6,6 +6,11 @@ public class RotatableObject : MonoBehaviour
     private float rotationStartTime;
     private bool isRotating = false;
 
+    private BoxCollider boxCollider;
+
+    private void Start() {
+        boxCollider = GetComponent<BoxCollider>();
+    }
     public void RotateRight()
     {
         if (!isRotating)
@@ -16,6 +21,7 @@ public class RotatableObject : MonoBehaviour
 
     public void StartRotation(Quaternion from, Quaternion to)
     {
+        boxCollider.size = new Vector3(0.25f, boxCollider.size.y, 0.25f);
         startRotation = from;
         destinationRotation = to;
         rotationStartTime = Time.time;
@@ -34,10 +40,11 @@ public class RotatableObject : MonoBehaviour
     {
         float progress = GetProgress(rotationStartTime, 90f, rotationSpeed);
         transform.rotation = Quaternion.Slerp(startRotation, destinationRotation, progress);
-
         if (progress >= 1.0f)
         {
             transform.rotation = destinationRotation;
+            boxCollider.size = new Vector3(0.4f, boxCollider.size.y, 0.4f);
+
             return false;
         }
         return true;

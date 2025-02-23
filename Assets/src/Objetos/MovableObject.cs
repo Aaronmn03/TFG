@@ -6,25 +6,28 @@ public class MovableObject : MonoBehaviour
     private Vector3 startPosition, destination;
     private float journeyLength, moveStartTime;
     private bool isMoving = false;
+    private float step = 0.1f;
+    
+    private Rigidbody rb;
 
-    private float step;
-
-    private void Start() {
-        step = 0.1f;
+    private void Awake() {
+        rb = GetComponent<Rigidbody>();
     }
+
     public void MoveForward()
     {
         if (!isMoving)
         {
             StartMovement(transform.position, transform.position + transform.forward * step);
-
         }
     }
 
     public void StartMovement(Vector3 from, Vector3 to)
     {
+        // Inicia la animación de caminar
         AnimatorHandlerPlayer animatorHandler = transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>();
         animatorHandler.Walk();
+
         startPosition = from;
         destination = to;
         journeyLength = Vector3.Distance(from, to);
@@ -32,7 +35,7 @@ public class MovableObject : MonoBehaviour
         isMoving = true;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (isMoving)
         {
@@ -43,11 +46,12 @@ public class MovableObject : MonoBehaviour
     private bool UpdateMovement()
     {
         float progress = GetProgress(moveStartTime, journeyLength, moveSpeed);
-        transform.position = Vector3.Lerp(startPosition, destination, progress);
+        Vector3 newPosition = Vector3.Lerp(startPosition, destination, progress);
+        rb.MovePosition(newPosition);
 
         if (progress >= 1.0f)
         {
-            transform.position = destination;
+            rb.MovePosition(destination);
             transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>().StopWalk();
             return false;
         }

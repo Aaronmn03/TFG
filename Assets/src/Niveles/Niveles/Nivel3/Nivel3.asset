@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32ac5e70906463489dcfc67b75a2f49, type: 3}
+  m_Name: Nivel3
+  m_EditorClassIdentifier: 
+  id: 3
+  nombre: 
+  objetivo: Llega hasta el cilindro verde
+  bloquesDisponibles:
+  - {fileID: 11400000, guid: 8f0fd0c3ca92fb9408de114f133bc60e, type: 2}
+  - {fileID: 11400000, guid: 85618cbcad3443048a21f781ea562037, type: 2}
+  - {fileID: 11400000, guid: c9794713a86e6b645ace3e3855397b7e, type: 2}
+  - {fileID: 11400000, guid: 1bb3cfce338a26742b5e642400aea03b, type: 2}

@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 653997517890015198, guid: 4280b002194bc3f48b23b8df352b51c6,
         type: 3}
       propertyPath: m_Name
-      value: Male Variant
+      value: Male
       objectReference: {fileID: 0}
     - target: {fileID: 5199934000529043641, guid: 4280b002194bc3f48b23b8df352b51c6,
         type: 3}
@@ -77,6 +77,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630253167670051049, guid: 4280b002194bc3f48b23b8df352b51c6,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630253167670051049, guid: 4280b002194bc3f48b23b8df352b51c6,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

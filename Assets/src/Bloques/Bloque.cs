@@ -8,7 +8,7 @@ using System.Linq;
 
 public abstract class Bloque : MonoBehaviour
 {
-    protected List<Bloque> bloquesConectados = new List<Bloque>();
+    public List<Bloque> bloquesConectados = new List<Bloque>();
     public Bloque parent;
     protected Nivel nivel;
     protected ProgramableObject programableObject;
