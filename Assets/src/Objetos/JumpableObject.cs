@@ -4,8 +4,6 @@ public class JumpableObject : MonoBehaviour
 {
     public float moveSpeed = 0.075f;
     public float jumpHeight = 0.2f;
-
-    public float jumpDuration = 0.5f;
     private Vector3 startPosition, destination;
     private float journeyLength, moveStartTime;
     private bool isJumping = false;
@@ -56,7 +54,7 @@ public class JumpableObject : MonoBehaviour
         {
             rb.MovePosition(destination);
             rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-            //transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>().Land(); 
+            transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>().StopJump();
             return false;
         }
         return true;
