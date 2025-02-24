@@ -4,6 +4,8 @@ public class ActionableObject : MonoBehaviour
 {
     private MovableObject movebleObject;
     private RotatableObject rotatableObject;
+
+    private JumpableObject jumpableObject;
     private Vector3 initialLocalPosition;
     private Quaternion initialLocalRotation;
 
@@ -11,6 +13,7 @@ public class ActionableObject : MonoBehaviour
     {
         movebleObject = gameObject.AddComponent<MovableObject>();
         rotatableObject = gameObject.AddComponent<RotatableObject>();
+        jumpableObject = gameObject.AddComponent<JumpableObject>();
         initialLocalPosition = transform.localPosition;
         initialLocalRotation = transform.localRotation;
     }
@@ -48,8 +51,14 @@ public class ActionableObject : MonoBehaviour
             rotatableObject.StartRotation(transform.rotation, transform.rotation * Quaternion.Euler(0, -90f, 0));
         }
     }
+
+    public void Jump()
+    {
+        jumpableObject.Jump();
+    }
+
     public bool IsMoving()
     {
-        return movebleObject.IsMoving() || rotatableObject.IsRotating();
+        return movebleObject.IsMoving() || rotatableObject.IsRotating() || jumpableObject.IsJumping();
     }
 }

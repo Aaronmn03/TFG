@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class BloqueMover : BloqueAccion{
+public class BloqueSaltar : BloqueAccion{
 
     public override IEnumerator Action(){
         actionableObject = programableObject.GetComponent<ActionableObject>();
-        actionableObject.MoveForward();
+        actionableObject.Jump();
         while (actionableObject.IsMoving()) {
             yield return null;
         }

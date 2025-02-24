@@ -16,4 +16,13 @@ public class AnimatorHandlerPlayer : MonoBehaviour
     public void StopWalk(){
         anim.SetBool("walk", false);
     }
+
+    public void Jump()
+    {
+        anim.SetBool("jump", true);
+        
+    }
+    public void StopJump(){
+        anim.SetBool("jump", false);
+    }
 }

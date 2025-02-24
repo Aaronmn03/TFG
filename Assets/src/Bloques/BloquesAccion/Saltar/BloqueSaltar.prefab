@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3916281861868112107}
   - component: {fileID: 8749968076413095458}
   - component: {fileID: 4305751909720759560}
-  - component: {fileID: 375795283698033675}
+  - component: {fileID: 8481104288618739612}
   m_Layer: 0
   m_Name: BloqueSaltar
   m_TagString: ARObject
@@ -83,7 +83,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &375795283698033675
+--- !u!114 &8481104288618739612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 973644812749269160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82ece0a9108878146bd84b43361f06aa, type: 3}
+  m_Script: {fileID: 11500000, guid: b951de4fb869b3a4c90629755b652b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bloquesConectados: []
