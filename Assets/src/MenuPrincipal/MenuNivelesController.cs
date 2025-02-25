@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class MenuNivelesController : MonoBehaviour
 {
@@ -32,7 +34,14 @@ public class MenuNivelesController : MonoBehaviour
         nivel.GetChild(1).GetComponent<TextMeshProUGUI>().text = datos.id.ToString();
         nivel.GetChild(2).GetComponent<TextMeshProUGUI>().text = datos.nombre;
         nivel.GetChild(3).GetComponent<TextMeshProUGUI>().text = datos.objetivo;
+        nivel.GetChild(4).GetComponent<Button>().onClick.AddListener(() => LoadLevel(datos.id));
     }
+
+    private void LoadLevel(int levelId){
+        PlayerPrefs.SetInt("actualLevel", levelId);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("Niveles");
+    } 
 
     public void Atras(){
         gameObject.GetComponent<MenuPrincipalController>().MenuPrincipal();

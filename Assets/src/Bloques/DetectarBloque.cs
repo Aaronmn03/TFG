@@ -35,7 +35,8 @@ public class DetectarBloque : MonoBehaviour
     public Bloque GetBloqueEnContacto()
     {
         if(bloqueInContact == null){return null;}
-        return bloqueInContact.GetComponent<Bloque>();
+        Bloque bloque = bloqueInContact.GetComponent<Bloque>();
         SetNullBloqueInContact();
+        return bloque;
     }
 }

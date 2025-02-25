@@ -24,4 +24,12 @@ public class MenuPrincipalController : MonoBehaviour
         panelNiveles.SetActive(true);
         gameObject.GetComponent<MenuNivelesController>().OnEnter();
     }
+
+    public void ShutOut(){
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
+    }
 }

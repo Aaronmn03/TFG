@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GestorNiveles : MonoBehaviour
 {
     public List<DatosNivel> niveles;
-    private int nivelActual = 0;
+    private int nivelActual;
     public Nivel nivelEnEscena;
 
     void Start()
     {
+        nivelActual = PlayerPrefs.GetInt("actualLevel") - 1;
         nivelEnEscena = GetComponent<Nivel>();
         CargarNivel(nivelActual);
     }
