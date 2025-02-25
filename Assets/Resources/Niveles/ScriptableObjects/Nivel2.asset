@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Nivel2
   m_EditorClassIdentifier: 
   id: 2
-  nombre: 
+  nombre: "\xBFGirar?"
+  icon: {fileID: 21300000, guid: 31ebb097a68a83241845ea5152829c5b, type: 3}
   objetivo: Llega hasta el cilindro verde
   bloquesDisponibles:
   - {fileID: 11400000, guid: 8f0fd0c3ca92fb9408de114f133bc60e, type: 2}

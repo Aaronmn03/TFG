@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class MenuNivelesController : MonoBehaviour
+{
+    private GameObject panelNiveles;
+    private DatosNivel[] niveles;
+    private GameObject panelNivel;
+    private bool hasLoaded;
+
+    private void Start() {
+        hasLoaded = false;
+    }
+    public void OnEnter()
+    {
+        if(hasLoaded){return;}
+        panelNiveles = GameObject.Find("Container");
+        niveles = Resources.LoadAll<DatosNivel>("Niveles/ScriptableObjects");
+        panelNivel = Resources.Load<GameObject>("MenuPrincipal/Nivel");
+        foreach (DatosNivel nivel in niveles) {
+            GameObject nivelInstanciado = Instantiate(panelNivel, panelNiveles.transform);
+            SetNivelData(nivelInstanciado.transform, nivel);
+        }
+        hasLoaded = true;
+    }
+
+    private void SetNivelData(Transform nivel, DatosNivel datos){
+        nivel.GetChild(0).GetComponent<Image>().sprite = datos.icon;
+        nivel.GetChild(1).GetComponent<TextMeshProUGUI>().text = datos.id.ToString();
+        nivel.GetChild(2).GetComponent<TextMeshProUGUI>().text = datos.nombre;
+        nivel.GetChild(3).GetComponent<TextMeshProUGUI>().text = datos.objetivo;
+    }
+
+    public void Atras(){
+        gameObject.GetComponent<MenuPrincipalController>().MenuPrincipal();
+    }
+}
