@@ -32,7 +32,7 @@ public class ZonaProgramacion : MonoBehaviour
     }
 
     public void LimpiarBloques(){
-        Destroy(this.transform.parent.gameObject);
+        Destroy(this.transform.parent.transform.parent.gameObject);
     }
 
     public void Play(){
