@@ -45,7 +45,7 @@ public class IUNivelController : MonoBehaviour
     private void SetLevelInfo(DatosNivel datosNivel){
         int numeroNivel;
         string objetivo;
-        if(datosNivel.id == null || datosNivel.id <= 0){
+        if(datosNivel.id <= 0){
             numeroNivel = 0;
         }else{
             numeroNivel = datosNivel.id;

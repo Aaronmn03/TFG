@@ -99,7 +99,6 @@ public class ObjectManipulator : MonoBehaviour
     }
 
     private void SelectObject(GameObject hit){
-        Debug.Log("Queremos mover el:" + hit.transform.gameObject.name);        
         if (hit.transform.gameObject.TryGetComponent<ProgramableObject>(out ProgramableObject ProgramableObject))
         {
             ARObject = hit.transform.gameObject;

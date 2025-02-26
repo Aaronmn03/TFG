@@ -24,7 +24,6 @@ public class MovableObject : MonoBehaviour
 
     public void StartMovement(Vector3 from, Vector3 to)
     {
-        // Inicia la animación de caminar
         AnimatorHandlerPlayer animatorHandler = transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>();
         animatorHandler.Walk();
 

@@ -13,12 +13,10 @@ public class ZonaBloques: MonoBehaviour
         GameObject container = transform.GetChild(0).gameObject;
         container.GetComponent<Image>().enabled = false;
         Transform firstChild = container.transform.GetChild(0);
-        Debug.Log(firstChild);
         foreach (Transform child in firstChild)
         {
             if (child != null)
             {
-                Debug.Log(child);
                 child.gameObject.SetActive(false);
             }
         }

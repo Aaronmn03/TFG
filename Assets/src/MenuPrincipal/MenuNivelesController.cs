@@ -50,7 +50,6 @@ public class MenuNivelesController : MonoBehaviour
 
     private bool NivelBloqueado(int nivel){
         int nivelesPasados = PlayerPrefs.GetInt("MaxLevel", 1);
-        Debug.Log(nivelesPasados);
         return nivel > nivelesPasados;
     }
 }

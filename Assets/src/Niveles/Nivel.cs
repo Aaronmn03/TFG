@@ -68,7 +68,6 @@ public class Nivel : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         groundPlane.GetChild(datosNivel.id-1).gameObject.SetActive(true);
-        Debug.Log("si " + datosNivel.datosTutorial);
         groundPlane.GetChild(datosNivel.id-1).transform.GetComponentInChildren<MessageManager>().Empezar(datosNivel.datosTutorial);
         UnActivateZonaBloques();
         ObtenerProgramableObjects();
@@ -107,7 +106,6 @@ public class Nivel : MonoBehaviour
                 int nuevoNivel = datosNivel.id + 1;
                 PlayerPrefs.SetInt("MaxLevel", nuevoNivel);
                 PlayerPrefs.Save();
-                Debug.Log("MaxNivel = " + nuevoNivel);
             }
         }
     }

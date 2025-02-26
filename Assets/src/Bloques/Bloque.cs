@@ -36,7 +36,7 @@ public abstract class Bloque : MonoBehaviour
             List<Bloque> bloquesHijos = new List<Bloque>(parent.getListConectados());
             List<Bloque> bloquesConectar = new List<Bloque>(bloquesConectados);
             bloquesConectar.Insert(0, this);
-            parent.AddBloques(0, bloquesConectar); 
+            if (!parent.AddBloques(0, bloquesConectar)){return false;} 
             this.parent = parent;
             if(bloquesHijos.Count != 0){
                 foreach (Bloque bloque in this.bloquesConectados){
@@ -59,10 +59,27 @@ public abstract class Bloque : MonoBehaviour
             child.SetParent(null);
         }
     }
-    public void AddBloques(int index, List<Bloque> childs){
+    public bool AddBloques(int index, List<Bloque> childs){
+        foreach (Bloque bloque in childs)
+        {
+            if (bloque == this)
+            {
+                Debug.LogWarning($"El bloque {bloque.name} es el mismo que el bloque actual, no se agregará.");
+                return false;
+            }
+
+            if (bloquesConectados.Contains(bloque))
+            {
+                Debug.LogWarning($"El bloque {bloque.name} ya está conectado, no se agregará.");
+                return false;
+            }
+        }
+        Debug.Log($"Intentando añadir {childs.Count} bloques en el índice {index}. Total de bloques antes de la inserción: {bloquesConectados.Count}, el bloque al que nos queremos conectar es: {this.gameObject.name}");
         bloquesConectados.InsertRange(index, childs);
         if (this.HasParent()){
-            this.parent.AddBloques(index + 1, childs);
+            return this.parent.AddBloques(index + 1, childs);
+        }else{
+            return true;
         }
     }
     public void RemoveBloque(Bloque child){
