@@ -102,8 +102,14 @@ public class Nivel : MonoBehaviour
         if(!lose){
             win = true;
             iUNivelController.Win();
+            int nivelesPasados = PlayerPrefs.GetInt("MaxLevel");
+            if(nivelesPasados <= datosNivel.id){
+                int nuevoNivel = datosNivel.id + 1;
+                PlayerPrefs.SetInt("MaxLevel", nuevoNivel);
+                PlayerPrefs.Save();
+                Debug.Log("MaxNivel = " + nuevoNivel);
+            }
         }
-        
     }
 
     public void Lose(){

@@ -31,5 +31,6 @@ public class MenuPrincipalController : MonoBehaviour
         #else
         Application.Quit();
         #endif
+        PlayerPrefs.SetInt("MaxLevel", 1);
     }
 }
