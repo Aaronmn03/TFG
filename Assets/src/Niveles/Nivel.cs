@@ -114,6 +114,7 @@ public class Nivel : MonoBehaviour
         if(!win){
             lose = true;
             iUNivelController.Lose();
+            StopAllCoroutines();
         }
     }
     public void Play(){
