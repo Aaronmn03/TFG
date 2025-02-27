@@ -103,15 +103,14 @@ public class ObjectManipulator : MonoBehaviour
         {
             ARObject = hit.transform.gameObject;
             ProgramableObject.SelectObject();
-            
         }
         if (hit.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
         {
             bloqueObject = bloque;  
         }
-        else
+        if (hit.transform.gameObject.TryGetComponent<Semaforo>(out Semaforo semaforo))
         {
-            Debug.LogWarning("El objeto seleccionado no es ni ProgramableObject ni Bloque.");
+            semaforo.SelectObject();
         }
     }
 

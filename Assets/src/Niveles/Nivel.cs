@@ -6,6 +6,8 @@ using System.Linq;
 
 public class Nivel : MonoBehaviour
 {
+    public delegate void OnPlayEvent();
+    public event OnPlayEvent PlayEvent;
     private DatosNivel datosNivel;
     private ZonaBloques zonaBloques;
     public List<ProgramableObject> programableObjects;
@@ -130,6 +132,7 @@ public class Nivel : MonoBehaviour
         foreach (ProgramableObject programableObject in programableObjects){
             programableObject.ExecuteBloques();
         }
+        PlayEvent?.Invoke();
     }
     public void ActivateZonaBloques(){
         zonaBloques.SelectedObject();

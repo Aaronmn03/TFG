@@ -99,6 +99,7 @@ MonoBehaviour:
   bloquesConectados: []
   parent: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
+  referencia: {fileID: 0}
 --- !u!1 &3037568085646875854
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +161,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e07fa5b6165d45f4dafc8eeb85725df5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

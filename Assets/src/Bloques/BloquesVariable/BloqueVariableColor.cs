@@ -5,8 +5,30 @@ using UnityEngine;
 public class BloqueVariableColor : BloqueVariable
 {
     public Color color;
-    public override void SetValue(object value){
-        if(value.GetType() != color.GetType()){Debug.LogError("El tipo de variable no coincide");}
+    public Semaforo referencia;
+    public override void SetValue(object value)
+    {
+        if (value is Semaforo semaforo)
+        {
+            this.referencia = semaforo;
+            SetIcon(semaforo);
+            return;
+        }
+        if (value is Color colorValue)
+        {
+            SetColor(colorValue);
+            return;
+        }
+        Debug.LogError("El tipo de variable no coincide");
+    }
+    private void SetIcon(Semaforo semaforo){
+        Renderer childRenderer = transform.GetChild(1).GetComponent<Renderer>();
+        Material newMaterial = childRenderer.material; 
+        newMaterial.mainTexture = semaforo.GetTexture2D();
+        childRenderer.material = newMaterial;
+    }
+
+    private void SetColor(object value){
         this.color = (Color)value; 
         Material newMaterial = new Material(Shader.Find("Standard")); 
         newMaterial.color = this.color; 
@@ -15,6 +37,9 @@ public class BloqueVariableColor : BloqueVariable
     }
     public override IEnumerator Action()
     {
+        if(color == null){
+            yield return referencia.GetColor();
+        }
         yield return color;
     }
 }
