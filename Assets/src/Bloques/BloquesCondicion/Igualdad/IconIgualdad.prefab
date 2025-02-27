@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3838207410408862821}
   - component: {fileID: 3096689513641545744}
   - component: {fileID: 4427968834808272870}
-  - component: {fileID: 7418389089172728300}
+  - component: {fileID: 1951880518022632443}
   m_Layer: 0
-  m_Name: IconRotarDer
+  m_Name: IconIgualdad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b8fa5c8335362fc43962b58849dcd500, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9cc9e3a4b5cbf1b41a71faeba823dbc8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89,7 +89,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &7418389089172728300
+--- !u!114 &1951880518022632443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

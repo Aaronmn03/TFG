@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 3838207410408862821}
   - component: {fileID: 3096689513641545744}
   - component: {fileID: 4427968834808272870}
-  - component: {fileID: 3059367089213069521}
-  - component: {fileID: -6567609518674727391}
+  - component: {fileID: 6071707370903898642}
   m_Layer: 0
   m_Name: IconComenzar
   m_TagString: Untagged
@@ -90,7 +89,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &3059367089213069521
+--- !u!114 &6071707370903898642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,19 +98,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 973644812749269160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc70f2eb1f073ee409850a16f4a51ac9, type: 3}
+  m_Script: {fileID: 11500000, guid: b108414ef13dfda49bdddd5664b0dbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6567609518674727391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973644812749269160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9081bc7f87a05b4f90af9f708aa564f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 0}

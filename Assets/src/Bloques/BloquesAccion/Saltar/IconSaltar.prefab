@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3838207410408862821}
   - component: {fileID: 3096689513641545744}
   - component: {fileID: 4427968834808272870}
-  - component: {fileID: -5672424444115008922}
+  - component: {fileID: 830931417755725395}
   m_Layer: 0
   m_Name: IconSaltar
   m_TagString: Untagged
@@ -89,7 +89,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &-5672424444115008922
+--- !u!114 &830931417755725395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,6 +98,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 973644812749269160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc70f2eb1f073ee409850a16f4a51ac9, type: 3}
+  m_Script: {fileID: 11500000, guid: b108414ef13dfda49bdddd5664b0dbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

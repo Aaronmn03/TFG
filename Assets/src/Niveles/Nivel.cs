@@ -117,6 +117,15 @@ public class Nivel : MonoBehaviour
             StopAllCoroutines();
         }
     }
+
+    public void Lose(string s){
+        if(!win){
+            lose = true;
+            iUNivelController.Lose();
+            StopAllCoroutines();
+            Debug.Log(s);
+        }
+    }
     public void Play(){
         foreach (ProgramableObject programableObject in programableObjects){
             programableObject.ExecuteBloques();
