@@ -28,6 +28,10 @@ public class BloqueArrastrable : MonoBehaviour
         transform.localPosition = transform.localPosition - new Vector3(delta.x * movementSpeed,0 , delta.y * movementSpeed);
         MoveChilds(delta);
     }
+
+    public void Move(Vector3 position){
+        transform.position = position - new Vector3(0,0,0.0075f);
+    }
     public void MoveChilds(Vector2 delta)
     {
         List<Bloque> list = bloque.getListConectados();
@@ -41,15 +45,24 @@ public class BloqueArrastrable : MonoBehaviour
 
     public void OnEndDrag()
     {        
-        var targetBloque = detectarBloque.GetBloqueEnContacto();
-        if(targetBloque != null){
-            if(bloque.ConnectTo(targetBloque)){
-                Vector3 targetTransform = targetBloque.GetComponent<Transform>().localPosition;
-                BloqueArrastrable targetArrastrable = targetBloque.GetComponent<BloqueArrastrable>();
-                targetArrastrable.MoveConnectedBlocks(targetTransform);
-                targetArrastrable.NoBrillar();
-                this.NoBrillar();
+        var targetGameObject = detectarBloque.GetBloqueEnContacto();
+        if(targetGameObject != null){
+            if(detectarBloque.GetTipoContacto() == TipoContacto.ContactoNormal){   
+                Bloque targetBloque = targetGameObject.GetComponent<Bloque>();
+                if(bloque.ConnectTo(targetBloque)){
+                    Vector3 targetTransform = targetBloque.GetComponent<Transform>().localPosition;
+                    BloqueArrastrable targetArrastrable = targetBloque.GetComponent<BloqueArrastrable>();
+                    targetArrastrable.MoveConnectedBlocks(targetTransform);
+                    targetArrastrable.NoBrillar();
+                    this.NoBrillar();
 
+                }
+            }else if(detectarBloque.GetTipoContacto() == TipoContacto.ContactoPosicional){   
+                Bloque targetBloque = targetGameObject.transform.parent.GetComponent<Bloque>();
+                IConnectable connectableBloque = bloque as IConnectable;
+                if(connectableBloque.ConnectTo(targetBloque, detectarBloque.GetIndex())){
+                    Move(targetGameObject.transform.position);
+                }   
             }
         }
     }

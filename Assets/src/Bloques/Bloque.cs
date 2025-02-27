@@ -53,6 +53,7 @@ public abstract class Bloque : MonoBehaviour
         }
         return false;       
     }
+
     public void UnConnectTo(Bloque child){  
         if (bloquesConectados.Contains(child)){
             RemoveBloque(child);
@@ -105,4 +106,10 @@ public abstract class Bloque : MonoBehaviour
             meshRenderer.enabled = visible;
         }
     }
+}
+
+public interface IConnectable
+{
+    bool ConnectTo(Bloque parent, int index);
+    void UnConnectTo(Bloque parent, int index);
 }

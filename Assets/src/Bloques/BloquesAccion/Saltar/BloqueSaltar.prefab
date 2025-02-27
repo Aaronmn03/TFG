@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8749968076413095458}
   - component: {fileID: 4305751909720759560}
   - component: {fileID: 8481104288618739612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BloqueSaltar
   m_TagString: ARObject
   m_Icon: {fileID: 0}

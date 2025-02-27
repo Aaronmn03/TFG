@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8749968076413095458}
   - component: {fileID: 4305751909720759560}
   - component: {fileID: 503396928640900933}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BloqueComenzar
   m_TagString: ARObject
   m_Icon: {fileID: 0}
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ed51d4d6f471b4281282425d63e011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloquesConectados: []
   parent: {fileID: 0}
 --- !u!1001 &3964773018150294777
 PrefabInstance:

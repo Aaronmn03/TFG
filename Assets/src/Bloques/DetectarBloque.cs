@@ -1,41 +1,93 @@
 using UnityEngine;
 
+public enum TipoContacto
+    {
+        ContactoNormal,
+        ContactoPosicional
+    }
+
 public class DetectarBloque : MonoBehaviour
 {
-    private GameObject bloqueInContact;
+    [SerializeField] private GameObject bloqueInContact;
+
+    [SerializeField] private TipoContacto tipoContacto;
+    private int index;
+    public TipoContacto GetTipoContacto(){
+        return tipoContacto;
+    }
+
+    public int GetIndex(){
+        return index;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
-        {
-            if(bloqueInContact != null){
-                SetNullBloqueInContact();
+        if(other.gameObject.layer == LayerMask.NameToLayer("BloqueGeneral")){ 
+            if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
+            {
+                if(bloqueInContact != null){
+                    SetNullBloqueInContact();
+                }
+                bloqueInContact = other.gameObject;
+                bloque.Brillar();
+                tipoContacto = TipoContacto.ContactoNormal;
             }
-            bloqueInContact = other.gameObject;
-            bloqueInContact.GetComponent<BloqueArrastrable>().Brillar();
+        }else if(other.gameObject.layer == LayerMask.NameToLayer("BloquePosicional")){
+            if (other.transform.parent.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
+            {
+                if(bloqueInContact != null){
+                    SetNullBloqueInContact();
+                }
+                bloqueInContact = other.gameObject;
+                bloque.Brillar();
+                tipoContacto = TipoContacto.ContactoPosicional;
+                index = transform.GetSiblingIndex();
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
-        {
-            if (bloqueInContact == other.gameObject)
+        if(other.gameObject.layer == LayerMask.NameToLayer("BloqueGeneral")){        
+            if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
             {
-                SetNullBloqueInContact();              
+                if (bloqueInContact == other.gameObject)
+                {
+                    SetNullBloqueInContact();              
+                }
+            }
+        }else if(other.gameObject.layer == LayerMask.NameToLayer("BloquePosicional")){
+            if (other.transform.parent.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
+            {
+                if (bloqueInContact == other.gameObject)
+                {
+                    SetNullBloqueInContact();              
+                }
             }
         }
     }
 
-    private void SetNullBloqueInContact(){
-        bloqueInContact.GetComponent<BloqueArrastrable>().NoBrillar();
-        bloqueInContact = null;       
+    private void SetNullBloqueInContact()
+    {
+        if (bloqueInContact == null) return;
+
+        BloqueArrastrable bloque = bloqueInContact.GetComponent<BloqueArrastrable>();
+        if (bloque == null && bloqueInContact.transform.parent != null)
+        {
+            bloque = bloqueInContact.transform.parent.GetComponent<BloqueArrastrable>();
+        }
+        if (bloque != null)
+        {
+            bloque.NoBrillar();
+        }
+        bloqueInContact = null;
     }
 
-    public Bloque GetBloqueEnContacto()
+
+    public GameObject GetBloqueEnContacto()
     {
         if(bloqueInContact == null){return null;}
-        Bloque bloque = bloqueInContact.GetComponent<Bloque>();
+        GameObject bloque = bloqueInContact;
         SetNullBloqueInContact();
         return bloque;
     }

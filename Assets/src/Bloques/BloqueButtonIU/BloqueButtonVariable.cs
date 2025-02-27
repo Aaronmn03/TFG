@@ -27,7 +27,6 @@ public class BloqueButtonVariable : BloqueButton
 
     public void ShowSelection()
     {
-        Debug.Log("Holii");
         selection.SetActive(true);
     }
 

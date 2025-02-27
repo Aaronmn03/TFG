@@ -21,6 +21,10 @@ public class BloqueVariableColor : BloqueVariable
         }
         Debug.LogError("El tipo de variable no coincide");
     }
+
+    public override Color GetColor(){
+        return color;
+    }
     private void SetIcon(Semaforo semaforo){
         Renderer childRenderer = transform.GetChild(1).GetComponent<Renderer>();
         Material newMaterial = childRenderer.material; 
@@ -37,9 +41,6 @@ public class BloqueVariableColor : BloqueVariable
     }
     public override IEnumerator Action()
     {
-        if(color == null){
-            yield return referencia.GetColor();
-        }
-        yield return color;
+        yield return null;
     }
 }

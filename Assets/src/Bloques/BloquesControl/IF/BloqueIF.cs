@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BloqueIF : BloqueControl
+public class BloqueIF : BloqueControl
 {
+    [SerializeField] private BloqueCondicion condicion;
     public override IEnumerator Action() {
-        if(condicion.EvaluarCondicion()){
+        if(condicion.ObtenerResultado()){
             foreach (Bloque bloque in bloquesDentro) {
                 yield return StartCoroutine(bloque.Action());
             }

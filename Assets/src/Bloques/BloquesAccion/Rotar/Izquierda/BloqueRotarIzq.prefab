@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8749968076413095458}
   - component: {fileID: 4305751909720759560}
   - component: {fileID: 2414740289337668973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BloqueRotarIzq
   m_TagString: ARObject
   m_Icon: {fileID: 0}
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7a249c377490c4bb2500fc3d458944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloquesConectados: []
   parent: {fileID: 0}
   turnLeft: 1
 --- !u!1001 &3964773018150294777
@@ -190,6 +191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: graphics
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 01eed42fd3919cd45b19ce11e0c4f187,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
