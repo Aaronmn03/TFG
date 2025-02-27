@@ -54,12 +54,13 @@ public abstract class Bloque : MonoBehaviour
         return false;       
     }
 
-    public void UnConnectTo(Bloque child){  
-        if (bloquesConectados.Contains(child)){
-            RemoveBloque(child);
-            child.SetParent(null);
+    public virtual void UnConnectTo(Bloque parent){  
+        if (parent.getListConectados().Contains(this)){
+            parent.RemoveBloque(this);
+            this.SetParent(null);
         }
     }
+
     public bool AddBloques(int index, List<Bloque> childs){
         foreach (Bloque bloque in childs)
         {
@@ -111,5 +112,4 @@ public abstract class Bloque : MonoBehaviour
 public interface IConnectable
 {
     bool ConnectTo(Bloque parent, int index);
-    void UnConnectTo(Bloque parent, int index);
 }

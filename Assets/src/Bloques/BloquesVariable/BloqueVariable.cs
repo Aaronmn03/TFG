@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class BloqueVariable : Bloque, IConnectable
 {
 
+    private int index;
     public abstract void SetValue(object value);
 
     public abstract Color GetColor();
@@ -18,20 +19,27 @@ public abstract class BloqueVariable : Bloque, IConnectable
         if(parent is not BloqueCondicion){return false;}
         BloqueCondicion bloque = (BloqueCondicion) parent; 
         if(index == 1){
+            this.index = index;
             return bloque.SetBloque1(this);
         }else if(index == 2){
+            this.index = index;
             return bloque.SetBloque2(this);
         }
         return false;
     }
-    public void UnConnectTo(Bloque parent, int index){
+    public override void UnConnectTo(Bloque parent){
         if(parent is not BloqueCondicion){return;}
         BloqueCondicion bloque = (BloqueCondicion) parent; 
+        this.transform.parent = parent.transform.parent;
+        this.SetParent(null);
+        Debug.Log("El index es: " + index);
+        Debug.Log("El bloque es: " + bloque);
         if(index == 1){
-            bloque.SetBloque1(null);
+            bloque.NullBloque1();
         }else if(index == 2){
-            bloque.SetBloque2(null);
+            bloque.NullBloque2();
         }
+        this.transform.position = this.transform.position + new Vector3(0,0,0.0075f);
     }
 }
 

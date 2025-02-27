@@ -24,16 +24,23 @@ public abstract class BloqueCondicion : Bloque, IConnectable
         return true;
     }
 
+    public void NullBloque1(){
+        bloque1 = null;
+    }
+
     public bool SetBloque2(BloqueVariable bloqueVariable){
         if(bloque2){return false;}
         bloque2 = bloqueVariable;
         return true;
     }
+    public void NullBloque2(){
+        bloque2 = null;
+    }
 
     public bool ConnectTo(Bloque parent, int index){
         return false;
     }
-    public void UnConnectTo(Bloque parent, int index){
+    public override void UnConnectTo(Bloque parent){
     }
 
 }

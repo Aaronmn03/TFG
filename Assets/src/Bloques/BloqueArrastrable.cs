@@ -62,6 +62,8 @@ public class BloqueArrastrable : MonoBehaviour
                 IConnectable connectableBloque = bloque as IConnectable;
                 if(connectableBloque.ConnectTo(targetBloque, detectarBloque.GetIndex())){
                     Move(targetGameObject.transform.position);
+                    this.transform.parent = targetBloque.transform;
+                    this.GetBloque().SetParent(targetBloque);
                 }   
             }
         }

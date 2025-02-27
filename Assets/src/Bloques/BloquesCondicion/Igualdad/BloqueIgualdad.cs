@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BloqueIgualdad : BloqueCondicion
 {
-
     public override IEnumerator Action (){
         if (bloque1 == null || bloque2 == null)
         {

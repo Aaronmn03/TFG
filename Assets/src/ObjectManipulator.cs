@@ -38,7 +38,14 @@ public class ObjectManipulator : MonoBehaviour
                 Bloque bloque = bloqueObject.GetBloque();
                 if (bloque.HasParent())
                 {
-                    bloque.GetParent().UnConnectTo(bloque);
+                    if (bloque is BloqueVariable bloqueVariable)
+                    {
+                        bloqueVariable.UnConnectTo(bloqueVariable.GetParent());
+                    }
+                    else
+                    {
+                        bloque.UnConnectTo(bloque.GetParent());
+                    }
                 }
                 bloqueObject.Move(diff);
                 firstInput = touchPosition;
@@ -67,7 +74,14 @@ public class ObjectManipulator : MonoBehaviour
                             Bloque bloque = bloqueObject.GetBloque();
                             if (bloque.HasParent())
                             {
-                                bloque.GetParent().UnConnectTo(bloque);
+                                if (bloque is BloqueVariable bloqueVariable)
+                                {
+                                    bloqueVariable.UnConnectTo(bloqueVariable.GetParent());
+                                }
+                                else
+                                {
+                                    bloque.UnConnectTo(bloque.GetParent());
+                                }
                             }
                             bloqueObject.Move(diff);
                             firstInput = touchPosition;

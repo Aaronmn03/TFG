@@ -41,8 +41,22 @@ public class DetectarBloque : MonoBehaviour
                 bloqueInContact = other.gameObject;
                 bloque.Brillar();
                 tipoContacto = TipoContacto.ContactoPosicional;
-                index = transform.GetSiblingIndex();
+                index = GetLastNumber(other.gameObject.name);
             }
+        }
+    }
+
+    int GetLastNumber(string name)
+    {
+        var match = System.Text.RegularExpressions.Regex.Match(name, @"\d+$");
+        if (match.Success)
+        {
+            return int.Parse(match.Value); 
+        }
+        else
+        {
+            Debug.LogError("No se encontró un número al final del nombre.");
+            return -1;
         }
     }
 
