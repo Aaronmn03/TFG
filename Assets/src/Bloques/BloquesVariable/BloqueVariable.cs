@@ -5,8 +5,12 @@ using UnityEngine;
 
 public abstract class BloqueVariable : Bloque, IConnectable
 {
-
     private int index;
+    public int Index
+    {
+        get { return index; }
+        set { index = value; }
+    }
     public abstract void SetValue(object value);
 
     public abstract Color GetColor();
@@ -32,8 +36,6 @@ public abstract class BloqueVariable : Bloque, IConnectable
         BloqueCondicion bloque = (BloqueCondicion) parent; 
         this.transform.parent = parent.transform.parent;
         this.SetParent(null);
-        Debug.Log("El index es: " + index);
-        Debug.Log("El bloque es: " + bloque);
         if(index == 1){
             bloque.NullBloque1();
         }else if(index == 2){

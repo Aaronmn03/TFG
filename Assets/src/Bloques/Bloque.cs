@@ -15,9 +15,10 @@ public abstract class Bloque : MonoBehaviour
     public abstract bool isConectable(Bloque other);
     public abstract IEnumerator Action();
 
-    private void Start(){
+    protected void Start(){
         nivel = GameObject.Find("LevelHandler").GetComponent<Nivel>();
         gameObject.AddComponent<BloqueArrastrable>();
+        Debug.Log(GetComponent<BloqueArrastrable>());
     }
     public List<Bloque> getListConectados(){
         return bloquesConectados;
@@ -111,5 +112,7 @@ public abstract class Bloque : MonoBehaviour
 
 public interface IConnectable
 {
+    int Index { get; set; }
     bool ConnectTo(Bloque parent, int index);
+    void UnConnectTo(Bloque parent);
 }

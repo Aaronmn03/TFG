@@ -41,8 +41,9 @@ public class ObjectManipulator : MonoBehaviour
                     if (bloque is BloqueVariable bloqueVariable)
                     {
                         bloqueVariable.UnConnectTo(bloqueVariable.GetParent());
-                    }
-                    else
+                    }else if (bloque is BloqueCondicion bloqueCondicion){
+                        bloqueCondicion.UnConnectTo(bloqueCondicion.GetParent());
+                    }else
                     {
                         bloque.UnConnectTo(bloque.GetParent());
                     }
@@ -77,8 +78,9 @@ public class ObjectManipulator : MonoBehaviour
                                 if (bloque is BloqueVariable bloqueVariable)
                                 {
                                     bloqueVariable.UnConnectTo(bloqueVariable.GetParent());
-                                }
-                                else
+                                }else if (bloque is BloqueCondicion bloqueCondicion){
+                                    bloqueCondicion.UnConnectTo(bloqueCondicion.GetParent());
+                                }else
                                 {
                                     bloque.UnConnectTo(bloque.GetParent());
                                 }

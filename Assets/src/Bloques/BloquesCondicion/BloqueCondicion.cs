@@ -5,6 +5,13 @@ using UnityEngine;
 
 public abstract class BloqueCondicion : Bloque, IConnectable
 {
+    private int index;
+    public int Index
+    {
+        get { return index; }
+        set { index = value; }
+    }
+
     [SerializeField] protected BloqueVariable bloque1;
     [SerializeField] protected BloqueVariable bloque2;
     [SerializeField] protected bool resultado = false;
@@ -38,9 +45,23 @@ public abstract class BloqueCondicion : Bloque, IConnectable
     }
 
     public bool ConnectTo(Bloque parent, int index){
+        if(parent is not BloqueControl){return false;}
+        BloqueControl bloque = (BloqueControl) parent; 
+        if(index == 1){
+            this.index = index;
+            return bloque.SetBloqueCondicion(this);
+        }
         return false;
     }
     public override void UnConnectTo(Bloque parent){
+        if(parent is not BloqueControl){return;}
+        BloqueControl bloque = (BloqueControl) parent; 
+        this.transform.parent = parent.transform.parent;
+        this.SetParent(null);
+        if(index == 1){
+            bloque.SetNullBloqueCondicion();
+        }
+        this.transform.position = this.transform.position + new Vector3(0,0,0.0075f);
     }
 
 }
