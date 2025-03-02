@@ -40,12 +40,12 @@ public class ObjectManipulator : MonoBehaviour
                 {
                     if (bloque is BloqueVariable bloqueVariable)
                     {
-                        bloqueVariable.UnConnectTo(bloqueVariable.GetParent());
+                        bloqueVariable.DisConnectTo(bloqueVariable.GetParent());
                     }else if (bloque is BloqueCondicion bloqueCondicion){
-                        bloqueCondicion.UnConnectTo(bloqueCondicion.GetParent());
+                        bloqueCondicion.DisConnectTo(bloqueCondicion.GetParent());
                     }else
                     {
-                        bloque.UnConnectTo(bloque.GetParent());
+                        bloque.DisConnectTo(bloque.GetParent());
                     }
                 }
                 bloqueObject.Move(diff);
@@ -77,12 +77,12 @@ public class ObjectManipulator : MonoBehaviour
                             {
                                 if (bloque is BloqueVariable bloqueVariable)
                                 {
-                                    bloqueVariable.UnConnectTo(bloqueVariable.GetParent());
+                                    bloqueVariable.DisConnectTo(bloqueVariable.GetParent());
                                 }else if (bloque is BloqueCondicion bloqueCondicion){
-                                    bloqueCondicion.UnConnectTo(bloqueCondicion.GetParent());
+                                    bloqueCondicion.DisConnectTo(bloqueCondicion.GetParent());
                                 }else
                                 {
-                                    bloque.UnConnectTo(bloque.GetParent());
+                                    bloque.DisConnectTo(bloque.GetParent());
                                 }
                             }
                             bloqueObject.Move(diff);

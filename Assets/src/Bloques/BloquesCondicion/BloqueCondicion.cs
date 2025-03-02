@@ -53,7 +53,7 @@ public abstract class BloqueCondicion : Bloque, IConnectable
         }
         return false;
     }
-    public override void UnConnectTo(Bloque parent){
+    public override void DisConnectTo(Bloque parent){
         if(parent is not BloqueControl){return;}
         BloqueControl bloque = (BloqueControl) parent; 
         this.transform.parent = parent.transform.parent;

@@ -30,7 +30,7 @@ public class BloqueArrastrable : MonoBehaviour
     }
 
     public void Move(Vector3 position){
-        transform.position = position - new Vector3(0,0,0.0075f);
+        transform.position = position;
     }
     public void MoveChilds(Vector2 delta)
     {
@@ -38,7 +38,6 @@ public class BloqueArrastrable : MonoBehaviour
         if (list.Count != 0)
         {
             BloqueArrastrable bloque_aux = list[0].GetComponent<BloqueArrastrable>();
-            Debug.Log(bloque_aux);
             bloque_aux.Move(delta);
         }
     }
@@ -55,16 +54,25 @@ public class BloqueArrastrable : MonoBehaviour
                     targetArrastrable.MoveConnectedBlocks(targetTransform);
                     targetArrastrable.NoBrillar();
                     this.NoBrillar();
-
                 }
             }else if(detectarBloque.GetTipoContacto() == TipoContacto.ContactoPosicional){   
                 Bloque targetBloque = targetGameObject.transform.parent.GetComponent<Bloque>();
                 IConnectable connectableBloque = bloque as IConnectable;
                 if(connectableBloque.ConnectTo(targetBloque, detectarBloque.GetIndex())){
-                    Move(targetGameObject.transform.position);
+                    Move(targetGameObject.transform.position - new Vector3(0,0,0.0075f));
                     this.transform.parent = targetBloque.transform;
                     this.GetBloque().SetParent(targetBloque);
                 }   
+            }
+            else if(detectarBloque.GetTipoContacto() == TipoContacto.ContactoInterno){
+                Bloque targetBloque = targetGameObject.transform.parent.GetComponent<Bloque>();
+                if(targetBloque is not BloqueControl){Debug.LogError("EL tipo de bloque no es control");}
+                BloqueControl bloqueControl = (BloqueControl) targetBloque;
+                Debug.Log($"Intentamos contectar {this.name} a {bloqueControl.name}");
+                if(bloque.ConnectTo(bloqueControl)){
+                    Move(targetGameObject.transform.position);
+                    transform.parent = bloqueControl.transform;
+                }
             }
         }
     }
@@ -72,6 +80,9 @@ public class BloqueArrastrable : MonoBehaviour
         Bloque bloque = this.GetComponent<Bloque>(); 
         if(!bloque.HasChild()){return;}
         float offsetX = GetComponent<Transform>().localScale.x * 1.1f;
+        if(bloque.HasBloqueControl()){
+            offsetX += 0.3f;
+        }
         Transform transformHijo = bloque.getListConectados()[0].transform;
         Vector3 nuevaPosicion = new Vector3(parentPosition.x + offsetX, parentPosition.y , parentPosition.z );
         transformHijo.localPosition = nuevaPosicion;

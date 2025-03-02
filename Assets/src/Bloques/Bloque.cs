@@ -12,6 +12,8 @@ public abstract class Bloque : MonoBehaviour
     public Bloque parent;
     protected Nivel nivel;
     protected ProgramableObject programableObject;
+
+    [SerializeField] protected BloqueControl bloqueControl;
     public abstract bool isConectable(Bloque other);
     public abstract IEnumerator Action();
 
@@ -32,13 +34,32 @@ public abstract class Bloque : MonoBehaviour
     public void SetProgramableObject(ProgramableObject programableObject){
         this.programableObject = programableObject;
     }
+
+    public void SetBloqueControl(BloqueControl bloqueControl){
+        this.bloqueControl = bloqueControl;
+    }
+    public bool HasBloqueControl(){
+        return bloqueControl != null;
+    }
+
+    public BloqueControl GetBloqueControl(){
+        return bloqueControl;
+    }
+
+    private void CheckBloqueControl(Bloque parent){
+        if(parent.HasBloqueControl()){
+            this.SetBloqueControl(parent.GetBloqueControl());
+            
+        }
+    }
     public bool ConnectTo(Bloque parent){
-        if(isConectable(parent)){
+        if(isConectable(parent) && parent.bloqueControl != this){
             List<Bloque> bloquesHijos = new List<Bloque>(parent.getListConectados());
             List<Bloque> bloquesConectar = new List<Bloque>(bloquesConectados);
             bloquesConectar.Insert(0, this);
             if (!parent.AddBloques(0, bloquesConectar)){return false;} 
             this.parent = parent;
+            CheckBloqueControl(parent);
             if(bloquesHijos.Count != 0){
                 foreach (Bloque bloque in this.bloquesConectados){
                     bloque.getListConectados().AddRange(bloquesHijos);
@@ -55,14 +76,46 @@ public abstract class Bloque : MonoBehaviour
         return false;       
     }
 
-    public virtual void UnConnectTo(Bloque parent){  
+    public bool ConnectTo(BloqueControl bloqueControl){
+        if(isConectable(bloqueControl)){
+            List<Bloque> bloquesDentro = new List<Bloque>(bloqueControl.GetBloquesDentro());
+            List<Bloque> bloquesConectar = new List<Bloque>(bloquesConectados);
+            bloquesConectar.Insert(0, this);
+            this.SetBloqueControl(bloqueControl);
+            if (!bloqueControl.AddBloques(0, bloquesConectar)){return false;} 
+            this.parent = bloqueControl;
+            if(bloquesDentro.Count != 0){
+                foreach (Bloque bloque in this.bloquesConectados){
+                    bloque.getListConectados().AddRange(bloquesDentro);
+                }
+                this.bloquesConectados.AddRange(bloquesDentro);
+                if(this.HasChild()){
+                    bloquesDentro[0].parent = bloquesConectar.Last();  
+                }else{
+                    bloquesDentro[0].parent = this;
+                }
+            }
+            return true;
+        }
+        return false;   
+    }
+
+    public virtual void DisConnectTo(Bloque parent){  
         if (parent.getListConectados().Contains(this)){
             parent.RemoveBloque(this);
             this.SetParent(null);
         }
+        if(HasBloqueControl()){
+            Debug.Log("Tiene bloque Control vamos a sacarlo");
+            bloqueControl.RemoveBloqueDentro(this);
+            transform.parent = bloqueControl.transform.parent;
+            SetBloqueControl(null);
+            this.SetParent(null);
+        }
+        
     }
 
-    public bool AddBloques(int index, List<Bloque> childs){
+    public virtual bool AddBloques(int index, List<Bloque> childs){
         foreach (Bloque bloque in childs)
         {
             if (bloque == this)
@@ -77,7 +130,6 @@ public abstract class Bloque : MonoBehaviour
                 return false;
             }
         }
-        Debug.Log($"Intentando añadir {childs.Count} bloques en el índice {index}. Total de bloques antes de la inserción: {bloquesConectados.Count}, el bloque al que nos queremos conectar es: {this.gameObject.name}");
         bloquesConectados.InsertRange(index, childs);
         if (this.HasParent()){
             return this.parent.AddBloques(index + 1, childs);
@@ -85,7 +137,7 @@ public abstract class Bloque : MonoBehaviour
             return true;
         }
     }
-    public void RemoveBloque(Bloque child){
+    public virtual void RemoveBloque(Bloque child){
         List<Bloque> list = child.getListConectados();
         this.getListConectados().Remove(child);
         foreach(Bloque bloque_aux in list){
@@ -114,5 +166,5 @@ public interface IConnectable
 {
     int Index { get; set; }
     bool ConnectTo(Bloque parent, int index);
-    void UnConnectTo(Bloque parent);
+    void DisConnectTo(Bloque parent);
 }

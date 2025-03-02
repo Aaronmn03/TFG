@@ -3,7 +3,8 @@ using UnityEngine;
 public enum TipoContacto
     {
         ContactoNormal,
-        ContactoPosicional
+        ContactoPosicional,
+        ContactoInterno,
     }
 
 public class DetectarBloque : MonoBehaviour
@@ -42,6 +43,16 @@ public class DetectarBloque : MonoBehaviour
                 bloque.Brillar();
                 tipoContacto = TipoContacto.ContactoPosicional;
                 index = GetLastNumber(other.gameObject.name);
+            }
+        }else if(other.gameObject.layer == LayerMask.NameToLayer("BloqueInterno")){
+            if (other.transform.parent.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
+            {
+                if(bloqueInContact != null){
+                    SetNullBloqueInContact();
+                }
+                bloqueInContact = other.gameObject;
+                bloque.Brillar();
+                tipoContacto = TipoContacto.ContactoInterno;
             }
         }
     }
