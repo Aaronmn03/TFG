@@ -6,6 +6,7 @@ public class BloqueVariableColor : BloqueVariable
 {
     public Color color;
     public Semaforo referencia;
+
     public override void SetValue(object value)
     {
         if (value is Semaforo semaforo)
@@ -23,6 +24,11 @@ public class BloqueVariableColor : BloqueVariable
     }
 
     public override Color GetColor(){
+        if(color == Color.clear){
+            color = referencia.GetColor();
+            Debug.Log("El valor de ref es:" + color);
+            return referencia.GetColor();
+        }
         return color;
     }
     private void SetIcon(Semaforo semaforo){
@@ -30,6 +36,7 @@ public class BloqueVariableColor : BloqueVariable
         Material newMaterial = childRenderer.material; 
         newMaterial.mainTexture = semaforo.GetTexture2D();
         childRenderer.material = newMaterial;
+        color = Color.clear;
     }
 
     private void SetColor(object value){

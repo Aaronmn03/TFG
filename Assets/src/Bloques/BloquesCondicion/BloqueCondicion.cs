@@ -63,5 +63,4 @@ public abstract class BloqueCondicion : Bloque, IConnectable
         }
         this.transform.position = this.transform.position + new Vector3(0,0,0.0075f);
     }
-
 }

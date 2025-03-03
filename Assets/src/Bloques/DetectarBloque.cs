@@ -22,6 +22,7 @@ public class DetectarBloque : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
+    //todo:Comprobar si se puede conectar antes de iluminar... y de asignar el bloqueInContact todo
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("BloqueGeneral")){ 
             if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
@@ -51,7 +52,8 @@ public class DetectarBloque : MonoBehaviour
                     SetNullBloqueInContact();
                 }
                 bloqueInContact = other.gameObject;
-                bloque.Brillar();
+                //bloque.Brillar();
+                bloque.GetComponent<BloqueControl>().IncrementarTamano(GetComponent<Bloque>().getListConectados().Count + 1);
                 tipoContacto = TipoContacto.ContactoInterno;
             }
         }
@@ -72,7 +74,9 @@ public class DetectarBloque : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other)
+    //todo: Esto se puede simplificar mucho
     {
+        Debug.Log("Salimos de un collider: " + other.gameObject.name);
         if(other.gameObject.layer == LayerMask.NameToLayer("BloqueGeneral")){        
             if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
             {
@@ -84,6 +88,16 @@ public class DetectarBloque : MonoBehaviour
         }else if(other.gameObject.layer == LayerMask.NameToLayer("BloquePosicional")){
             if (other.transform.parent.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
             {
+                if (bloqueInContact == other.gameObject)
+                {
+                    SetNullBloqueInContact();              
+                }
+            }
+        }else if(other.gameObject.layer == LayerMask.NameToLayer("BloqueInterno")){
+            Debug.Log("Salimos del bloqueInterno0");
+            if (other.transform.parent.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
+            {
+                Debug.Log("Salimos del bloqueInterno");
                 if (bloqueInContact == other.gameObject)
                 {
                     SetNullBloqueInContact();              
@@ -104,6 +118,9 @@ public class DetectarBloque : MonoBehaviour
         if (bloque != null)
         {
             bloque.NoBrillar();
+            if(bloque.TryGetComponent<BloqueControl>(out BloqueControl bloqueControl)){
+                bloqueControl.IncrementarTamano(0);
+            }
         }
         bloqueInContact = null;
     }

@@ -12,15 +12,22 @@ public abstract class BloqueControl : Bloque
     [SerializeField] private BoxCollider collider;
     private Vector3 normalSize;
 
+    private int incrementoExtra;
+
     private void Start() {
         base.Start();
         bloquesDentro = new List<Bloque>();
         normalSize = centro.localScale; 
         collider.enabled = true;
+        incrementoExtra = 0;
     }
-    private void Update() {
+
+    public void IncrementarTamano(int value)
+    {
+        incrementoExtra = value;
         ActualizarTamaño();
     }
+
     public bool AddBloques(int index, List<Bloque> childs){
         foreach (Bloque bloque in childs)
         {
@@ -39,8 +46,10 @@ public abstract class BloqueControl : Bloque
         Debug.Log($"Intentando añadir {childs.Count} bloques en el índice {index}. Total de bloques antes de la inserción: {bloquesDentro.Count}, el bloque al que nos queremos conectar es: {this.gameObject.name}");
         bloquesDentro.InsertRange(index, childs);
         if (this.HasParent()){
+            ActualizarTamaño();
             return this.parent.AddBloques(index + 1, childs);
         }else{
+            ActualizarTamaño();
             return true;
         }
     }
@@ -61,13 +70,16 @@ public abstract class BloqueControl : Bloque
         return other is BloqueControl || other is BloqueAccion || other is BloqueRaiz; 
     }
     private void ActualizarTamaño(){
-        int numBloques = bloquesDentro.Count; 
+        int numBloques = bloquesDentro.Count + incrementoExtra; 
+        Debug.Log("Actualizamos el tamaño: " + numBloques);
         if(numBloques == 0){
             centro.localScale = normalSize;
             collider.enabled = true;
         }
         else {
-            collider.enabled = false;
+            if(bloquesDentro.Count != 0){
+                collider.enabled = false;
+            }
             float ancho = 300;
             float nuevoAncho = (ancho * numBloques);
             centro.localScale = new Vector3(nuevoAncho, normalSize.y, normalSize.z);
