@@ -34,7 +34,7 @@ public class BloqueArrastrable : MonoBehaviour
     }
     public void MoveChilds(Vector2 delta)
     {
-        List<Bloque> list = bloque.getListConectados();
+        List<Bloque> list = bloque.GetListConectados();
         if (list.Count != 0)
         {
             BloqueArrastrable bloque_aux = list[0].GetComponent<BloqueArrastrable>();
@@ -68,26 +68,40 @@ public class BloqueArrastrable : MonoBehaviour
                 Bloque targetBloque = targetGameObject.transform.parent.GetComponent<Bloque>();
                 if(targetBloque is not BloqueControl){Debug.LogError("EL tipo de bloque no es control");}
                 BloqueControl bloqueControl = (BloqueControl) targetBloque;
-                Debug.Log($"Intentamos contectar {this.name} a {bloqueControl.name}");
                 if(bloque.ConnectTo(bloqueControl)){
                     Move(targetGameObject.transform.position);
+                    MoveConnectedBlocks(this.transform.localPosition);
                     transform.parent = bloqueControl.transform;
+                    foreach(Bloque bloque in bloque.GetListConectados()){
+                        bloque.transform.parent = bloqueControl.transform;
+                    }
                 }
             }
         }
     }
     public void MoveConnectedBlocks(Vector3 parentPosition){
         Bloque bloque = this.GetComponent<Bloque>(); 
+        Debug.Log(bloque.gameObject.name);
         if(!bloque.HasChild()){return;}
         float offsetX = GetComponent<Transform>().localScale.x * 1.1f;
-        if(bloque.HasBloqueControl()){
-            offsetX += 0.3f;
+        if(PrimerHijoControl(bloque.GetListConectados()[0])){
+            BloqueControl bloqueControl = bloque as BloqueControl; 
+            if(bloqueControl.GetBloquesDentro().Count == 0){
+                offsetX += 0.3f;
+            }else{
+                offsetX = offsetX + (bloqueControl.GetBloquesDentro()[0].transform.localScale.x * 1.1f + 0.3f) * (bloqueControl.GetBloquesDentro().Count - 1);
+            }
         }
-        Transform transformHijo = bloque.getListConectados()[0].transform;
+        Transform transformHijo = bloque.GetListConectados()[0].transform;
         Vector3 nuevaPosicion = new Vector3(parentPosition.x + offsetX, parentPosition.y , parentPosition.z );
         transformHijo.localPosition = nuevaPosicion;
         transformHijo.transform.parent.rotation = transform.parent.rotation;
         transformHijo.gameObject.GetComponent<BloqueArrastrable>().MoveConnectedBlocks(nuevaPosicion);
+    }
+
+    private bool PrimerHijoControl(Bloque hijo){
+        Debug.Log(hijo.GetParent());
+        return !hijo.HasBloqueControl() && hijo.GetParent() is BloqueControl;
     }
 
     public void Brillar(){

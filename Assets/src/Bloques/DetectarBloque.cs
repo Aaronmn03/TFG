@@ -53,7 +53,7 @@ public class DetectarBloque : MonoBehaviour
                 }
                 bloqueInContact = other.gameObject;
                 //bloque.Brillar();
-                bloque.GetComponent<BloqueControl>().IncrementarTamano(GetComponent<Bloque>().getListConectados().Count + 1);
+                bloque.GetComponent<BloqueControl>().IncrementarTamano(GetComponent<Bloque>().GetListConectados().Count + 1);
                 tipoContacto = TipoContacto.ContactoInterno;
             }
         }

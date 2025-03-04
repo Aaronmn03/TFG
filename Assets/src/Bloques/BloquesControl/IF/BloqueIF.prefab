@@ -126,7 +126,9 @@ MonoBehaviour:
   bloquesDentro: []
   lateral: {fileID: 2670740556591404782}
   centro: {fileID: 1230057781594660657}
-  collider: {fileID: 3083344145500609202}
+  colliderCentral: {fileID: 3083344145500609202}
+  colliders: []
+  colliderLateral: {fileID: 0}
 --- !u!1 &2766257736750383835
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public abstract class Bloque : MonoBehaviour
         gameObject.AddComponent<BloqueArrastrable>();
         Debug.Log(GetComponent<BloqueArrastrable>());
     }
-    public List<Bloque> getListConectados(){
+    public List<Bloque> GetListConectados(){
         return bloquesConectados;
     }
     public Bloque GetParent(){
@@ -54,7 +54,7 @@ public abstract class Bloque : MonoBehaviour
     }
     public bool ConnectTo(Bloque parent){
         if(isConectable(parent) && parent.bloqueControl != this){
-            List<Bloque> bloquesHijos = new List<Bloque>(parent.getListConectados());
+            List<Bloque> bloquesHijos = new List<Bloque>(parent.GetListConectados());
             List<Bloque> bloquesConectar = new List<Bloque>(bloquesConectados);
             bloquesConectar.Insert(0, this);
             if (!parent.AddBloques(0, bloquesConectar)){return false;} 
@@ -62,7 +62,7 @@ public abstract class Bloque : MonoBehaviour
             CheckBloqueControl(parent);
             if(bloquesHijos.Count != 0){
                 foreach (Bloque bloque in this.bloquesConectados){
-                    bloque.getListConectados().AddRange(bloquesHijos);
+                    bloque.GetListConectados().AddRange(bloquesHijos);
                 }
                 this.bloquesConectados.AddRange(bloquesHijos);
                 if(this.HasChild()){
@@ -84,9 +84,12 @@ public abstract class Bloque : MonoBehaviour
             this.SetBloqueControl(bloqueControl);
             if (!bloqueControl.AddBloques(0, bloquesConectar)){return false;} 
             this.parent = bloqueControl;
+            foreach(Bloque bloque in bloquesConectados){
+                bloque.SetBloqueControl(bloqueControl);
+            }
             if(bloquesDentro.Count != 0){
                 foreach (Bloque bloque in this.bloquesConectados){
-                    bloque.getListConectados().AddRange(bloquesDentro);
+                    bloque.GetListConectados().AddRange(bloquesDentro);
                 }
                 this.bloquesConectados.AddRange(bloquesDentro);
                 if(this.HasChild()){
@@ -101,18 +104,20 @@ public abstract class Bloque : MonoBehaviour
     }
 
     public virtual void DisConnectTo(Bloque parent){  
-        if (parent.getListConectados().Contains(this)){
+        if (parent.GetListConectados().Contains(this)){
             parent.RemoveBloque(this);
             this.SetParent(null);
         }
         if(HasBloqueControl()){
-            Debug.Log("Tiene bloque Control vamos a sacarlo");
             bloqueControl.RemoveBloqueDentro(this);
+            foreach(Bloque bloque in bloquesConectados){
+                bloque.transform.parent = bloqueControl.transform.parent;
+                bloque.SetBloqueControl(null);
+            }
             transform.parent = bloqueControl.transform.parent;
-            SetBloqueControl(null);
             this.SetParent(null);
+            SetBloqueControl(null);
         }
-        
     }
 
     public virtual bool AddBloques(int index, List<Bloque> childs){
@@ -138,10 +143,10 @@ public abstract class Bloque : MonoBehaviour
         }
     }
     public virtual void RemoveBloque(Bloque child){
-        List<Bloque> list = child.getListConectados();
-        this.getListConectados().Remove(child);
+        List<Bloque> list = child.GetListConectados();
+        this.GetListConectados().Remove(child);
         foreach(Bloque bloque_aux in list){
-            this.getListConectados().Remove(bloque_aux);
+            this.GetListConectados().Remove(bloque_aux);
         }
         if(this.HasParent()){
             this.parent.RemoveBloque(child);

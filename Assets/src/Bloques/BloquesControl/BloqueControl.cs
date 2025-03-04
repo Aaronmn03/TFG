@@ -9,17 +9,21 @@ public abstract class BloqueControl : Bloque
     public List<Bloque> bloquesDentro; 
     [SerializeField] private Transform lateral;
     [SerializeField] private Transform centro;
-    [SerializeField] private BoxCollider collider;
-    private Vector3 normalSize;
+    [SerializeField] private BoxCollider colliderCentral;
 
+    [SerializeField] private BoxCollider[] colliders;
+    [SerializeField] private BoxCollider colliderLateral;
+    private Vector3 normalSize;
     private int incrementoExtra;
 
     private void Start() {
         base.Start();
         bloquesDentro = new List<Bloque>();
         normalSize = centro.localScale; 
-        collider.enabled = true;
+        colliderCentral.enabled = true;
         incrementoExtra = 0;
+        colliders = GetComponents<BoxCollider>();
+        colliderLateral = colliders[1];
     }
 
     public void IncrementarTamano(int value)
@@ -55,10 +59,9 @@ public abstract class BloqueControl : Bloque
     }
 
     public void RemoveBloqueDentro(Bloque child){
-        List<Bloque> list = child.getListConectados();
+        List<Bloque> list = child.GetListConectados();
         bloquesDentro.Remove(child);
         foreach(Bloque bloque_aux in list){
-            Debug.Log($"Eliminamos {bloque_aux.gameObject.name}");
             bloquesDentro.Remove(bloque_aux);
         }
     }
@@ -69,26 +72,39 @@ public abstract class BloqueControl : Bloque
     {
         return other is BloqueControl || other is BloqueAccion || other is BloqueRaiz; 
     }
-    private void ActualizarTamaño(){
-        int numBloques = bloquesDentro.Count + incrementoExtra; 
-        Debug.Log("Actualizamos el tamaño: " + numBloques);
-        if(numBloques == 0){
+    private void ActualizarTamaño()
+    {
+        int numBloques = bloquesDentro.Count + incrementoExtra;
+
+        if (numBloques == 0)
+        {
             centro.localScale = normalSize;
-            collider.enabled = true;
+            colliderCentral.enabled = true;
         }
-        else {
-            if(bloquesDentro.Count != 0){
-                collider.enabled = false;
+        else
+        {
+            if (bloquesDentro.Count != 0)
+            {
+                colliderCentral.enabled = false;
             }
-            float ancho = 300;
+            float ancho = 275;
             float nuevoAncho = (ancho * numBloques);
             centro.localScale = new Vector3(nuevoAncho, normalSize.y, normalSize.z);
         }
-        Bounds centroBounds = centro.GetComponent<Renderer>().bounds;
-        Vector3 nuevaPosicionLateral = centroBounds.max; 
-        lateral.position = new Vector3(nuevaPosicionLateral.x, lateral.position.y, lateral.position.z);
-    }
 
+        Bounds centroBounds = centro.GetComponent<Renderer>().bounds;
+        Vector3 nuevaPosicionLateral = centroBounds.max;
+        Vector3 nuevaPosicionLocal = lateral.parent.InverseTransformPoint(nuevaPosicionLateral);
+
+        Vector3 posicionAnteriorLateral = lateral.localPosition;
+
+        lateral.localPosition = new Vector3(nuevaPosicionLocal.x, lateral.localPosition.y, lateral.localPosition.z);
+        if (colliderLateral != null)
+        {
+            Vector3 desplazamiento = lateral.localPosition - posicionAnteriorLateral;
+            colliderLateral.center += new Vector3(desplazamiento.x * 0.5f, 0, 0);
+        }
+    }
     public bool SetBloqueCondicion(BloqueCondicion bloqueCondicion){
         if(condicion){return false;}
         condicion = bloqueCondicion;
@@ -97,6 +113,4 @@ public abstract class BloqueControl : Bloque
     public void SetNullBloqueCondicion(){
         condicion = null;
     }
-
-
 }
