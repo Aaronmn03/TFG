@@ -34,8 +34,10 @@ public class ObjectManipulator : MonoBehaviour
             if (Input.GetMouseButton(0) && bloqueObject != null)
             {
                 touchPosition = Input.mousePosition;
-                Vector2 diff = (firstInput - touchPosition) * ScreenFactor;
                 Bloque bloque = bloqueObject.GetBloque();
+                Vector3 escala = bloque != null ? bloque.GetAreaTrabajo().transform.localScale : Vector3.one;
+                float zoomFactor = 1f / escala.x;
+                Vector2 diff = (firstInput - touchPosition) * ScreenFactor * zoomFactor;
                 if (bloque.HasParent())
                 {
                     if (bloque is BloqueVariable bloqueVariable)
@@ -71,8 +73,10 @@ public class ObjectManipulator : MonoBehaviour
                         if (firstTouch.phase == TouchPhase.Moved && bloqueObject != null)
                         {
                             touchPosition = firstTouch.position;
-                            Vector2 diff = (firstInput - touchPosition) * ScreenFactor;
                             Bloque bloque = bloqueObject.GetBloque();
+                            Vector3 escala = bloque != null ? bloque.GetAreaTrabajo().transform.localScale : Vector3.one;
+                            float zoomFactor = 1f / escala.x;
+                            Vector2 diff = (firstInput - touchPosition) * ScreenFactor * zoomFactor;
                             if (bloque.HasParent())
                             {
                                 if (bloque is BloqueVariable bloqueVariable)

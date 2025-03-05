@@ -24,6 +24,10 @@ public class ProgramableObject : MonoBehaviour
         this.zonaProgramacion = zonaProgramacion;
     }
 
+    public GameObject GetZonaProgramacion(){
+        return zonaProgramacion.gameObject;
+    }
+
     public void SelectObject()
     {
         objectRenderer.material = selectedMaterial;

@@ -127,6 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7485702151957647049}
   - component: {fileID: 8771439850630942706}
+  - component: {fileID: 1133235115778670964}
   m_Layer: 0
   m_Name: AreaTrabajo
   m_TagString: Untagged
@@ -162,6 +163,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloquesRaiz: []
+--- !u!114 &1133235115778670964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311241058390866632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7bcb0591cbf6984ea43aba42237208d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomSpeed: 0.00001
+  moveSpeed: 0.0001
+  escalaMinima: {x: 0.0015, y: 0.00099, z: 0.00099}
+  escalaMaxima: {x: 0.0055, y: 0.00495, z: 0.00495}
 --- !u!1001 &2088320354242063183
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -46,6 +46,10 @@ public abstract class Bloque : MonoBehaviour
         return bloqueControl;
     }
 
+    public GameObject GetAreaTrabajo(){
+        return programableObject.GetZonaProgramacion();
+    }
+
     private void CheckBloqueControl(Bloque parent){
         if(parent.HasBloqueControl()){
             this.SetBloqueControl(parent.GetBloqueControl());

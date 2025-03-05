@@ -9,10 +9,10 @@ public class BloqueArrastrable : MonoBehaviour
     public ObjectManipulator objectManipulator;
     private DetectarBloque detectarBloque;
     private Color emissionColor; 
+    
     public Bloque GetBloque(){
         return bloque;
     }
-
     private void Awake() {
         detectarBloque = gameObject.AddComponent<DetectarBloque>();
         bloque = GetComponent<Bloque>();
