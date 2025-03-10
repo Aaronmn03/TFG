@@ -30,12 +30,6 @@ public abstract class BloqueControl : Bloque
         return incrementoExtra;
     }
 
-    public void IncrementarTamano(int value)
-    {
-        incrementoExtra = value;
-        ActualizarTamaño();
-    }
-
     public bool AddBloques(int index, List<Bloque> childs){
         foreach (Bloque bloque in childs)
         {
@@ -51,78 +45,63 @@ public abstract class BloqueControl : Bloque
                 return false;
             }
         }
-        Debug.Log($"Intentando añadir {childs.Count} bloques en el índice {index}. Total de bloques antes de la inserción: {bloquesDentro.Count}, el bloque al que nos queremos conectar es: {this.gameObject.name}");
         bloquesDentro.InsertRange(index, childs);
         foreach (Bloque bloque in childs)
         {
             bloque.transform.parent = this.transform;
-            bloque.GetComponent<BoxCollider>().center += new Vector3(0, 0.2f, 0);
-            bloque.GetComponent<BoxCollider>().size -= new Vector3(0.4f, 0, 0);
+            AjustarCollider(bloque, true);
         }
         ActualizarTamaño();
         return true;
     }
-
     public void RemoveBloqueDentro(Bloque child){
         List<Bloque> list = child.GetBloquesConectados();
-        child.GetComponent<BoxCollider>().center -= new Vector3(0, 0.2f, 0);
-        child.GetComponent<BoxCollider>().size += new Vector3(0.4f, 0, 0);
+        AjustarCollider(child, false);
         bloquesDentro.Remove(child);
         foreach(Bloque bloque in list){
-            bloque.GetComponent<BoxCollider>().center -= new Vector3(0, 0.2f, 0);
-            bloque.GetComponent<BoxCollider>().size += new Vector3(0.4f, 0, 0);
+            AjustarCollider(bloque, false);
             bloquesDentro.Remove(bloque);
             ActualizarTamaño();
         }
     }
+    
     public List<Bloque> GetBloquesDentro(){
         return bloquesDentro;
     } 
-    public override bool isConectable(Bloque other)
-    {
+    public override bool isConectable(Bloque other){
         return other is BloqueControl || other is BloqueAccion || other is BloqueRaiz; 
     }
-
-    private void ActualizarTamaño()
-    {
+    public void IncrementarTamano(int value){
+        incrementoExtra = value;
+        ActualizarTamaño();
+    }
+    private void ActualizarTamaño(){
         int numBloques = bloquesDentro.Count + incrementoExtra;
-
-        if (numBloques == 0)
-        {
+        if (numBloques == 0){
             centro.localScale = normalSize;
             colliderInterno.enabled = true;
-        }
-        else
-        {
-            if (bloquesDentro.Count != 0)
-            {
-                colliderInterno.enabled = false;
-            }
-            float ancho = 275;
+        }else{
+            const float ancho = 275;
             float nuevoAncho = (ancho * numBloques);
             centro.localScale = new Vector3(nuevoAncho, normalSize.y, normalSize.z);
         }
+        colliderInterno.enabled = bloquesDentro.Count == 0;
 
-        Bounds centroBounds = centro.GetComponent<Renderer>().bounds;
-        Vector3 nuevaPosicionLateral = centroBounds.max;
-        Vector3 nuevaPosicionLocal = lateral.parent.InverseTransformPoint(nuevaPosicionLateral);
-        Vector3 posicionAnteriorLateral = lateral.localPosition;
-        lateral.localPosition = new Vector3(nuevaPosicionLocal.x, lateral.localPosition.y, lateral.localPosition.z);
-        if (colliderLateral != null)
-        {
-            Vector3 desplazamiento = lateral.localPosition - posicionAnteriorLateral;
-            colliderLateral.center += new Vector3(desplazamiento.x * 0.5f, 0, 0);
+        if (colliderLateral != null){
+            Vector3 desplazamiento = lateral.localPosition;
+            lateral.localPosition = new Vector3(CalcularNuevaPosicionLateral(), lateral.localPosition.y, lateral.localPosition.z);
+            colliderLateral.center += new Vector3((lateral.localPosition - desplazamiento).x * 0.5f, 0, 0);
         }
-
-        BloqueArrastrable bloqueArrastrable = GetComponent<BloqueArrastrable>();
-        bloqueArrastrable.MoveConnectedBlocks(bloqueArrastrable.transform.localPosition);
+        
+        GetComponent<BloqueArrastrable>().MoveConnectedBlocks(bloqueArrastrable.transform.localPosition);
         CentrarCondicion();
         ControlarTextura();
     }
-
+    private float CalcularNuevaPosicionLateral(){
+        return lateral.parent.InverseTransformPoint(centro.GetComponent<Renderer>().bounds.max).x;
+    }
     private void CentrarCondicion(){
         float centroRealX = centro.GetComponent<Renderer>().bounds.center.x;
-        Debug.Log("el centro es :" +  centroRealX);
         Transform transformCollider = colliderCondicion.transform;
         transformCollider.position = new Vector3(centroRealX, transformCollider.position.y, transformCollider.position.z);
         if(condicion != null){
@@ -141,6 +120,16 @@ public abstract class BloqueControl : Bloque
         float offsetX = -C * tiling.x + C; 
         material.mainTextureOffset = new Vector2(offsetX, 0f);
     }
+
+    private void AjustarCollider(Bloque bloque, bool agregar){
+        float ajusteX = agregar ? -0.4f : 0.4f;
+        float ajusteY = agregar ? 0.2f : -0.2f;
+        
+        var collider = bloque.GetComponent<BoxCollider>();
+        collider.center += new Vector3(0, ajusteY, 0);
+        collider.size += new Vector3(ajusteX, 0, 0);
+    }
+
     public bool SetBloqueCondicion(BloqueCondicion bloqueCondicion){
         if(condicion){return false;}
         condicion = bloqueCondicion;

@@ -26,7 +26,6 @@ public class BloqueVariableColor : BloqueVariable
     public override Color GetColor(){
         if(color == Color.clear){
             color = referencia.GetColor();
-            Debug.Log("El valor de ref es:" + color);
             return referencia.GetColor();
         }
         return color;

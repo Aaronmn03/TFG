@@ -25,7 +25,6 @@ public abstract class Bloque : MonoBehaviour
     protected void Start(){
         nivel = GameObject.Find("LevelHandler").GetComponent<Nivel>();
         gameObject.AddComponent<BloqueArrastrable>();
-        Debug.Log(GetComponent<BloqueArrastrable>());
     }
     public List<Bloque> GetBloquesConectados(){
         return bloquesConectados;

@@ -2266,7 +2266,7 @@ MonoBehaviour:
   niveles:
   - {fileID: 11400000, guid: afd6a440f56aacb498d8d9764e636eb1, type: 2}
   - {fileID: 11400000, guid: d41eea37a167f7d46a33148c25ce1f65, type: 2}
-  - {fileID: 11400000, guid: b2b32195f9263934a8a6e9bed40e1d47, type: 2}
+  - {fileID: 11400000, guid: 1fb1f588e097aa040b2a82e926acfc41, type: 2}
   - {fileID: 11400000, guid: 8d5e3d49eb4c3d84b9ff162ed0884257, type: 2}
   - {fileID: 11400000, guid: 006fc8cff1f361642a6fea990d6632f9, type: 2}
   - {fileID: 11400000, guid: b2b32195f9263934a8a6e9bed40e1d47, type: 2}
@@ -4736,17 +4736,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 942559266}
     m_Modifications:
-    - target: {fileID: 972762281114469856, guid: 9070fbb968019a84981ff094b99cd441,
-        type: 3}
-      propertyPath: texture
-      value: 
-      objectReference: {fileID: 2800000, guid: 4cf6ac1d1dbd9c647ab1533abb0dc962, type: 3}
-    - target: {fileID: 972762281114469856, guid: 9070fbb968019a84981ff094b99cd441,
-        type: 3}
-      propertyPath: datosBloque
-      value: 
-      objectReference: {fileID: 11400000, guid: 925eb4d92408c654baf0a165423fb8ca,
-        type: 2}
     - target: {fileID: 3627751852098794400, guid: 9070fbb968019a84981ff094b99cd441,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4806,6 +4795,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Nvl6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8798405964189335968, guid: 9070fbb968019a84981ff094b99cd441,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

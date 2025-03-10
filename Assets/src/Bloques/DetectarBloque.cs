@@ -117,10 +117,8 @@ public class DetectarBloque : MonoBehaviour
                 }
             }
         }else if(other.gameObject.layer == LayerMask.NameToLayer("BloqueInterno")){
-            Debug.Log("Salimos del bloqueInterno0");
             if (other.transform.parent.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
             {
-                Debug.Log("Salimos del bloqueInterno");
                 if (bloqueInContact == other.gameObject)
                 {
                     SetNullBloqueInContact();              

@@ -17,7 +17,7 @@ public class MessageManager : MonoBehaviour
     {
         tutorialFinalizado = false;
         if(datosTutorial == null){
-            Debug.Log("No has agregado mensajes");
+            Debug.LogError("No has agregado mensajes");
             return;
         }
         this.datosTutorial = datosTutorial;

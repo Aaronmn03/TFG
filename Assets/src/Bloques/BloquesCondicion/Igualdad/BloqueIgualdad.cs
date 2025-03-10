@@ -17,17 +17,11 @@ public class BloqueIgualdad : BloqueCondicion
         object valor2 = bloque2.GetColor();
         while (EsColorNegro(valor1) || EsColorNegro(valor2))
         {
-            Debug.Log("Esperando a que los valores cambien...");
             valor1 = bloque1.GetColor();
-            Debug.Log(valor1);
             valor2 = bloque2.GetColor();
-            Debug.Log(valor2);
             yield return null;
         }
-        Debug.Log("El valor1 es : " + valor1);
-        Debug.Log("El valor2 es : " + valor2);
         resultado = valor1.Equals(valor2);
-        Debug.Log("Hemos llegado a la igualdad y el resultado es: " + resultado);
         yield return null; 
     }
 
