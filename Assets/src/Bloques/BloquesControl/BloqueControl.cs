@@ -93,7 +93,7 @@ public abstract class BloqueControl : Bloque
             colliderLateral.center += new Vector3((lateral.localPosition - desplazamiento).x * 0.5f, 0, 0);
         }
         
-        GetComponent<BloqueArrastrable>().MoveConnectedBlocks(bloqueArrastrable.transform.localPosition);
+        GetComponent<BloqueArrastrable>().MoveConnectedBlocks(this.transform.localPosition);
         CentrarCondicion();
         ControlarTextura();
     }
