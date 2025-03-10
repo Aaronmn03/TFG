@@ -23,7 +23,7 @@ public class WinController : MonoBehaviour
         if(other.gameObject.CompareTag("lose")){
             if (nivel != null)
             {
-                nivel.Lose(); 
+                nivel.Lose("Te has chocado con un obstáculo"); 
             }
         }
     }

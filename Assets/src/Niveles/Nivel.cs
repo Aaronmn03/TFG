@@ -100,7 +100,7 @@ public class Nivel : MonoBehaviour
         }
     }
     public void Win(){
-        if(!lose){
+        if(!lose && !win){
             win = true;
             iUNivelController.Win();
             int nivelesPasados = PlayerPrefs.GetInt("MaxLevel");
@@ -112,20 +112,23 @@ public class Nivel : MonoBehaviour
         }
     }
 
-    public void Lose(){
-        if(!win){
-            lose = true;
-            iUNivelController.Lose();
-            StopAllCoroutines();
-        }
+    public void Lose()
+    {
+        HandleLose();
     }
 
-    public void Lose(string s){
-        if(!win){
+    public void Lose(string message)
+    {
+        HandleLose();
+        iUNivelController.SetLoseMessage(message);
+    }
+    private void HandleLose()
+    {
+        if (!win && !lose)
+        {
             lose = true;
             iUNivelController.Lose();
             StopAllCoroutines();
-            Debug.Log(s);
         }
     }
     public void Play(){

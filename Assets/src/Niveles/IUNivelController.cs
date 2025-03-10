@@ -39,7 +39,12 @@ public class IUNivelController : MonoBehaviour
 
     public void Lose(){
         loseCanvas.SetActive(true);
+        loseCanvas.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "¡Error! Vamos, tú puedes.";
         playCanvas.SetActive(false);
+    }
+
+    public void SetLoseMessage(string message){
+        loseCanvas.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "¡Error!\n"+ message +"\nTú puedes.";
     }
 
     private void SetLevelInfo(DatosNivel datosNivel){
