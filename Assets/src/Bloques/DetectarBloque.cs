@@ -22,42 +22,65 @@ public class DetectarBloque : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    //todo:Comprobar si se puede conectar antes de iluminar... y de asignar el bloqueInContact todo
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("BloqueGeneral")){ 
-            if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
-            {
-                if(bloqueInContact != null){
-                    SetNullBloqueInContact();
-                }
-                bloqueInContact = other.gameObject;
-                bloque.Brillar();
-                tipoContacto = TipoContacto.ContactoNormal;
-            }
-        }else if(other.gameObject.layer == LayerMask.NameToLayer("BloquePosicional")){
-            if (other.transform.parent.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
-            {
-                if(bloqueInContact != null){
-                    SetNullBloqueInContact();
-                }
-                bloqueInContact = other.gameObject;
-                bloque.Brillar();
-                tipoContacto = TipoContacto.ContactoPosicional;
-                index = GetLastNumber(other.gameObject.name);
-            }
-        }else if(other.gameObject.layer == LayerMask.NameToLayer("BloqueInterno")){
-            if (other.transform.parent.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
-            {
-                if(bloqueInContact != null){
-                    SetNullBloqueInContact();
-                }
-                bloqueInContact = other.gameObject;
-                //bloque.Brillar();
-                bloque.GetComponent<BloqueControl>().IncrementarTamano(GetComponent<Bloque>().GetListConectados().Count + 1);
-                tipoContacto = TipoContacto.ContactoInterno;
-            }
+        if (!enabled) return;
+        int layer = other.gameObject.layer;
+        if (layer == LayerMask.NameToLayer("BloqueGeneral"))
+        {
+            ProcesarBloqueGeneral(other.gameObject);
+        }
+        else if (layer == LayerMask.NameToLayer("BloquePosicional"))
+        {
+            ProcesarBloquePosicional(other.gameObject);
+        }
+        else if (layer == LayerMask.NameToLayer("BloqueInterno"))
+        {
+            ProcesarBloqueInterno(other.gameObject);
         }
     }
+
+    private void ProcesarBloqueGeneral(GameObject other)
+    {
+        if (!other.TryGetComponent(out BloqueArrastrable bloque)) return;
+        if (GetComponent<Bloque>().GetBloqueControl() == bloque.GetComponent<Bloque>()) return;
+        if (!GetComponent<Bloque>().isConectable(other.GetComponent<Bloque>(), TipoContacto.ContactoNormal)){return;}
+        ActualizarBloqueEnContacto(other, bloque);
+        if (bloque.GetBloque().HasBloqueControl())
+        {
+            bloque.GetBloque().GetBloqueControl().IncrementarTamano(GetComponent<Bloque>().GetBloquesConectados().Count + 1);
+        }
+        tipoContacto = TipoContacto.ContactoNormal;
+    }
+
+    private void ProcesarBloquePosicional(GameObject other)
+    {
+        GameObject parentObj = other.transform.parent?.gameObject;
+        if (parentObj == null || !parentObj.TryGetComponent(out BloqueArrastrable bloque)) return;
+        if (!GetComponent<Bloque>().isConectable(bloque.GetBloque(), TipoContacto.ContactoPosicional)){return;}
+
+        ActualizarBloqueEnContacto(other, bloque);
+        tipoContacto = TipoContacto.ContactoPosicional;
+        index = GetLastNumber(other.name);
+    }
+
+    private void ProcesarBloqueInterno(GameObject other)
+    {
+        GameObject parentObj = other.transform.parent?.gameObject;
+        if (parentObj == null || !parentObj.TryGetComponent(out BloqueArrastrable bloque)) return;
+        if (!GetComponent<Bloque>().isConectable(bloque.GetBloque(), TipoContacto.ContactoInterno)){return;}
+
+        ActualizarBloqueEnContacto(other, bloque);
+        bloque.GetComponent<BloqueControl>().IncrementarTamano(GetComponent<Bloque>().GetBloquesConectados().Count + 1);
+        tipoContacto = TipoContacto.ContactoInterno;
+    }
+
+    private void ActualizarBloqueEnContacto(GameObject newBloque, BloqueArrastrable bloque)
+    {
+        if (bloqueInContact != null) SetNullBloqueInContact();
+        bloqueInContact = newBloque;
+        bloque.Brillar();
+    }
+
 
     int GetLastNumber(string name)
     {
@@ -76,7 +99,7 @@ public class DetectarBloque : MonoBehaviour
     private void OnTriggerExit(Collider other)
     //todo: Esto se puede simplificar mucho
     {
-        Debug.Log("Salimos de un collider: " + other.gameObject.name);
+        if (!enabled) return;
         if(other.gameObject.layer == LayerMask.NameToLayer("BloqueGeneral")){        
             if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
             {
@@ -120,6 +143,9 @@ public class DetectarBloque : MonoBehaviour
             bloque.NoBrillar();
             if(bloque.TryGetComponent<BloqueControl>(out BloqueControl bloqueControl)){
                 bloqueControl.IncrementarTamano(0);
+            }
+            if(bloque.GetBloque().HasBloqueControl()){
+                bloque.GetBloque().GetBloqueControl().IncrementarTamano(0);
             }
         }
         bloqueInContact = null;

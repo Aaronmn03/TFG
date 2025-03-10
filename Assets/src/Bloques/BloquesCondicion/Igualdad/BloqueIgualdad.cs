@@ -11,7 +11,7 @@ public class BloqueIgualdad : BloqueCondicion
             nivel.Lose("Algun campo de la igualdad esta vacio");
         }
         if (bloque1.GetType() != bloque2.GetType()){
-            nivel.Lose("Las clases de la concicion no son los mismos");
+            nivel.Lose("Las clases de la condicion no son los mismos");
         }
         object valor1 = bloque1.GetColor();
         object valor2 = bloque2.GetColor();

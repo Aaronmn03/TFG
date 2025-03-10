@@ -6,13 +6,13 @@ using UnityEngine;
 public abstract class BloqueControl : Bloque
 {
     [SerializeField] protected BloqueCondicion condicion;
-    public List<Bloque> bloquesDentro; 
+    [SerializeField] protected List<Bloque> bloquesDentro; 
     [SerializeField] private Transform lateral;
     [SerializeField] private Transform centro;
-    [SerializeField] private BoxCollider colliderCentral;
-
-    [SerializeField] private BoxCollider[] colliders;
-    [SerializeField] private BoxCollider colliderLateral;
+    [SerializeField] private BoxCollider colliderInterno;
+    [SerializeField] private BoxCollider colliderCondicion;
+    private BoxCollider[] colliders;
+    private BoxCollider colliderLateral;
     private Vector3 normalSize;
     private int incrementoExtra;
 
@@ -20,10 +20,14 @@ public abstract class BloqueControl : Bloque
         base.Start();
         bloquesDentro = new List<Bloque>();
         normalSize = centro.localScale; 
-        colliderCentral.enabled = true;
+        colliderInterno.enabled = true;
         incrementoExtra = 0;
         colliders = GetComponents<BoxCollider>();
         colliderLateral = colliders[1];
+    }
+
+    public int GetExtra(){
+        return incrementoExtra;
     }
 
     public void IncrementarTamano(int value)
@@ -49,20 +53,26 @@ public abstract class BloqueControl : Bloque
         }
         Debug.Log($"Intentando añadir {childs.Count} bloques en el índice {index}. Total de bloques antes de la inserción: {bloquesDentro.Count}, el bloque al que nos queremos conectar es: {this.gameObject.name}");
         bloquesDentro.InsertRange(index, childs);
-        if (this.HasParent()){
-            ActualizarTamaño();
-            return this.parent.AddBloques(index + 1, childs);
-        }else{
-            ActualizarTamaño();
-            return true;
+        foreach (Bloque bloque in childs)
+        {
+            bloque.transform.parent = this.transform;
+            bloque.GetComponent<BoxCollider>().center += new Vector3(0, 0.2f, 0);
+            bloque.GetComponent<BoxCollider>().size -= new Vector3(0.4f, 0, 0);
         }
+        ActualizarTamaño();
+        return true;
     }
 
     public void RemoveBloqueDentro(Bloque child){
-        List<Bloque> list = child.GetListConectados();
+        List<Bloque> list = child.GetBloquesConectados();
+        child.GetComponent<BoxCollider>().center -= new Vector3(0, 0.2f, 0);
+        child.GetComponent<BoxCollider>().size += new Vector3(0.4f, 0, 0);
         bloquesDentro.Remove(child);
-        foreach(Bloque bloque_aux in list){
-            bloquesDentro.Remove(bloque_aux);
+        foreach(Bloque bloque in list){
+            bloque.GetComponent<BoxCollider>().center -= new Vector3(0, 0.2f, 0);
+            bloque.GetComponent<BoxCollider>().size += new Vector3(0.4f, 0, 0);
+            bloquesDentro.Remove(bloque);
+            ActualizarTamaño();
         }
     }
     public List<Bloque> GetBloquesDentro(){
@@ -72,6 +82,7 @@ public abstract class BloqueControl : Bloque
     {
         return other is BloqueControl || other is BloqueAccion || other is BloqueRaiz; 
     }
+
     private void ActualizarTamaño()
     {
         int numBloques = bloquesDentro.Count + incrementoExtra;
@@ -79,13 +90,13 @@ public abstract class BloqueControl : Bloque
         if (numBloques == 0)
         {
             centro.localScale = normalSize;
-            colliderCentral.enabled = true;
+            colliderInterno.enabled = true;
         }
         else
         {
             if (bloquesDentro.Count != 0)
             {
-                colliderCentral.enabled = false;
+                colliderInterno.enabled = false;
             }
             float ancho = 275;
             float nuevoAncho = (ancho * numBloques);
@@ -95,15 +106,40 @@ public abstract class BloqueControl : Bloque
         Bounds centroBounds = centro.GetComponent<Renderer>().bounds;
         Vector3 nuevaPosicionLateral = centroBounds.max;
         Vector3 nuevaPosicionLocal = lateral.parent.InverseTransformPoint(nuevaPosicionLateral);
-
         Vector3 posicionAnteriorLateral = lateral.localPosition;
-
         lateral.localPosition = new Vector3(nuevaPosicionLocal.x, lateral.localPosition.y, lateral.localPosition.z);
         if (colliderLateral != null)
         {
             Vector3 desplazamiento = lateral.localPosition - posicionAnteriorLateral;
             colliderLateral.center += new Vector3(desplazamiento.x * 0.5f, 0, 0);
         }
+
+        BloqueArrastrable bloqueArrastrable = GetComponent<BloqueArrastrable>();
+        bloqueArrastrable.MoveConnectedBlocks(bloqueArrastrable.transform.localPosition);
+        CentrarCondicion();
+        ControlarTextura();
+    }
+
+    private void CentrarCondicion(){
+        float centroRealX = centro.GetComponent<Renderer>().bounds.center.x;
+        Debug.Log("el centro es :" +  centroRealX);
+        Transform transformCollider = colliderCondicion.transform;
+        transformCollider.position = new Vector3(centroRealX, transformCollider.position.y, transformCollider.position.z);
+        if(condicion != null){
+            condicion.GetComponent<BloqueArrastrable>().Move(transformCollider.position - new Vector3(0,0,0.05f));
+        }
+    }
+
+    private void ControlarTextura(){
+        Renderer renderer = centro.GetComponent<Renderer>();
+        Material material = renderer.material;
+        Vector2 tiling = material.mainTextureScale;
+        tiling.x = centro.localScale.x / normalSize.x;
+        material.mainTextureScale = tiling;
+        material.mainTexture.wrapMode = TextureWrapMode.Clamp;
+        const float C = 0.67f;
+        float offsetX = -C * tiling.x + C; 
+        material.mainTextureOffset = new Vector2(offsetX, 0f);
     }
     public bool SetBloqueCondicion(BloqueCondicion bloqueCondicion){
         if(condicion){return false;}

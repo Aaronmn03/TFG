@@ -6,6 +6,9 @@ using UnityEngine;
 public class BloqueIF : BloqueControl
 {
     public override IEnumerator Action() {
+        if (condicion == null){
+            nivel.Lose("Fallo de sintaxis, falta la condicion en el if");
+        }
         yield return StartCoroutine(condicion.Action());
         if(condicion.ObtenerResultado()){
             Debug.Log("Ejecutamos el if");

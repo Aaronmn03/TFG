@@ -56,6 +56,7 @@ public class ObjectManipulator : MonoBehaviour
             if (Input.GetMouseButtonUp(0) && bloqueObject != null)
             {
                 bloqueObject.OnEndDrag();
+                bloqueObject.GetComponent<DetectarBloque>().enabled = false;
                 bloqueObject = null;
             }
         #else
@@ -95,6 +96,7 @@ public class ObjectManipulator : MonoBehaviour
                         if (firstTouch.phase == TouchPhase.Ended && bloqueObject != null)
                         {
                             bloqueObject.OnEndDrag();
+                            bloqueObject.GetComponent<DetectarBloque>().enabled = false;
                             bloqueObject = null;
                         }
                     }
@@ -126,6 +128,7 @@ public class ObjectManipulator : MonoBehaviour
         }
         if (hit.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
         {
+            bloque.GetComponent<DetectarBloque>().enabled = true;
             bloqueObject = bloque;  
         }
         if (hit.transform.gameObject.TryGetComponent<Semaforo>(out Semaforo semaforo))

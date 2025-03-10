@@ -15,10 +15,8 @@ public class Semaforo : MonoBehaviour
     }
 
     private void OnPlay(){
-        Debug.Log("El evento Play ha sido invocado, ejecutando la función en Semaforo.");
         List<Color> colors = new List<Color>(){Color.red, Color.yellow, Color.green};        
         color = colors[Random.Range(0, colors.Count)];
-        Debug.Log("Tenemos el color : " + color);
         Renderer renderer = GetComponent<Renderer>();        
         if (renderer != null) {
             renderer.material.color = color;

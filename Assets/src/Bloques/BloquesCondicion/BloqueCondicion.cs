@@ -17,7 +17,25 @@ public abstract class BloqueCondicion : Bloque, IConnectable
     [SerializeField] protected bool resultado = false;
     public override bool isConectable(Bloque other)
     {
-        return other is BloqueControl || other is BloqueAccion || other is BloqueRaiz; 
+        return other is BloqueControl;
+    }
+
+    public override bool isConectable(Bloque other, TipoContacto tipoContacto)
+    {
+        switch (tipoContacto)
+        {
+            case TipoContacto.ContactoNormal:
+                return false; 
+                
+            case TipoContacto.ContactoInterno:
+                return false;
+                
+            case TipoContacto.ContactoPosicional:
+                return other is BloqueControl;
+                
+            default:
+                return false;
+        }
     }
 
     public bool ObtenerResultado()
@@ -61,6 +79,6 @@ public abstract class BloqueCondicion : Bloque, IConnectable
         if(index == 1){
             bloque.SetNullBloqueCondicion();
         }
-        this.transform.position = this.transform.position + new Vector3(0,0,0.0075f);
+        this.transform.position = this.transform.position + new Vector3(0,0,0.05f);
     }
 }

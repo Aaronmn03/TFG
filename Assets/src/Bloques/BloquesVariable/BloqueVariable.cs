@@ -16,9 +16,25 @@ public abstract class BloqueVariable : Bloque, IConnectable
     public abstract Color GetColor();
     public override bool isConectable(Bloque other)
     {
-        return other is BloqueControl || other is BloqueAccion || other is BloqueRaiz; 
+        return other is BloqueCondicion; 
     }
-
+    public override bool isConectable(Bloque other, TipoContacto tipoContacto)
+    {
+        switch (tipoContacto)
+        {
+            case TipoContacto.ContactoNormal:
+                return false; 
+                
+            case TipoContacto.ContactoInterno:
+                return false; 
+                
+            case TipoContacto.ContactoPosicional:
+                return other is BloqueCondicion;
+                
+            default:
+                return false;
+        }
+    }
     public bool ConnectTo(Bloque parent, int index){
         if(parent is not BloqueCondicion){return false;}
         BloqueCondicion bloque = (BloqueCondicion) parent; 
@@ -41,7 +57,7 @@ public abstract class BloqueVariable : Bloque, IConnectable
         }else if(index == 2){
             bloque.NullBloque2();
         }
-        this.transform.position = this.transform.position + new Vector3(0,0,0.0075f);
+        this.transform.position = this.transform.position + new Vector3(0,0,0.05f);
     }
 }
 

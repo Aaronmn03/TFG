@@ -14,15 +14,20 @@ public abstract class Bloque : MonoBehaviour
     protected ProgramableObject programableObject;
 
     [SerializeField] protected BloqueControl bloqueControl;
-    public abstract bool isConectable(Bloque other);
     public abstract IEnumerator Action();
+
+    public abstract bool isConectable(Bloque other);
+
+    public virtual bool isConectable(Bloque other, TipoContacto tipoContacto){
+        return isConectable(other);
+    }
 
     protected void Start(){
         nivel = GameObject.Find("LevelHandler").GetComponent<Nivel>();
         gameObject.AddComponent<BloqueArrastrable>();
         Debug.Log(GetComponent<BloqueArrastrable>());
     }
-    public List<Bloque> GetListConectados(){
+    public List<Bloque> GetBloquesConectados(){
         return bloquesConectados;
     }
     public Bloque GetParent(){
@@ -58,7 +63,7 @@ public abstract class Bloque : MonoBehaviour
     }
     public bool ConnectTo(Bloque parent){
         if(isConectable(parent) && parent.bloqueControl != this){
-            List<Bloque> bloquesHijos = new List<Bloque>(parent.GetListConectados());
+            List<Bloque> bloquesHijos = new List<Bloque>(parent.GetBloquesConectados());
             List<Bloque> bloquesConectar = new List<Bloque>(bloquesConectados);
             bloquesConectar.Insert(0, this);
             if (!parent.AddBloques(0, bloquesConectar)){return false;} 
@@ -66,7 +71,7 @@ public abstract class Bloque : MonoBehaviour
             CheckBloqueControl(parent);
             if(bloquesHijos.Count != 0){
                 foreach (Bloque bloque in this.bloquesConectados){
-                    bloque.GetListConectados().AddRange(bloquesHijos);
+                    bloque.GetBloquesConectados().AddRange(bloquesHijos);
                 }
                 this.bloquesConectados.AddRange(bloquesHijos);
                 if(this.HasChild()){
@@ -93,7 +98,7 @@ public abstract class Bloque : MonoBehaviour
             }
             if(bloquesDentro.Count != 0){
                 foreach (Bloque bloque in this.bloquesConectados){
-                    bloque.GetListConectados().AddRange(bloquesDentro);
+                    bloque.GetBloquesConectados().AddRange(bloquesDentro);
                 }
                 this.bloquesConectados.AddRange(bloquesDentro);
                 if(this.HasChild()){
@@ -108,7 +113,7 @@ public abstract class Bloque : MonoBehaviour
     }
 
     public virtual void DisConnectTo(Bloque parent){  
-        if (parent.GetListConectados().Contains(this)){
+        if (parent.GetBloquesConectados().Contains(this)){
             parent.RemoveBloque(this);
             this.SetParent(null);
         }
@@ -120,6 +125,8 @@ public abstract class Bloque : MonoBehaviour
             }
             transform.parent = bloqueControl.transform.parent;
             this.SetParent(null);
+            BloqueArrastrable bloqueControlArrastrable = bloqueControl.GetComponent<BloqueArrastrable>();
+            bloqueControlArrastrable.MoveConnectedBlocks(bloqueControlArrastrable.transform.localPosition);
             SetBloqueControl(null);
         }
     }
@@ -141,16 +148,20 @@ public abstract class Bloque : MonoBehaviour
         }
         bloquesConectados.InsertRange(index, childs);
         if (this.HasParent()){
-            return this.parent.AddBloques(index + 1, childs);
+            if(parent == bloqueControl){
+                return bloqueControl.AddBloques(index + 1, childs);
+            }else{
+                return this.parent.AddBloques(index + 1, childs);
+            }
         }else{
             return true;
         }
     }
     public virtual void RemoveBloque(Bloque child){
-        List<Bloque> list = child.GetListConectados();
-        this.GetListConectados().Remove(child);
+        List<Bloque> list = child.GetBloquesConectados();
+        this.GetBloquesConectados().Remove(child);
         foreach(Bloque bloque_aux in list){
-            this.GetListConectados().Remove(bloque_aux);
+            this.GetBloquesConectados().Remove(bloque_aux);
         }
         if(this.HasParent()){
             this.parent.RemoveBloque(child);
