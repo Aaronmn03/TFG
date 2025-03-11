@@ -6,18 +6,15 @@ using UnityEngine.UI;
 public class ProgramableObject : MonoBehaviour
 {
     private Renderer objectRenderer;
-    private Material originalMaterial;
-    [SerializeField] private Material selectedMaterial;
-
     private ZonaProgramacion zonaProgramacion;
     private Nivel nivel;
-
+    [SerializeField] private GameObject luz;
     void Start()
     {
         gameObject.AddComponent<ActionableObject>();        
         objectRenderer = GetComponent<Renderer>();
-        originalMaterial = objectRenderer.material;
         nivel = GameObject.Find("LevelHandler").GetComponent<Nivel>();
+        luz.SetActive(false);
     }
 
     public void SetZonaProgramacion(ZonaProgramacion zonaProgramacion){
@@ -30,7 +27,7 @@ public class ProgramableObject : MonoBehaviour
 
     public void SelectObject()
     {
-        objectRenderer.material = selectedMaterial;
+        luz.SetActive(true);
         if(zonaProgramacion == null){
             nivel.ActivateAirFinder();
         }else{
@@ -40,14 +37,13 @@ public class ProgramableObject : MonoBehaviour
     }
     public void DeselectObject()
     {
+        luz.SetActive(false);
         if(zonaProgramacion == null){
             nivel.GetAirFinder().SetActive(false);
         }else{
             zonaProgramacion.NonSelectedObject();
             nivel.UnActivateZonaBloques();
         }
-        objectRenderer.material = originalMaterial;
-
     }
 
     public void PutBloqueRaiz(BloqueRaiz bloqueRaiz){
