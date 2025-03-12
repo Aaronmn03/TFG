@@ -8,11 +8,12 @@ public class JumpableObject : MonoBehaviour
     private float journeyLength, moveStartTime;
     private bool isJumping = false;
     private float step = 0.1f;
-    
     private Rigidbody rb;
+    private Collider collider;
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
+        collider = GetComponent<BoxCollider>();
     }
 
     public void Jump()
@@ -33,6 +34,7 @@ public class JumpableObject : MonoBehaviour
         journeyLength = Vector3.Distance(from, to);
         moveStartTime = Time.time;
         isJumping = true;
+        collider.enabled = false;
     }
 
     private void FixedUpdate()
@@ -52,6 +54,7 @@ public class JumpableObject : MonoBehaviour
         rb.MovePosition(newPosition);
         if (progress >= 1.0f)
         {
+            collider.enabled = true;
             rb.MovePosition(destination);
             rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
             transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>().StopJump();

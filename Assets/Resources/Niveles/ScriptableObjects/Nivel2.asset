@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 2
   nombre: "\xBFGirar?"
   icon: {fileID: 21300000, guid: 31ebb097a68a83241845ea5152829c5b, type: 3}
-  objetivo: Llega hasta el cilindro verde
+  objetivo: "Alcanza la tienda de campa\xF1a"
   bloquesDisponibles:
   - {fileID: 11400000, guid: 8f0fd0c3ca92fb9408de114f133bc60e, type: 2}
   - {fileID: 11400000, guid: 85618cbcad3443048a21f781ea562037, type: 2}
