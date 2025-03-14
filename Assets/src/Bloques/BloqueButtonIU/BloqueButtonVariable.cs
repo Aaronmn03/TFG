@@ -27,7 +27,7 @@ public class BloqueButtonVariable : BloqueButton
 
     public void ShowSelection()
     {
-        selection.SetActive(true);
+        selection.SetActive(!selection.activeSelf);
     }
 
     public void OnShowBloqueButtonClicked(DatosBloque datosBloque, object value)

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23e68548a882cf498f2066d939946f4, type: 3}
+  m_Name: MensajesNivel5
+  m_EditorClassIdentifier: 
+  mensajesBasicos:
+  - Tenemos un nuevo amigo, el nos indicara si podemos movernos o no, si no le hacemos
+    caso se enfadara
+  - Nuestro amigo tiene una caja la cual tiene 2 bellotas una roja y otra verde,
+    como en un semaforo
+  - Tambien tenemos nuevas piezas
+  - Las variables son cajas en las cuales podemos  cambiar su valor cuando queramos
+  - Podemos obtener la variable de la bellota de la ardilla pulsando sobre su caja
+  - Tambien tenemos nuestros propios colores pulsando sobre el puzzle negro
+  - Por otra parte tenemos una igualdad, que nos sirve para comprobar si 2 variables
+    tienen el mismo valor
+  - Y por ultimo tenemos el IF que dara acceso a sus bloques internos dependiendo
+    de la condicion que hayamos incluido
+  - "Este nivel ya se complica mas, pero confio en que puedas ayudar a la ni\xF1a
+    a llegar a la tienda sin enfadar a la ardilla"
+  pistas:
+  - En la parte oscura del IF podemos poner nuestra igualdad
+  - En las 2 partes oscuras de la igualdad podemos poner 2 variables
+  - Todo lo que este fuera de la pieza del IF se ejecutara, mientras que su interior
+    solo si se cumple la condicion
+  - Te recomiendo que hagas el recorrido primero y luego lo metas todo dentro de
+    la pieza del IF
+  - La pieza de la bellota es clave, ya que tenemos que comprobar que la misma sea
+    verde con la igualdad

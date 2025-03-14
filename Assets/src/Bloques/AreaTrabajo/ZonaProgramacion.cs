@@ -7,15 +7,20 @@ public class ZonaProgramacion : MonoBehaviour
 {
     public List<BloqueRaiz> bloquesRaiz;
     private Animator anim;
+    private bool estaEjecutando = false;
     private void Start() {
         anim = transform.parent.gameObject.GetComponent<Animator>();
         SelectedObject();
         bloquesRaiz = new List<BloqueRaiz>();
-        transform.parent.LookAt(Camera.main.transform.position);
-        Vector3 euler = transform.parent.eulerAngles;
-        euler.z = -90;
-        transform.parent.eulerAngles = euler;
+    }
 
+    public void TerminarEjecucion(){
+        estaEjecutando = false;
+        FindObjectOfType<Nivel>().Lose();
+    }
+
+    public bool GetEstaEjecutando(){
+        return estaEjecutando;
     }
 
     public List<BloqueRaiz> GetBloquesRaiz(){
@@ -37,6 +42,7 @@ public class ZonaProgramacion : MonoBehaviour
 
     public void Play(){
         if(bloquesRaiz.Count <= 0) return;
+        estaEjecutando = true;
         foreach (BloqueRaiz bloque in bloquesRaiz){
             StartCoroutine(bloque.Action());
         }

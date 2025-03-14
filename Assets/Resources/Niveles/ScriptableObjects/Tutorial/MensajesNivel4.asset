@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e23e68548a882cf498f2066d939946f4, type: 3}
-  m_Name: MensajesNivel2
+  m_Name: MensajesNivel4
   m_EditorClassIdentifier: 
   mensajesBasicos:
-  - En este nivel vamos a aprender a girar
-  - Para hacerlo tienes que usar las piezas de puzzle que tienen una L y una R
-  - Para hacerlo tienes que usar las piezas de puzzle que tienen una L y una R
-  - "Tenemos que llegar de igual forma a la tienda de campa\xF1a"
-  - "\xA1Yo s\xE9 que puedes hacerlo!"
+  - "\xA1Estamos atrapados!"
+  - Si te fijas ahora tenemos disponible un nueva pieza.
+  - En ella tenemos un icono que indica un salto
+  - Vamos a probarlo a ver si conseguimos salir y alcanzar la meta.
   pistas:
-  - "\xA1OJO! El bloque con la R gira hacia la derecha"
+  - A la vez que el personaje salta avanza un paso
+  - Tenemos que seguir teniendo cuidado con la orientacion.

@@ -4,10 +4,11 @@ public class ActionableObject : MonoBehaviour
 {
     private MovableObject movebleObject;
     private RotatableObject rotatableObject;
-
     private JumpableObject jumpableObject;
     private Vector3 initialLocalPosition;
     private Quaternion initialLocalRotation;
+
+    private bool hasMoved = false;
 
     private void Awake()
     {
@@ -16,6 +17,16 @@ public class ActionableObject : MonoBehaviour
         jumpableObject = gameObject.AddComponent<JumpableObject>();
         initialLocalPosition = transform.localPosition;
         initialLocalRotation = transform.localRotation;
+    }
+
+    public ProgramableObject GetProgramableObject()
+    {
+        return GetComponent<ProgramableObject>();
+    }
+
+    public bool HasMoved()
+    {
+        return hasMoved;
     }
     public void ResetObject()
     {
@@ -31,6 +42,7 @@ public class ActionableObject : MonoBehaviour
     }
     public void MoveForward()
     {
+        hasMoved = true;
         if (!movebleObject.IsMoving())
         {
             movebleObject.MoveForward();
@@ -38,6 +50,7 @@ public class ActionableObject : MonoBehaviour
     }
     public void RotateRight()
     {
+        hasMoved = true;
         if (!rotatableObject.IsRotating())
         {
             rotatableObject.StartRotation(transform.rotation, transform.rotation * Quaternion.Euler(0, 90f, 0));
@@ -46,6 +59,7 @@ public class ActionableObject : MonoBehaviour
 
     public void RotateLeft()
     {
+        hasMoved = true;
         if (!rotatableObject.IsRotating())
         {
             rotatableObject.StartRotation(transform.rotation, transform.rotation * Quaternion.Euler(0, -90f, 0));
@@ -54,6 +68,7 @@ public class ActionableObject : MonoBehaviour
 
     public void Jump()
     {
+        hasMoved = true;
         jumpableObject.Jump();
     }
 

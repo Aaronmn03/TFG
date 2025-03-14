@@ -10,11 +10,16 @@ public class Semaforo : MonoBehaviour
     [SerializeField] private Transform rojo;
     [SerializeField] private Transform verde;
     [SerializeField] private Animator animator_ardilla;
+    private Nivel nivel;
     private void Start() {
-        Nivel nivel = FindObjectOfType<Nivel>();
+        nivel = FindObjectOfType<Nivel>();
         if (nivel != null) {
             nivel.PlayEvent += OnPlay; 
+            nivel.ResetEvent += Resetear;
         }
+    }
+
+    private void Resetear(){
         color = Color.clear;
         ResetearBellota(rojo);
         ResetearBellota(verde);
@@ -25,6 +30,7 @@ public class Semaforo : MonoBehaviour
         color = colors[Random.Range(0, colors.Count)];
         if(color == Color.red){
             StartCoroutine(SubirBellota(rojo));
+            StartCoroutine(ComprobarSiMueve(FindObjectsOfType<ActionableObject>()));
         }else{
             StartCoroutine(SubirBellota(verde));
         }            
@@ -43,6 +49,19 @@ public class Semaforo : MonoBehaviour
         floatEffect.floatHeight = 0.03f;
     }
 
+    private IEnumerator ComprobarSiMueve(ActionableObject[] actionableObjects){
+        foreach (ActionableObject actionableObject in actionableObjects){
+            while(actionableObject.GetProgramableObject().GetZonaProgramacion().GetEstaEjecutando()){
+                if(actionableObject.HasMoved()){
+                    nivel.Lose("El semaforo esta en rojo hemos enfadado a la ardilla");
+                    yield break;
+                }
+                yield return null;
+            }
+        }
+        nivel.Win();
+    }
+
     private void ResetearBellota(Transform bellota){
         FloatEffect floatEffect = bellota.GetComponent<FloatEffect>();
         if (floatEffect != null)
@@ -52,7 +71,6 @@ public class Semaforo : MonoBehaviour
         bellota.localPosition = new Vector3(bellota.localPosition.x, 0.01f, bellota.localPosition.z);
     }
     public void SelectObject(){
-        Debug.Log("Seleccionamos el semaforo");
         GameObject bloque = Instantiate(datosBloque.prefab, GameObject.Find("AreaTrabajo").transform);
         bloque.GetComponent<BloqueVariableColor>().SetValue(this);
     }

@@ -8,11 +8,16 @@ public class Nivel : MonoBehaviour
 {
     public delegate void OnPlayEvent();
     public event OnPlayEvent PlayEvent;
+
+    public delegate void OnResetEvent();
+    public event OnResetEvent ResetEvent;
     private DatosNivel datosNivel;
     private ZonaBloques zonaBloques;
     public List<ProgramableObject> programableObjects;
     private bool win;
     private bool lose;
+
+    private bool ifUsed;
     [SerializeField] private IUNivelController iUNivelController;
 
     /*---VUFORIA DATA---*/
@@ -34,6 +39,10 @@ public class Nivel : MonoBehaviour
     }
     public GameObject GetAirFinder(){
         return airFinder;
+    }
+
+    public void IfUsed(){
+        this.ifUsed = true;
     }
 
     public void ActivateAirFinder(){
@@ -77,6 +86,8 @@ public class Nivel : MonoBehaviour
     }
 
     public void Reiniciar(){
+        ifUsed = false;
+        ResetEvent?.Invoke();
         win = false;
         lose = false;
         foreach (ProgramableObject programableObject in programableObjects){
@@ -101,6 +112,9 @@ public class Nivel : MonoBehaviour
     }
     public void Win(){
         if(!lose && !win){
+            if(!ComprobarCondiciones()){
+                return;
+            }
             win = true;
             iUNivelController.Win();
             int nivelesPasados = PlayerPrefs.GetInt("MaxLevel");
@@ -112,6 +126,15 @@ public class Nivel : MonoBehaviour
         }
     }
 
+    private bool ComprobarCondiciones(){
+        if(datosNivel.requireIF && !ifUsed){
+            Lose("Para este nivel se requiere al menos un IF");
+            return false;
+        }
+        return true;
+    }
+
+
     public void Lose()
     {
         HandleLose();
@@ -119,17 +142,20 @@ public class Nivel : MonoBehaviour
 
     public void Lose(string message)
     {
-        HandleLose();
-        iUNivelController.SetLoseMessage(message);
+        if(HandleLose()){
+            iUNivelController.SetLoseMessage(message);
+        }
     }
-    private void HandleLose()
+    private bool  HandleLose()
     {
         if (!win && !lose)
         {
             lose = true;
             iUNivelController.Lose();
             StopAllCoroutines();
+            return true;
         }
+        return false;
     }
     public void Play(){
         foreach (ProgramableObject programableObject in programableObjects){

@@ -3,7 +3,7 @@ using UnityEngine;
 public class JumpableObject : MonoBehaviour
 {
     public float moveSpeed = 0.075f;
-    public float jumpHeight = 0.2f;
+    public float jumpHeight = 0.1f;
     private Vector3 startPosition, destination;
     private float journeyLength, moveStartTime;
     private bool isJumping = false;

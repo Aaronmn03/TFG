@@ -50,7 +50,7 @@ public abstract class Bloque : MonoBehaviour
         return bloqueControl;
     }
 
-    public GameObject GetAreaTrabajo(){
+    public ZonaProgramacion GetZonaProgramacion(){
         return programableObject.GetZonaProgramacion();
     }
 

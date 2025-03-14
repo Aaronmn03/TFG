@@ -22,4 +22,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c9794713a86e6b645ace3e3855397b7e, type: 2}
   - {fileID: 11400000, guid: 1bb3cfce338a26742b5e642400aea03b, type: 2}
   - {fileID: 11400000, guid: f13f3464d74e0aa42bdc99c941fa2445, type: 2}
-  datosTutorial: {fileID: 0}
+  datosTutorial: {fileID: 11400000, guid: baf9989864101394b80a47dcf031cbda, type: 2}
+  requireIF: 0
