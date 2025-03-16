@@ -10,20 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b32ac5e70906463489dcfc67b75a2f49, type: 3}
-  m_Name: Nivel5
+  m_Name: Nivel6
   m_EditorClassIdentifier: 
-  id: 5
-  nombre: "\xBFSi o No?"
+  id: 6
+  nombre: <>
   icon: {fileID: 21300000, guid: 0cebab489e829e747b04fb8d45d0c6f5, type: 3}
-  objetivo: No enfades a la ardilla
+  objetivo: <>
   bloquesDisponibles:
   - {fileID: 11400000, guid: 8f0fd0c3ca92fb9408de114f133bc60e, type: 2}
   - {fileID: 11400000, guid: 85618cbcad3443048a21f781ea562037, type: 2}
   - {fileID: 11400000, guid: c9794713a86e6b645ace3e3855397b7e, type: 2}
   - {fileID: 11400000, guid: 1bb3cfce338a26742b5e642400aea03b, type: 2}
   - {fileID: 11400000, guid: f13f3464d74e0aa42bdc99c941fa2445, type: 2}
+  - {fileID: 11400000, guid: 0f5e5d93d2a44f1408eaa5ef2e16f75a, type: 2}
+  - {fileID: 11400000, guid: a8d1cd8a790f3dd4e81c312f3aa52445, type: 2}
   - {fileID: 11400000, guid: 39894c5c5d550494f80afd70604d4589, type: 2}
   - {fileID: 11400000, guid: d2cebc66b57969e488954872914e4491, type: 2}
   - {fileID: 11400000, guid: 925eb4d92408c654baf0a165423fb8ca, type: 2}
-  datosTutorial: {fileID: 11400000, guid: 5623390513ebbd845b34720f6e3c69d2, type: 2}
+  datosTutorial: {fileID: 0}
   requireIF: 1

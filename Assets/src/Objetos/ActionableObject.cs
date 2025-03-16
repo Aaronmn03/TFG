@@ -5,8 +5,10 @@ public class ActionableObject : MonoBehaviour
     private MovableObject movebleObject;
     private RotatableObject rotatableObject;
     private JumpableObject jumpableObject;
+    private ScalableObject scalableObject;
     private Vector3 initialLocalPosition;
     private Quaternion initialLocalRotation;
+    private Vector3 initialLocalScale;
 
     private bool hasMoved = false;
 
@@ -15,8 +17,10 @@ public class ActionableObject : MonoBehaviour
         movebleObject = gameObject.AddComponent<MovableObject>();
         rotatableObject = gameObject.AddComponent<RotatableObject>();
         jumpableObject = gameObject.AddComponent<JumpableObject>();
+        scalableObject = gameObject.AddComponent<ScalableObject>();
         initialLocalPosition = transform.localPosition;
         initialLocalRotation = transform.localRotation;
+        initialLocalScale = transform.localScale;
     }
 
     public ProgramableObject GetProgramableObject()
@@ -39,6 +43,8 @@ public class ActionableObject : MonoBehaviour
         }
         transform.localPosition = initialLocalPosition;
         transform.localRotation = initialLocalRotation;
+        transform.localScale = initialLocalScale;
+        hasMoved = false;
     }
     public void MoveForward()
     {
@@ -72,8 +78,20 @@ public class ActionableObject : MonoBehaviour
         jumpableObject.Jump();
     }
 
+    public void Agrandar()
+    {
+        hasMoved = true;
+        scalableObject.Scale(true);
+    }
+
+    public void Reducir()
+    {
+        hasMoved = true;
+        scalableObject.Scale(false);
+    }
+
     public bool IsMoving()
     {
-        return movebleObject.IsMoving() || rotatableObject.IsRotating() || jumpableObject.IsJumping();
+        return movebleObject.IsMoving() || rotatableObject.IsRotating() || jumpableObject.IsJumping() || scalableObject.IsScaling();
     }
 }
