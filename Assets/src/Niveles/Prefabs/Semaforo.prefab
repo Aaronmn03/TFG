@@ -1537,7 +1537,7 @@ GameObject:
   - component: {fileID: 6347183687725337319}
   m_Layer: 0
   m_Name: Semaforo
-  m_TagString: Untagged
+  m_TagString: ARObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
