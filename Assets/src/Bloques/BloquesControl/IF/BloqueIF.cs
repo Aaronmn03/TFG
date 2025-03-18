@@ -9,11 +9,16 @@ public class BloqueIF : BloqueControl
         nivel.IfUsed();
         if (condicion == null){
             nivel.Lose("Fallo de sintaxis, falta la condicion en el if");
+            yield break;
         }
-        yield return StartCoroutine(condicion.Action());
+        Coroutine condCoroutine = StartCoroutine(condicion.Action());
+        coroutines.Add(condCoroutine);
+        yield return condCoroutine;
         if(condicion.ObtenerResultado()){
             foreach (Bloque bloque in bloquesDentro) {
-                yield return StartCoroutine(bloque.Action());
+                Coroutine c = StartCoroutine(bloque.Action());
+                coroutines.Add(c);
+                yield return c;
             }
         }
     }

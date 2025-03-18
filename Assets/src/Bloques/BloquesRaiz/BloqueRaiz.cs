@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class BloqueRaiz : Bloque
 {
+    protected List<Coroutine> coroutines = new List<Coroutine>();
+
     public override bool isConectable(Bloque other){
         return false;
     }
@@ -15,5 +17,13 @@ public abstract class BloqueRaiz : Bloque
 
     public void RemoveBloque(){
         programableObject.RemoveBloqueRaiz(this);
+    }
+    public void StopAllActions()
+    {
+        foreach (Coroutine c in coroutines)
+        {
+            StopCoroutine(c);
+        }
+        coroutines.Clear();
     }
 }

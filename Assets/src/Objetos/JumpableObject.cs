@@ -24,6 +24,12 @@ public class JumpableObject : MonoBehaviour
         }
     }
 
+    public void Stop()
+    {
+        isJumping = false;
+        transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>().StopJump();
+    }
+
     private void StartJump(Vector3 from, Vector3 to)
     {
         AnimatorHandlerPlayer animatorHandler = transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>();

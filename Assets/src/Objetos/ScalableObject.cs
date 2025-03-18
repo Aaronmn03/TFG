@@ -10,7 +10,6 @@ public class ScalableObject : MonoBehaviour
 
     public void Scale(bool crecer)
     {
-        Debug.Log("Scaling");
         if (!isScaling)
         {
             if(crecer){
@@ -19,6 +18,11 @@ public class ScalableObject : MonoBehaviour
                 StartScaling(transform.localScale, transform.localScale / 2);
             }
         }
+    }
+
+    public void Stop()
+    {
+        isScaling = false;
     }
 
     private void StartScaling(Vector3 from, Vector3 to)

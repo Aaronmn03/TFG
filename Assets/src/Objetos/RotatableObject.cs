@@ -18,6 +18,10 @@ public class RotatableObject : MonoBehaviour
             StartRotation(transform.rotation, transform.rotation * Quaternion.Euler(0, 90f, 0));
         }
     }
+    public void Stop()
+    {
+        isRotating = false;
+    }
 
     public void StartRotation(Quaternion from, Quaternion to)
     {

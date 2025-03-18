@@ -34,6 +34,12 @@ public class MovableObject : MonoBehaviour
         isMoving = true;
     }
 
+    public void Stop()
+    {
+        isMoving = false;
+        transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>().StopWalk();
+    }
+
     private void FixedUpdate()
     {
         if (isMoving)

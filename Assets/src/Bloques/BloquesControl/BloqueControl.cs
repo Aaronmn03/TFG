@@ -15,6 +15,7 @@ public abstract class BloqueControl : Bloque
     private BoxCollider colliderLateral;
     private Vector3 normalSize;
     private int incrementoExtra;
+    protected List<Coroutine> coroutines = new List<Coroutine>();
 
     private void Start() {
         base.Start();
@@ -137,5 +138,14 @@ public abstract class BloqueControl : Bloque
     }
     public void SetNullBloqueCondicion(){
         condicion = null;
+    }
+
+    public void StopAllActions()
+    {
+        foreach (Coroutine c in coroutines)
+        {
+            StopCoroutine(c);
+        }
+        coroutines.Clear();
     }
 }

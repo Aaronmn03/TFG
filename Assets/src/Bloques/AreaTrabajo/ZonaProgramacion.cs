@@ -57,6 +57,18 @@ public class ZonaProgramacion : MonoBehaviour
             StartCoroutine(bloque.Action());
         }
     }
+
+    public void Stop(){
+        if(bloquesRaiz.Count <= 0) return;
+        estaEjecutando = false;
+        foreach (BloqueRaiz bloque in bloquesRaiz){
+            bloque.StopAllActions();
+        }
+        foreach (BloqueControl bloque in FindObjectsOfType<BloqueControl>())
+        {
+            bloque.StopAllActions();
+        }
+    }
     private void HideBloques()
     {
         SetChildrenVisibility(false);

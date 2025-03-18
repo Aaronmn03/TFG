@@ -146,13 +146,16 @@ public class Nivel : MonoBehaviour
             iUNivelController.SetLoseMessage(message);
         }
     }
-    private bool  HandleLose()
+    private bool HandleLose()
     {
         if (!win && !lose)
         {
             lose = true;
             iUNivelController.Lose();
             StopAllCoroutines();
+            foreach (ProgramableObject programableObject in programableObjects){
+                programableObject.StopExecution();
+            }
             return true;
         }
         return false;

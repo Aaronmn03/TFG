@@ -9,9 +9,11 @@ public class ProgramableObject : MonoBehaviour
     private ZonaProgramacion zonaProgramacion;
     private Nivel nivel;
     [SerializeField] private GameObject luz;
+
+    private ActionableObject actionableObject;
     void Start()
     {
-        gameObject.AddComponent<ActionableObject>();        
+        actionableObject = gameObject.AddComponent<ActionableObject>();        
         objectRenderer = GetComponent<Renderer>();
         nivel = GameObject.Find("LevelHandler").GetComponent<Nivel>();
         luz.SetActive(false);
@@ -59,7 +61,10 @@ public class ProgramableObject : MonoBehaviour
     public void ExecuteBloques(){
         zonaProgramacion.Play();
     }
-
+    public void StopExecution(){
+        zonaProgramacion.Stop();
+        actionableObject.Stop();
+    }
     public void LimpiarBloques(){
         zonaProgramacion.LimpiarBloques();
     }

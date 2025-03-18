@@ -94,4 +94,12 @@ public class ActionableObject : MonoBehaviour
     {
         return movebleObject.IsMoving() || rotatableObject.IsRotating() || jumpableObject.IsJumping() || scalableObject.IsScaling();
     }
+
+    public void Stop()
+    {
+        movebleObject.Stop();
+        rotatableObject.Stop();
+        jumpableObject.Stop();
+        scalableObject.Stop();
+    }
 }
