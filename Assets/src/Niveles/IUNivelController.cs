@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems; 
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class IUNivelController : MonoBehaviour
 {
@@ -61,5 +62,9 @@ public class IUNivelController : MonoBehaviour
             objetivo = datosNivel.objetivo;
         }
         playCanvas.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Nivel" + numeroNivel + " - " + objetivo;
+    }
+
+    public void CargarMenuPrincipal(){
+        SceneManager.LoadScene("MenuPrincipal");
     }
 }
