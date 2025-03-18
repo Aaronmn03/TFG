@@ -11,6 +11,8 @@ public class Semaforo : MonoBehaviour
     [SerializeField] private Transform verde;
     [SerializeField] private Animator animator_ardilla;
     private Nivel nivel;
+
+    Coroutine subirBellota;
     private void Start() {
         nivel = FindObjectOfType<Nivel>();
         if (nivel != null) {
@@ -21,6 +23,8 @@ public class Semaforo : MonoBehaviour
 
     private void Resetear(){
         color = Color.clear;
+        if(subirBellota != null)
+            StopCoroutine(subirBellota);
         ResetearBellota(rojo);
         ResetearBellota(verde);
     }
@@ -29,7 +33,7 @@ public class Semaforo : MonoBehaviour
         List<Color> colors = new List<Color>(){Color.red, Color.green};        
         color = colors[Random.Range(0, colors.Count)];
         if(color == Color.red){
-            StartCoroutine(SubirBellota(rojo));
+            subirBellota = StartCoroutine(SubirBellota(rojo));
             StartCoroutine(ComprobarSiMueve(FindObjectsOfType<ActionableObject>()));
         }else{
             StartCoroutine(SubirBellota(verde));
