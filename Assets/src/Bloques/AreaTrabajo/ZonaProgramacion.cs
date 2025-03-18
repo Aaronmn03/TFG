@@ -14,6 +14,16 @@ public class ZonaProgramacion : MonoBehaviour
         bloquesRaiz = new List<BloqueRaiz>();
     }
 
+    private void Update() {
+        Transform cameraTransform = Camera.main.transform;
+        Vector3 direction = cameraTransform.position - transform.position;
+        direction.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        Vector3 currentRotation = transform.parent.transform.rotation.eulerAngles;
+        targetRotation = Quaternion.Euler(currentRotation.x, targetRotation.eulerAngles.y, currentRotation.z);
+        transform.parent.transform.rotation = targetRotation;
+    }
+
     public void TerminarEjecucion(){
         estaEjecutando = false;
         FindObjectOfType<Nivel>().Lose();
