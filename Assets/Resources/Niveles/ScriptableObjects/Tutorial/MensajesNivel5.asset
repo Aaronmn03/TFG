@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23e68548a882cf498f2066d939946f4, type: 3}
   m_Name: MensajesNivel5
   m_EditorClassIdentifier: 
+  id: 4
   mensajesBasicos:
   - Tenemos un nuevo amigo, el nos indicara si podemos movernos o no, si no le hacemos
     caso se enfadara

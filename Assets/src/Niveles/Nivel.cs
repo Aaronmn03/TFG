@@ -20,6 +20,8 @@ public class Nivel : MonoBehaviour
     private bool ifUsed;
     [SerializeField] private IUNivelController iUNivelController;
 
+    private AudioController audioController;
+
     /*---VUFORIA DATA---*/
     public Transform groundPlane;   
     [SerializeField] public GameObject PlaneFinder;   
@@ -32,6 +34,7 @@ public class Nivel : MonoBehaviour
         airFinder = GameObject.Find("AreaTrabajoFinder");
         zonaBloques = GameObject.Find("Zona_programacion").GetComponent<ZonaBloques>();
         iUNivelController = GetComponent<IUNivelController>();
+        audioController = FindObjectOfType<AudioController>();
     }
 
     public DatosNivel GetData(){
@@ -72,6 +75,7 @@ public class Nivel : MonoBehaviour
         iUNivelController.NivelInstanciado();
         MostrarNivel();
         PlaneFinder.SetActive(false);
+        audioController.AdjustAudioVolumes();
     }
 
     private void MostrarNivel(){

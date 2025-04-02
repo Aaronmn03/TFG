@@ -30,6 +30,9 @@ public class Semaforo : MonoBehaviour
     }
 
     private void OnPlay(){
+        if (!this.enabled || !gameObject.activeInHierarchy){
+            return;
+        }
         List<Color> colors = new List<Color>(){Color.red, Color.green};        
         color = colors[Random.Range(0, colors.Count)];
         if(color == Color.red){

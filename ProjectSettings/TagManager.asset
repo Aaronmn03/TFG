@@ -8,6 +8,8 @@ TagManager:
   - ARObject
   - ProgramableObject
   - lose
+  - Musica
+  - Sonido
   layers:
   - Default
   - TransparentFX

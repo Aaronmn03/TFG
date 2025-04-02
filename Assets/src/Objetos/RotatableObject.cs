@@ -7,9 +7,13 @@ public class RotatableObject : MonoBehaviour
     private bool isRotating = false;
 
     private BoxCollider boxCollider;
+    private AudioSource audioSource;
+
 
     private void Start() {
         boxCollider = GetComponent<BoxCollider>();
+        audioSource = GetComponentInChildren<AudioSource>();
+
     }
     public void RotateRight()
     {
@@ -30,6 +34,7 @@ public class RotatableObject : MonoBehaviour
         destinationRotation = to;
         rotationStartTime = Time.time;
         isRotating = true;
+        audioSource.Play();
     }
 
     private void Update()
@@ -48,7 +53,7 @@ public class RotatableObject : MonoBehaviour
         {
             transform.rotation = destinationRotation;
             boxCollider.size = new Vector3(0.4f, boxCollider.size.y, 0.4f);
-
+            audioSource.Pause();
             return false;
         }
         return true;

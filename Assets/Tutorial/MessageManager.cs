@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MessageManager : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class MessageManager : MonoBehaviour
     public Button boton;
     private int currentMessageIndex = 0;
     private Coroutine typingCoroutine;
-
     private bool tutorialFinalizado;
+    private LevelAudioManager levelAudioManager;
+    private void Awake() {
+        levelAudioManager = gameObject.AddComponent<LevelAudioManager>();
+    }
 
     public void Empezar(DatosTutorial datosTutorial)
     {
@@ -21,6 +25,9 @@ public class MessageManager : MonoBehaviour
             return;
         }
         this.datosTutorial = datosTutorial;
+        List<string> mensajesList = new List<string>(datosTutorial.mensajesBasicos);
+        mensajesList.AddRange(datosTutorial.pistas);
+        levelAudioManager.CheckAndDownloadLevelAudio(datosTutorial.id, mensajesList);
         boton.onClick.AddListener(ShowNextMessage);
         ShowNextMessage();
         GameObject.Find("info_Button").GetComponent<Button>().onClick.AddListener(ShowPista);
@@ -30,6 +37,7 @@ public class MessageManager : MonoBehaviour
     {
         if (currentMessageIndex < datosTutorial.mensajesBasicos.Length)
         {
+            levelAudioManager.PlayAudio(datosTutorial.id, currentMessageIndex);
             if (typingCoroutine != null)
                 StopCoroutine(typingCoroutine);
             
@@ -57,9 +65,9 @@ public class MessageManager : MonoBehaviour
 
     public void ShowPista(){
         if(!tutorialFinalizado){return;}
-        
         boton.gameObject.SetActive(true);
         int randomIndex = Random.Range(0, datosTutorial.pistas.Length);
+        levelAudioManager.PlayAudio(datosTutorial.id, currentMessageIndex + randomIndex);
         string mensaje = datosTutorial.pistas[randomIndex];
 
         if (typingCoroutine != null)

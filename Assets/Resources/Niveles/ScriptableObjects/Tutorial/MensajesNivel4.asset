@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23e68548a882cf498f2066d939946f4, type: 3}
   m_Name: MensajesNivel4
   m_EditorClassIdentifier: 
+  id: 3
   mensajesBasicos:
   - "\xA1Estamos atrapados!"
   - Si te fijas ahora tenemos disponible un nueva pieza.

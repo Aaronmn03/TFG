@@ -7,11 +7,14 @@ public class MovableObject : MonoBehaviour
     private float journeyLength, moveStartTime;
     private bool isMoving = false;
     private float step = 0.1f;
+
+    private AudioSource audioSource;
     
     private Rigidbody rb;
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponentInChildren<AudioSource>();
     }
 
     public void MoveForward()
@@ -26,6 +29,7 @@ public class MovableObject : MonoBehaviour
     {
         AnimatorHandlerPlayer animatorHandler = transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>();
         animatorHandler.Walk();
+        audioSource.Play();
 
         startPosition = from;
         destination = to;
@@ -58,6 +62,7 @@ public class MovableObject : MonoBehaviour
         {
             rb.MovePosition(destination);
             transform.GetChild(0).GetComponent<AnimatorHandlerPlayer>().StopWalk();
+            audioSource.Pause();
             return false;
         }
         return true;

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23e68548a882cf498f2066d939946f4, type: 3}
   m_Name: MensajesNivel2
   m_EditorClassIdentifier: 
+  id: 1
   mensajesBasicos:
   - En este nivel vamos a aprender a girar
   - Para hacerlo tienes que usar las piezas de puzzle que tienen una L y una R

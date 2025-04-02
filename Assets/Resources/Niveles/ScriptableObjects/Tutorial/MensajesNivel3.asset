@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23e68548a882cf498f2066d939946f4, type: 3}
   m_Name: MensajesNivel3
   m_EditorClassIdentifier: 
+  id: 2
   mensajesBasicos:
   - Con todo lo aprendido anteriormente tenemos que resolver el laberinto.
   - Ponte en modo genio y ayuda a la chica a llegar a su destino

@@ -1,28 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEngine.Networking;
+
 
 public class MenuPrincipalController : MonoBehaviour
 {
     private GameObject panelPrincipal;
     private GameObject panelNiveles;
+    private GameObject panelAjustes;
     void Start()
     {
         panelPrincipal = GameObject.Find("MenuPrincipal");
-        panelPrincipal.SetActive(true);
         panelNiveles = GameObject.Find("Niveles");
-        panelNiveles.SetActive(false);
+        panelAjustes = GameObject.Find("Ajustes");
+        MenuPrincipal();
     }
 
     public void MenuPrincipal(){
         panelPrincipal.SetActive(true);
         panelNiveles.SetActive(false);
+        panelAjustes.SetActive(false);
     }
 
     public void Niveles(){
         panelPrincipal.SetActive(false);
         panelNiveles.SetActive(true);
         gameObject.GetComponent<MenuNivelesController>().OnEnter();
+    }
+
+    public void Ajustes(){
+        panelPrincipal.SetActive(false);
+        panelAjustes.SetActive(true);
+        gameObject.GetComponent<MenuAjustesController>().OnEnter();
     }
 
     public void ShutOut(){
