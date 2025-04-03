@@ -6,19 +6,24 @@ using UnityEngine;
 public class BloqueBucle : BloqueControl
 {
     public override IEnumerator Action() {
-        nivel.IfUsed();
+        //nivel.IfUsed();
         if (condicion == null){
-            nivel.Lose("Fallo de sintaxis, falta la condicion en el if");
+            nivel.Lose("Fallo de sintaxis, falta la condicion en el bucle");
             yield break;
         }
-        Coroutine condCoroutine = StartCoroutine(condicion.Action());
-        coroutines.Add(condCoroutine);
-        yield return condCoroutine;
-        if(condicion.ObtenerResultado()){
+        //Ejecutamos el contenido del bucle
+        while(true){
             foreach (Bloque bloque in bloquesDentro) {
                 Coroutine c = StartCoroutine(bloque.Action());
                 coroutines.Add(c);
                 yield return c;
+            }
+            //Hasta que la condicion no sea verdadera
+            Coroutine condCoroutine = StartCoroutine(condicion.Action());
+            coroutines.Add(condCoroutine);
+            yield return condCoroutine;
+            if(!condicion.ObtenerResultado()){
+                yield break;
             }
         }
     }

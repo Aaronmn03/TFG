@@ -124,10 +124,10 @@ MonoBehaviour:
   bloqueControl: {fileID: 0}
   condicion: {fileID: 0}
   bloquesDentro: []
-  lateral: {fileID: 0}
-  centro: {fileID: 0}
-  colliderInterno: {fileID: 0}
-  colliderCondicion: {fileID: 0}
+  lateral: {fileID: 2670740556591404782}
+  centro: {fileID: 1230057781594660657}
+  colliderInterno: {fileID: 3083344145500609202}
+  colliderCondicion: {fileID: 9196075334170357802}
 --- !u!1 &2766257736750383835
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +465,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 652b3fc6e7674f04596f72ea0a4e7eb7, type: 3}
+--- !u!4 &1230057781594660657 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4361080418111007636, guid: 652b3fc6e7674f04596f72ea0a4e7eb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5938101104476900189}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2670740556591404782 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8608700081210613171, guid: 652b3fc6e7674f04596f72ea0a4e7eb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5938101104476900189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6188761739627998390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 652b3fc6e7674f04596f72ea0a4e7eb7,
