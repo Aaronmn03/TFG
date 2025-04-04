@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3916281861868112107}
   - component: {fileID: 8749968076413095458}
   - component: {fileID: 4305751909720759560}
-  - component: {fileID: 4468701083054307500}
+  - component: {fileID: -773986262193253834}
   m_Layer: 0
   m_Name: BloqueDistinto
   m_TagString: ARObject
@@ -85,7 +85,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4468701083054307500
+--- !u!114 &-773986262193253834
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 973644812749269160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44509e9f1faa60341b9efaec57885a08, type: 3}
+  m_Script: {fileID: 11500000, guid: 742ec3b3f6a5ec14888fa619c21825cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bloquesConectados: []
@@ -291,12 +291,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 41382caa28f48c14893b68d84b575a6d, type: 2}
+      objectReference: {fileID: 2100000, guid: 0ec93fc3948667b4eb655bbe5d18f5c5, type: 2}
     - target: {fileID: -5754084199372789682, guid: 01eed42fd3919cd45b19ce11e0c4f187,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -1843689209865246678, guid: 4a8402c588d37d444b617fd9b1faf69d,
+      objectReference: {fileID: -309074274965539837, guid: ba3922a189dc4be498ee5cc72c6f8069,
         type: 3}
     - target: {fileID: 919132149155446097, guid: 01eed42fd3919cd45b19ce11e0c4f187,
         type: 3}

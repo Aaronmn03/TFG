@@ -12,7 +12,6 @@ public class ObjectManipulator : MonoBehaviour
     private bool isARBloqueSelected;
     private string selectedObjectTag = "ARObject";
     private Vector2 touchPosition;
-
     private Vector2 firstInput = Vector2.zero;
 
     [SerializeField] private float ScreenFactor;
@@ -20,7 +19,6 @@ public class ObjectManipulator : MonoBehaviour
     public ProgramableObject GetProgramableObject(){
         return ARObject.GetComponent<ProgramableObject>();
     }
-
 
     void Update()
     {
@@ -131,9 +129,9 @@ public class ObjectManipulator : MonoBehaviour
             bloque.GetComponent<DetectarBloque>().enabled = true;
             bloqueObject = bloque;  
         }
-        if (hit.transform.gameObject.TryGetComponent<Semaforo>(out Semaforo semaforo))
+        if (hit.transform.gameObject.TryGetComponent<ObtenedorVariable>(out ObtenedorVariable obtenedorVariable))
         {
-            semaforo.SelectObject();
+            obtenedorVariable.SelectObject();
         }
     }
 
@@ -144,7 +142,7 @@ public class ObjectManipulator : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("El objeto seleccionado no es ni ProgramableObject ni Bloque.");
+            Debug.LogWarning("El objeto seleccionado no es ni ProgramableObject.");
         }
         ARObject = null;
     }

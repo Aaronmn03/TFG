@@ -2,16 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Semaforo : MonoBehaviour
+public class Semaforo : ObtenedorVariable
 {
-    [SerializeField] private Color color;
-    [SerializeField] private Texture2D texture;
-    [SerializeField] private DatosBloque datosBloque;
     [SerializeField] private Transform rojo;
     [SerializeField] private Transform verde;
     [SerializeField] private Animator animator_ardilla;
     private Nivel nivel;
-
     Coroutine subirBellota;
     private void Start() {
         nivel = FindObjectOfType<Nivel>();
@@ -22,7 +18,7 @@ public class Semaforo : MonoBehaviour
     }
 
     private void Resetear(){
-        color = Color.clear;
+        valor = Color.clear;
         if(subirBellota != null)
             StopCoroutine(subirBellota);
         ResetearBellota(rojo);
@@ -34,8 +30,9 @@ public class Semaforo : MonoBehaviour
             return;
         }
         List<Color> colors = new List<Color>(){Color.red, Color.green};        
-        color = colors[Random.Range(0, colors.Count)];
-        if(color == Color.red){
+        valor = colors[Random.Range(0, colors.Count)];
+        Debug.Log(valor);
+        if (valor is Color color && color == Color.red){    
             subirBellota = StartCoroutine(SubirBellota(rojo));
             StartCoroutine(ComprobarSiMueve(FindObjectsOfType<ActionableObject>()));
         }else{
@@ -76,17 +73,5 @@ public class Semaforo : MonoBehaviour
             Destroy(floatEffect);
         }        
         bellota.localPosition = new Vector3(bellota.localPosition.x, 0.01f, bellota.localPosition.z);
-    }
-    public void SelectObject(){
-        GameObject bloque = Instantiate(datosBloque.prefab, GameObject.Find("AreaTrabajo").transform);
-        bloque.GetComponent<BloqueVariableColor>().SetValue(this);
-    }
-
-    public Color GetColor(){
-        return color;
-    }
-
-    public Texture2D GetTexture2D(){
-        return texture;
     }
 }

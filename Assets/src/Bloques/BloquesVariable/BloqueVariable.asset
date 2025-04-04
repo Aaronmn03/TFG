@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8736cc23e6e7ac54f9120f978e6177d7, type: 3}
-  m_Name: BloqueVariableColor
+  m_Name: BloqueVariable
   m_EditorClassIdentifier: 
-  nombre: Bloque Variable Color
+  nombre: Bloque Variable
   prefab: {fileID: 973644812749269160, guid: 64e05d3d316245f4ea1c2bdc91db932c, type: 3}
   prefabIcon: {fileID: 973644812749269160, guid: dfaf93b7e5a3dff468449c7c5accd69e,
     type: 3}

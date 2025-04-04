@@ -62,6 +62,21 @@ public abstract class BloqueCondicion : Bloque, IConnectable
         bloque2 = null;
     }
 
+    protected bool ValidarBloques()
+    {
+        if (bloque1 == null || bloque2 == null)
+        {
+            nivel.Lose("Algún campo de la condicion esta vacío");
+            return false;
+        }
+        if (bloque1.GetType() != bloque2.GetType())
+        {
+            nivel.Lose("Las clases de la condición no son las mismas");
+            return false;
+        }
+        return true;
+    }
+
     public bool ConnectTo(Bloque parent, int index){
         if(parent is not BloqueControl){return false;}
         BloqueControl bloque = (BloqueControl) parent; 
@@ -71,6 +86,17 @@ public abstract class BloqueCondicion : Bloque, IConnectable
         }
         return false;
     }
+
+    protected bool EsValorNulo(object valor)
+    {
+        if (valor is Color color){
+            return color == Color.clear;
+        }else if(valor == null){
+            return true;
+        }
+        return false;
+    }
+
     public override void DisConnectTo(Bloque parent){
         if(parent is not BloqueControl){return;}
         BloqueControl bloque = (BloqueControl) parent; 
@@ -80,5 +106,28 @@ public abstract class BloqueCondicion : Bloque, IConnectable
             bloque.SetNullBloqueCondicion();
         }
         this.transform.position = this.transform.position + new Vector3(0,0,0.05f);
+    }
+
+    protected bool CalculateResultado(object valor1, object valor2){
+        bool resultado;
+        Debug.Log(valor1);
+        Debug.Log(valor2);
+        if (valor1 is Vector3 v1 && valor2 is Vector3 v2)
+        {
+            float tolerance = 0.075f;
+            Debug.Log("Vector1: " + v1 + " Vector2: " + v2);
+            Debug.Log("Distancia: " + Vector3.Distance(v1, v2) + " Tolerancia: " + tolerance);
+            if (Vector3.Distance(v1, v2) < tolerance)
+            {
+                resultado = true;
+            }
+            else
+            {
+                resultado = false;
+            }
+        }else{
+            resultado = valor1.Equals(valor2);
+        }
+        return resultado;
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8736cc23e6e7ac54f9120f978e6177d7, type: 3}
   m_Name: BloqueDistinto
   m_EditorClassIdentifier: 
-  nombre: Bloque Igualdad
-  prefab: {fileID: 973644812749269160, guid: 20f671b1037b689499c0ab33a4a08329, type: 3}
-  prefabIcon: {fileID: 973644812749269160, guid: ab5b6a14b720e6948ae0e6623f776ab7,
+  nombre: Bloque Distinto
+  prefab: {fileID: 973644812749269160, guid: 1dfe28b3436feee4cb227dc8a2493520, type: 3}
+  prefabIcon: {fileID: 973644812749269160, guid: 3441ef54bcb4c514e99c0816801f8a28,
     type: 3}
