@@ -8,7 +8,6 @@ public class Nivel : MonoBehaviour
 {
     public delegate void OnPlayEvent();
     public event OnPlayEvent PlayEvent;
-
     public delegate void OnResetEvent();
     public event OnResetEvent ResetEvent;
     private DatosNivel datosNivel;
@@ -16,10 +15,10 @@ public class Nivel : MonoBehaviour
     public List<ProgramableObject> programableObjects;
     private bool win;
     private bool lose;
-
     private bool ifUsed;
+    private bool bucleUsed;
+    private HashSet<Bloque> bloquesUsados;
     [SerializeField] private IUNivelController iUNivelController;
-
     private AudioController audioController;
 
     /*---VUFORIA DATA---*/
@@ -46,6 +45,10 @@ public class Nivel : MonoBehaviour
 
     public void IfUsed(){
         this.ifUsed = true;
+    }
+
+    public void BucleUsed(){
+        this.bucleUsed = true;
     }
 
     public void ActivateAirFinder(){
@@ -91,6 +94,8 @@ public class Nivel : MonoBehaviour
 
     public void Reiniciar(){
         ifUsed = false;
+        bucleUsed = false;
+        bloquesUsados = new HashSet<Bloque>();
         ResetEvent?.Invoke();
         win = false;
         lose = false;
@@ -135,9 +140,29 @@ public class Nivel : MonoBehaviour
             Lose("Para este nivel se requiere al menos un IF");
             return false;
         }
+        if(datosNivel.requireBucle && !bucleUsed){
+            Lose("Para este nivel se requiere al menos un Bucle");
+            return false;
+        }
+        if(datosNivel.maxBloques != 0 && datosNivel.maxBloques < GetBloquesUsados()){
+            Lose("Has usado más bloques de los permitidos");
+            return false;
+        }
         return true;
     }
 
+    private int GetBloquesUsados(){
+        return bloquesUsados.Count;
+    }
+    public void AñadirBloqueUsado(Bloque bloque){
+        if(bloquesUsados == null){
+            bloquesUsados = new HashSet<Bloque>();
+        }
+        if(!bloquesUsados.Contains(bloque)){
+            bloquesUsados.Add(bloque);
+            Debug.Log("Añadimos un nuevo bloque, cantidad actual: " + bloquesUsados.Count + "nombre del bloque añadido: " + bloque.name);
+        }
+    }
 
     public void Lose()
     {

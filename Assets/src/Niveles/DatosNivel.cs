@@ -13,4 +13,6 @@ public class DatosNivel : ScriptableObject
     public List<DatosBloque> bloquesDisponibles; 
     public DatosTutorial datosTutorial;
     public bool requireIF;
+    public bool requireBucle;
+    public int maxBloques;
 }

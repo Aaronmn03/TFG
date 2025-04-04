@@ -54,7 +54,7 @@ public class ZonaProgramacion : MonoBehaviour
         if(bloquesRaiz.Count <= 0) return;
         estaEjecutando = true;
         foreach (BloqueRaiz bloque in bloquesRaiz){
-            StartCoroutine(bloque.Action());
+            StartCoroutine(bloque.AccionConjunta());
         }
     }
 

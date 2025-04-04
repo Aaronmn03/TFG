@@ -16,6 +16,12 @@ public abstract class Bloque : MonoBehaviour
     [SerializeField] protected BloqueControl bloqueControl;
     public abstract IEnumerator Action();
 
+    public virtual IEnumerator AccionConjunta()
+    {
+        nivel.AñadirBloqueUsado(this);
+        yield return StartCoroutine(Action());
+    }
+
     public abstract bool isConectable(Bloque other);
 
     public virtual bool isConectable(Bloque other, TipoContacto tipoContacto){

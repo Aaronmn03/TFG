@@ -5,7 +5,7 @@ using UnityEngine;
 public class BloqueComenzar : BloqueRaiz {
     public override IEnumerator Action() {
         foreach (Bloque bloque in bloquesConectados) {
-            Coroutine c = StartCoroutine(bloque.Action());
+            Coroutine c = StartCoroutine(bloque.AccionConjunta());
             coroutines.Add(c);
             yield return c;
         }
