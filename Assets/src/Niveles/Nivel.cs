@@ -164,20 +164,22 @@ public class Nivel : MonoBehaviour
         }
     }
 
-    public void Lose()
+
+
+    public void Lose(bool force = false)
     {
-        HandleLose();
+        HandleLose(force);
     }
 
-    public void Lose(string message)
+    public void Lose(string message, bool force = false)
     {
-        if(HandleLose()){
+        if(HandleLose(force)){
             iUNivelController.SetLoseMessage(message);
         }
     }
-    private bool HandleLose()
+    private bool HandleLose(bool force)
     {
-        if (!win && !lose)
+        if (force ||!win && !lose)
         {
             lose = true;
             iUNivelController.Lose();

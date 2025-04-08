@@ -31,3 +31,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 925eb4d92408c654baf0a165423fb8ca, type: 2}
   datosTutorial: {fileID: 0}
   requireIF: 0
+  requireBucle: 1
+  maxBloques: 4
