@@ -19,6 +19,7 @@ public class Semaforo : ObtenedorVariable
 
     private void Resetear(){
         valor = Color.clear;
+        animator_ardilla.SetTrigger("saltar");
         if(subirBellota != null)
             StopCoroutine(subirBellota);
         ResetearBellota(rojo);
