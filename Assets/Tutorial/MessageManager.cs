@@ -13,12 +13,15 @@ public class MessageManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool tutorialFinalizado;
     private LevelAudioManager levelAudioManager;
+
+    private HashSet<int> pistasMostradas;
     private void Awake() {
         levelAudioManager = gameObject.AddComponent<LevelAudioManager>();
     }
 
     public void Empezar(DatosTutorial datosTutorial)
     {
+        pistasMostradas = new HashSet<int>();
         tutorialFinalizado = false;
         if(datosTutorial == null){
             Debug.LogError("No has agregado mensajes");
@@ -30,7 +33,7 @@ public class MessageManager : MonoBehaviour
         levelAudioManager.CheckAndDownloadLevelAudio(datosTutorial.id, mensajesList);
         boton.onClick.AddListener(ShowNextMessage);
         ShowNextMessage();
-        GameObject.Find("info_Button").GetComponent<Button>().onClick.AddListener(ShowPista);
+        GameObject.Find("info_Button").GetComponent<Button>().onClick.AddListener(() => { StartCoroutine(ShowPista()); });                                                                                                                                                            
     }
 
     private void ShowNextMessage()
@@ -63,10 +66,19 @@ public class MessageManager : MonoBehaviour
         }
     }
 
-    public void ShowPista(){
-        if(!tutorialFinalizado){return;}
+    public IEnumerator ShowPista(){
+        if (!tutorialFinalizado) yield break;
         boton.gameObject.SetActive(true);
+        
+        if(pistasMostradas.Count >= datosTutorial.pistas.Length){
+            pistasMostradas.Clear();
+        }
         int randomIndex = Random.Range(0, datosTutorial.pistas.Length);
+        while (pistasMostradas.Contains(randomIndex)){
+            randomIndex = Random.Range(0, datosTutorial.pistas.Length);
+        }
+        pistasMostradas.Add(randomIndex);
+
         levelAudioManager.PlayAudio(datosTutorial.id, currentMessageIndex + randomIndex);
         string mensaje = datosTutorial.pistas[randomIndex];
 
@@ -75,5 +87,7 @@ public class MessageManager : MonoBehaviour
 
         typingCoroutine = StartCoroutine(TypeText(mensaje));
 
+        yield return null;
     }
+    
 }
