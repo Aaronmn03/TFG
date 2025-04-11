@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 7
   nombre: Una y otra vez
   icon: {fileID: 21300000, guid: 003c181bdf6e5074685497fd0c8774ba, type: 3}
-  objetivo: "Hazte peque\xF1o y no enfades a la ardilla"
+  objetivo: LLega a la tineda sin usar muchos bloques
   bloquesDisponibles:
   - {fileID: 11400000, guid: 8f0fd0c3ca92fb9408de114f133bc60e, type: 2}
   - {fileID: 11400000, guid: 85618cbcad3443048a21f781ea562037, type: 2}

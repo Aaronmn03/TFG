@@ -37,7 +37,20 @@ public class BloqueManager : MonoBehaviour
     {
         nivel.GetAirFinder().SetActive(false);
         ProgramableObject programableObject = GameObject.Find("ARManipulator").GetComponent<ObjectManipulator>().GetProgramableObject();
-        programableObject.SetZonaProgramacion(GameObject.Find("AreaTrabajo").GetComponent<ZonaProgramacion>());
+        GameObject[] objetosInstanciados = GameObject.FindGameObjectsWithTag("AreaTrabajo");
+        GameObject ultimoInstanciado = null;
+        foreach(GameObject obj in objetosInstanciados)
+        {
+            if(obj.name == "AreaTrabajo")
+            {
+                ultimoInstanciado = obj;
+            }
+        }
+
+        if (ultimoInstanciado != null)
+        {
+            programableObject.SetZonaProgramacion(ultimoInstanciado.GetComponent<ZonaProgramacion>());
+        }
         nivel.ActivateZonaBloques();
     }
 }

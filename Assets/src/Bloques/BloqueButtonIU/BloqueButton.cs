@@ -2,7 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 public class BloqueButton : MonoBehaviour
 {
+    private Nivel nivel;
     protected DatosBloque datosBloque;
+
+    private void Start() {
+        nivel = FindObjectOfType<Nivel>();
+    }
     public virtual void InicializarBloque(DatosBloque datosBloque){
         SetName(datosBloque.nombre);
         gameObject.SetActive(false);
@@ -12,7 +17,7 @@ public class BloqueButton : MonoBehaviour
     public virtual void OnShowBloqueButtonClicked(DatosBloque datosBloque)
     {
         this.datosBloque = datosBloque;
-        GameObject bloque = Instantiate(datosBloque.prefab, GameObject.Find("AreaTrabajo").transform);
+        GameObject bloque = Instantiate(datosBloque.prefab, nivel.GetSelectedProgramableObject().GetZonaProgramacion().transform);
     }
 
     protected void SetName(string name){

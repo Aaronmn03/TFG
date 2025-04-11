@@ -999,6 +999,11 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.8679245
       objectReference: {fileID: 0}
+    - target: {fileID: 1167885987408260345, guid: cd9eefbd2d0d68542a1126c66dc0d75d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 3627751852098794400, guid: cd9eefbd2d0d68542a1126c66dc0d75d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1048,6 +1053,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6797494814997370647, guid: cd9eefbd2d0d68542a1126c66dc0d75d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326989591477132247, guid: cd9eefbd2d0d68542a1126c66dc0d75d,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326989591477132247, guid: cd9eefbd2d0d68542a1126c66dc0d75d,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326989591477132247, guid: cd9eefbd2d0d68542a1126c66dc0d75d,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326989591477132247, guid: cd9eefbd2d0d68542a1126c66dc0d75d,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326989591477132247, guid: cd9eefbd2d0d68542a1126c66dc0d75d,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8379837527030713595, guid: cd9eefbd2d0d68542a1126c66dc0d75d,
         type: 3}
@@ -2626,6 +2661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   programableObjects: []
+  programableObjectSeleccionado: {fileID: 0}
   iUNivelController: {fileID: 0}
   groundPlane: {fileID: 0}
   PlaneFinder: {fileID: 0}
@@ -2778,7 +2814,7 @@ MonoBehaviour:
   OnAutomaticHitTest:
     m_PersistentCalls:
       m_Calls: []
-  mDisplayAdvanced: 0
+  mDisplayAdvanced: 1
   mHitTestMode: 0
 --- !u!114 &1010322159
 MonoBehaviour:

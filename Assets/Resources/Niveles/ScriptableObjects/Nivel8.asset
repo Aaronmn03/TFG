@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8
   nombre: "Compa\xF1erismo"
-  icon: {fileID: 21300000, guid: 003c181bdf6e5074685497fd0c8774ba, type: 3}
-  objetivo: "Hazte peque\xF1o y no enfades a la ardilla"
+  icon: {fileID: 21300000, guid: ae8e9d7983b843d49a69668c9d89f88c, type: 3}
+  objetivo: Pulsa el boton antes de llegar a la tienda
   bloquesDisponibles:
   - {fileID: 11400000, guid: 8f0fd0c3ca92fb9408de114f133bc60e, type: 2}
   - {fileID: 11400000, guid: 85618cbcad3443048a21f781ea562037, type: 2}

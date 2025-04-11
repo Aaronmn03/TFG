@@ -10,6 +10,7 @@ TagManager:
   - lose
   - Musica
   - Sonido
+  - AreaTrabajo
   layers:
   - Default
   - TransparentFX

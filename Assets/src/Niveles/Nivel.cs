@@ -13,6 +13,7 @@ public class Nivel : MonoBehaviour
     private DatosNivel datosNivel;
     private ZonaBloques zonaBloques;
     public List<ProgramableObject> programableObjects;
+    public ProgramableObject programableObjectSeleccionado;
     private bool win;
     private bool lose;
     private bool ifUsed;
@@ -54,10 +55,21 @@ public class Nivel : MonoBehaviour
     public void ActivateAirFinder(){
         airFinder.SetActive(true);
     }
-
+    
     public void AsignarNivel(DatosNivel datosNivel){
         this.datosNivel = datosNivel;
         InicializarNivel();  
+    }
+
+    public ProgramableObject GetSelectedProgramableObject(){
+        return programableObjectSeleccionado;
+    }
+
+    public void SelectedObject(ProgramableObject programableObject){
+        if (programableObjectSeleccionado != null && programableObjectSeleccionado != programableObject){
+            programableObjectSeleccionado.DeselectObject();
+        }
+        programableObjectSeleccionado = programableObject;
     }
 
     public void InicializarNivel(){

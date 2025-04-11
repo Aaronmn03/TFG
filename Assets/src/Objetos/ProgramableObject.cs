@@ -6,10 +6,9 @@ using UnityEngine.UI;
 public class ProgramableObject : MonoBehaviour
 {
     private Renderer objectRenderer;
-    private ZonaProgramacion zonaProgramacion;
+    [SerializeField] private ZonaProgramacion zonaProgramacion;
     private Nivel nivel;
     [SerializeField] private GameObject luz;
-
     private ActionableObject actionableObject;
     void Start()
     {
@@ -30,6 +29,7 @@ public class ProgramableObject : MonoBehaviour
     public void SelectObject()
     {
         luz.SetActive(true);
+        nivel.SelectedObject(this);
         if(zonaProgramacion == null){
             nivel.ActivateAirFinder();
         }else{
