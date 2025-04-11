@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8736cc23e6e7ac54f9120f978e6177d7, type: 3}
+  m_Name: BloqueBotonPulsado
+  m_EditorClassIdentifier: 
+  nombre: Bloque Boton Pulsado
+  prefab: {fileID: 973644812749269160, guid: 700fbe45c2c2af74f968323f198c5619, type: 3}
+  prefabIcon: {fileID: 973644812749269160, guid: 69f82ba2ec129354182f09aee3ea8691,
+    type: 3}
