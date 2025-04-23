@@ -210,7 +210,10 @@ public class Nivel : MonoBehaviour
     }
     public void Play(){
         foreach (ProgramableObject programableObject in programableObjects){
-            programableObject.ExecuteBloques();
+            if(!programableObject.ExecuteBloques()){
+                Lose("No hay alguna zona de programacion o bloques en alguna zona de programacion");
+                return;
+            }
         }
         PlayEvent?.Invoke();
     }

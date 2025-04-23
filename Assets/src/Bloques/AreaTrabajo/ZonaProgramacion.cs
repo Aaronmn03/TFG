@@ -53,11 +53,12 @@ public class ZonaProgramacion : MonoBehaviour
         Destroy(this.transform.parent.transform.parent.gameObject);
     }
 
-    public void Play(){
-        if(bloquesRaiz.Count <= 0) return;
+    public bool Play(){
+        if(bloquesRaiz.Count <= 0) return false;
         foreach (BloqueRaiz bloque in bloquesRaiz){
             StartCoroutine(bloque.AccionConjunta());
         }
+        return true;
     }
 
     public void Stop(){

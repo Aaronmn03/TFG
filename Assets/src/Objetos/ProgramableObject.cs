@@ -58,9 +58,9 @@ public class ProgramableObject : MonoBehaviour
         zonaProgramacion.GetBloquesRaiz().Remove(bloqueRaiz);
     }
 
-    public void ExecuteBloques(){
-        if(zonaProgramacion == null) return;
-        zonaProgramacion.Play();
+    public bool ExecuteBloques(){
+        if(zonaProgramacion == null) return false;
+        return zonaProgramacion.Play();
     }
     public void StopExecution(){
         if(zonaProgramacion == null) return;
