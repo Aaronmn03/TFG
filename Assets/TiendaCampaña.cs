@@ -5,10 +5,9 @@ using UnityEngine;
 public class TiendaCampaña : ObtenedorVariable
 {
     [SerializeField] Transform tiendaCampaña;
-    private Nivel nivel;
     private void Start() {
         this.valor = tiendaCampaña.position;
-        this.nivel = FindObjectOfType<Nivel>();
+        base.Start();
     }
 
     private void OnTriggerEnter(Collider other) {

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class BloqueButton : MonoBehaviour
 {
-    private Nivel nivel;
+    protected Nivel nivel;
     protected DatosBloque datosBloque;
 
     private void Start() {

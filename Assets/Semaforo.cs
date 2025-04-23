@@ -7,10 +7,9 @@ public class Semaforo : ObtenedorVariable
     [SerializeField] private Transform rojo;
     [SerializeField] private Transform verde;
     [SerializeField] private Animator animator_ardilla;
-    private Nivel nivel;
     Coroutine subirBellota;
     private void Start() {
-        nivel = FindObjectOfType<Nivel>();
+        base.Start();
         if (nivel != null) {
             nivel.PlayEvent += OnPlay; 
             nivel.ResetEvent += Resetear;
@@ -32,7 +31,6 @@ public class Semaforo : ObtenedorVariable
         }
         List<Color> colors = new List<Color>(){Color.red, Color.green};        
         valor = colors[Random.Range(0, colors.Count)];
-        Debug.Log(valor);
         if (valor is Color color && color == Color.red){    
             subirBellota = StartCoroutine(SubirBellota(rojo));
             StartCoroutine(ComprobarSiMueve(FindObjectsOfType<ActionableObject>()));

@@ -110,13 +110,9 @@ public abstract class BloqueCondicion : Bloque, IConnectable
 
     protected bool CalculateResultado(object valor1, object valor2){
         bool resultado;
-        Debug.Log(valor1);
-        Debug.Log(valor2);
         if (valor1 is Vector3 v1 && valor2 is Vector3 v2)
         {
             float tolerance = 0.075f;
-            Debug.Log("Vector1: " + v1 + " Vector2: " + v2);
-            Debug.Log("Distancia: " + Vector3.Distance(v1, v2) + " Tolerancia: " + tolerance);
             if (Vector3.Distance(v1, v2) < tolerance)
             {
                 resultado = true;

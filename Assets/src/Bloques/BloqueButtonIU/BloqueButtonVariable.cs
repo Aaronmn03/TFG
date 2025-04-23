@@ -44,7 +44,7 @@ public class BloqueButtonVariable : BloqueButton
     public void OnShowBloqueButtonClicked(DatosBloque datosBloque, object value)
     {
         this.datosBloque = datosBloque;
-        GameObject bloque = Instantiate(datosBloque.prefab, GameObject.Find("AreaTrabajo").transform);
+        GameObject bloque = Instantiate(datosBloque.prefab, nivel.GetSelectedProgramableObject().GetZonaProgramacion().transform);
         bloque.GetComponent<BloqueVariable>().SetValue(value);
     }
 }

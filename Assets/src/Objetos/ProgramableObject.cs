@@ -59,9 +59,11 @@ public class ProgramableObject : MonoBehaviour
     }
 
     public void ExecuteBloques(){
+        if(zonaProgramacion == null) return;
         zonaProgramacion.Play();
     }
     public void StopExecution(){
+        if(zonaProgramacion == null) return;
         zonaProgramacion.Stop();
         actionableObject.Stop();
     }

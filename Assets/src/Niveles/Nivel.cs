@@ -176,6 +176,11 @@ public class Nivel : MonoBehaviour
         }
     }
 
+    public void CheckTerminadaEjecucionLose(){
+        if (programableObjects.All(p => p.GetZonaProgramacion().GetEstaEjecutando() == false)){
+            Lose();
+        }
+    }
 
 
     public void Lose(bool force = false)

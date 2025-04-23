@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: f8ef5334903debb45b2fc149b1f82c6e, type: 3}
   datosBloque: {fileID: 11400000, guid: 925eb4d92408c654baf0a165423fb8ca, type: 2}
-  "tiendaCampa\xF1a": {fileID: 0}
+  "tiendaCampa\xF1a": {fileID: 4752248967626095289}
 --- !u!65 &413913127942756875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2786,11 +2786,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8029420736449013484}
     m_Modifications:
-    - target: {fileID: 3817115540304575031, guid: b716938916e460d4d8dcb40cecf02744,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3817115540304575031, guid: b716938916e460d4d8dcb40cecf02744,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6399,7 +6394,7 @@ PrefabInstance:
     - target: {fileID: 5199934000529043641, guid: 4280b002194bc3f48b23b8df352b51c6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.099999994
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5199934000529043641, guid: 4280b002194bc3f48b23b8df352b51c6,
         type: 3}

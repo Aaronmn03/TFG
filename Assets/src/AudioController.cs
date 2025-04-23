@@ -30,7 +30,6 @@ public class AudioController : MonoBehaviour
         foreach (AudioSource music in musicSource)
         {
             if(music != null){
-                Debug.Log("Musica: " + PlayerPrefs.GetFloat("VolumenMusica"));
                 music.volume = PlayerPrefs.GetFloat("VolumenMusica");
             } 
         }
@@ -38,7 +37,6 @@ public class AudioController : MonoBehaviour
         foreach (AudioSource sound in soundSource)
         {
             if(sound != null){
-                Debug.Log("Efectos: " + PlayerPrefs.GetFloat("VolumenEfectos"));
                 sound.volume = PlayerPrefs.GetFloat("VolumenEfectos");  
             }
         }

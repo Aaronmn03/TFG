@@ -5,15 +5,23 @@ using UnityEngine;
 public class Boton : ObtenedorVariable
 {
     [SerializeField] bool hasBeenPressed = false;
-    private Nivel nivel;
     private void Start() {
+        base.Start();
         this.valor = hasBeenPressed;
-        this.nivel = FindObjectOfType<Nivel>();
+        if (nivel != null) {
+            nivel.ResetEvent += Resetear;
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
         if (other.transform.gameObject.TryGetComponent<ProgramableObject>(out ProgramableObject programableObject)) {
             hasBeenPressed = true;
+            this.valor = hasBeenPressed;
         }
+    }
+
+    private void Resetear(){
+        hasBeenPressed = false;
+        this.valor = hasBeenPressed;
     }
 }

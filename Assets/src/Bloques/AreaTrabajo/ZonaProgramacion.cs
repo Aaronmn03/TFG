@@ -26,13 +26,16 @@ public class ZonaProgramacion : MonoBehaviour
 
     public void TerminarEjecucion(){
         estaEjecutando = false;
-        FindObjectOfType<Nivel>().Lose();
+        FindObjectOfType<Nivel>().CheckTerminadaEjecucionLose();
+    }
+
+    public void EmpezarEjecucion(){
+        estaEjecutando = true;
     }
 
     public bool GetEstaEjecutando(){
         return estaEjecutando;
     }
-
     public List<BloqueRaiz> GetBloquesRaiz(){
         return bloquesRaiz;
     }
@@ -52,7 +55,6 @@ public class ZonaProgramacion : MonoBehaviour
 
     public void Play(){
         if(bloquesRaiz.Count <= 0) return;
-        estaEjecutando = true;
         foreach (BloqueRaiz bloque in bloquesRaiz){
             StartCoroutine(bloque.AccionConjunta());
         }

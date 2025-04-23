@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3916281861868112107}
   - component: {fileID: 8749968076413095458}
   - component: {fileID: 4305751909720759560}
-  - component: {fileID: 503396928640900933}
+  - component: {fileID: -1783044411465649418}
   m_Layer: 8
   m_Name: BloqueBotonPulsado
   m_TagString: ARObject
@@ -83,7 +83,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &503396928640900933
+--- !u!114 &-1783044411465649418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 973644812749269160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2ed51d4d6f471b4281282425d63e011, type: 3}
+  m_Script: {fileID: 11500000, guid: 20971fe1469bd3646a2c19e1e0dc6afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bloquesConectados: []

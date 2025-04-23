@@ -40,6 +40,7 @@ public class IUNivelController : MonoBehaviour
 
     public void Lose(){
         loseCanvas.SetActive(true);
+        winCanvas.SetActive(false);
         loseCanvas.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "¡Error! Vamos, tú puedes.";
         playCanvas.SetActive(false);
     }

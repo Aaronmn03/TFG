@@ -32,4 +32,4 @@ MonoBehaviour:
   datosTutorial: {fileID: 0}
   requireIF: 1
   requireBucle: 1
-  maxBloques: 0
+  maxBloques: 18
