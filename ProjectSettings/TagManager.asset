@@ -11,6 +11,7 @@ TagManager:
   - Musica
   - Sonido
   - AreaTrabajo
+  - Basura
   layers:
   - Default
   - TransparentFX

@@ -44,8 +44,18 @@ public class BloqueArrastrable : MonoBehaviour
     }
 
     public void OnEndDrag()
-    {        
+    {   
         var targetGameObject = detectarBloque.GetBloqueEnContacto();
+
+        if(detectarBloque.IsInBasura()){
+
+            foreach(Bloque bloqueConectado in bloque.GetBloquesConectados()){
+                Destroy(bloqueConectado.gameObject);
+            }
+            Destroy(this.gameObject);
+            targetGameObject.GetComponent<Animator>().SetTrigger("use");
+            return;
+        }
         if(targetGameObject != null){
             if(detectarBloque.GetTipoContacto() == TipoContacto.ContactoNormal){   
                 Bloque targetBloque = targetGameObject.GetComponent<Bloque>();

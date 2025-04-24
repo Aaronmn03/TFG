@@ -13,6 +13,8 @@ public class DetectarBloque : MonoBehaviour
 
     [SerializeField] private TipoContacto tipoContacto;
     private int index;
+
+    public bool isInBasura = false;
     public TipoContacto GetTipoContacto(){
         return tipoContacto;
     }
@@ -21,9 +23,19 @@ public class DetectarBloque : MonoBehaviour
         return index;
     }
 
+    public bool IsInBasura(){
+        return isInBasura;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!enabled) return;
+        if(other.gameObject.tag == "Basura") {
+            other.gameObject.GetComponent<Animator>().SetTrigger("use");
+            bloqueInContact = other.gameObject;
+            isInBasura = true;
+            return;
+        }
         int layer = other.gameObject.layer;
         if (layer == LayerMask.NameToLayer("BloqueGeneral"))
         {
@@ -96,10 +108,15 @@ public class DetectarBloque : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    //todo: Esto se puede simplificar mucho
-    {
+    private void OnTriggerExit(Collider other){
         if (!enabled) return;
+
+        if(other.gameObject.tag == "Basura") {
+            other.gameObject.GetComponent<Animator>().SetTrigger("use");
+            isInBasura = false;
+            return;
+        }
+
         if(other.gameObject.layer == LayerMask.NameToLayer("BloqueGeneral")){        
             if (other.transform.gameObject.TryGetComponent<BloqueArrastrable>(out BloqueArrastrable bloque))
             {
