@@ -18,10 +18,6 @@ public class MenuPrincipalController : MonoBehaviour
         MenuPrincipal();
     }
 
-    public void DesbloquearTodosNiveles(){
-        PlayerPrefs.SetInt("MaxLevel", 10);
-    }
-
     public void MenuPrincipal(){
         panelPrincipal.SetActive(true);
         panelNiveles.SetActive(false);
