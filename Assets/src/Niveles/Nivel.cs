@@ -209,8 +209,11 @@ public class Nivel : MonoBehaviour
         return false;
     }
     public void Play(){
-        foreach (ProgramableObject programableObject in programableObjects){
-            if(!programableObject.ExecuteBloques()){
+        iUNivelController.Play();
+        foreach (ProgramableObject programableObject in programableObjects)
+        {
+            if (!programableObject.ExecuteBloques())
+            {
                 Lose("No hay alguna zona de programacion o bloques en alguna zona de programacion");
                 return;
             }
