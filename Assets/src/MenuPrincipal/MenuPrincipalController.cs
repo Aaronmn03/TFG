@@ -21,9 +21,9 @@ public class MenuPrincipalController : MonoBehaviour
         panelAyuda = GameObject.Find("Ayuda");
         buttonDesbloquearNiveles = GameObject.Find("ButtonDesbloquearNiveles");
         #if DEVELOPMENT_BUILD || UNITY_EDITOR
-            botonDesbloquear.SetActive(true);
+            buttonDesbloquearNiveles.SetActive(true);
         #else
-            botonDesbloquear.SetActive(false);
+            buttonDesbloquearNiveles.SetActive(false);
         #endif
         MenuPrincipal();
     }
