@@ -90,7 +90,8 @@ public abstract class BloqueControl : Bloque
 
         if (colliderLateral != null){
             Vector3 desplazamiento = lateral.localPosition;
-            lateral.localPosition = new Vector3(CalcularNuevaPosicionLateral(), lateral.localPosition.y, lateral.localPosition.z);
+            float escalaX = centro.localScale.x;
+            lateral.localPosition = new Vector3(-0.009f * escalaX + 0.9f, lateral.localPosition.y, lateral.localPosition.z);
             colliderLateral.center += new Vector3((lateral.localPosition - desplazamiento).x * 0.5f, 0, 0);
         }
         
@@ -98,15 +99,15 @@ public abstract class BloqueControl : Bloque
         CentrarCondicion();
         ControlarTextura();
     }
-    private float CalcularNuevaPosicionLateral(){
-        return lateral.parent.InverseTransformPoint(centro.GetComponent<Renderer>().bounds.max).x;
-    }
-    private void CentrarCondicion(){
+    
+    private void CentrarCondicion()
+    {
         float centroRealX = centro.GetComponent<Renderer>().bounds.center.x;
         Transform transformCollider = colliderCondicion.transform;
         transformCollider.position = new Vector3(centroRealX, transformCollider.position.y, transformCollider.position.z);
-        if(condicion != null){
-            condicion.GetComponent<BloqueArrastrable>().Move(transformCollider.position - new Vector3(0,0,0.05f));
+        if (condicion != null)
+        {
+            condicion.GetComponent<BloqueArrastrable>().Move(transformCollider.position - new Vector3(0, 0, 0.05f));
         }
     }
 
