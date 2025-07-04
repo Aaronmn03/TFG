@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems; 
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class IUNivelController : MonoBehaviour
 {
@@ -55,9 +56,14 @@ public class IUNivelController : MonoBehaviour
         playCanvas.SetActive(true);
     }
 
-    public void Win(){
+    public void Win(bool endGame){
         winCanvas.SetActive(true);
         playCanvas.SetActive(false);
+        if (endGame)
+        {
+            winCanvas.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "HAS COMPLETADO TODOS LOS NIVELES";
+            winCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        }
     }
 
     public void Lose(){

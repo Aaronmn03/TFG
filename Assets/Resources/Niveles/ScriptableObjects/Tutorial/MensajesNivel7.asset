@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23e68548a882cf498f2066d939946f4, type: 3}
+  m_Name: MensajesNivel7
+  m_EditorClassIdentifier: 
+  id: 6
+  mensajesBasicos:
+  - Tenemos un nuevo bloque control, lo llamaremos bucle
+  - "En el mientras la condici\xF3n sea verdadera se realizaran las acciones de dentro"
+  - "Si probamos a pulsar sobre la tienda de campa\xF1a tendremos una variable que
+    contendr\xE1 la posicion de la meta"
+  - Tambien dentro de los bloques de las variables hay un bloque que es la posicion
+    actual de nuestro protagonista
+  pistas:
+  - Un ejemplo del bucle seria, mientras no hayan caramelos en una bolsa seguire
+    comiendo uno
+  - Es obligatorio utilizar el bucle

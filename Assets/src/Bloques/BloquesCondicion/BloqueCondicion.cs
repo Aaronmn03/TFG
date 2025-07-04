@@ -112,7 +112,7 @@ public abstract class BloqueCondicion : Bloque, IConnectable
         bool resultado;
         if (valor1 is Vector3 v1 && valor2 is Vector3 v2)
         {
-            float tolerance = 0.075f;
+            float tolerance = 0.09f;
             if (Vector3.Distance(v1, v2) < tolerance)
             {
                 resultado = true;

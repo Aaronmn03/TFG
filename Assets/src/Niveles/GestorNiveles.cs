@@ -20,12 +20,11 @@ public class GestorNiveles : MonoBehaviour
     {
         if (indice < niveles.Count)
         {
-            DatosNivel datos = niveles[indice];
             if (nivelEnEscena != null)
             {
                 nivelEnEscena.AsignarNivel(niveles[nivelActual]);
             }
-            
+
         }
     }
 
@@ -36,13 +35,15 @@ public class GestorNiveles : MonoBehaviour
         {
             CargarNivel(nivelActual);
         }
-        else
-        {
-            Debug.Log("¡Has completado todos los niveles!");
-        }
     }
 
-    public void ReiniciarNivel(){
+    public void ReiniciarNivel()
+    {
         nivelEnEscena.Reiniciar();
+    }
+
+    public int GetLevelCount()
+    {
+        return niveles.Count;
     }
 }

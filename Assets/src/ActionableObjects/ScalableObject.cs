@@ -49,7 +49,6 @@ public class ScalableObject : MonoBehaviour
 
         if (progress >= 1.0f)
         {
-            Debug.Log("Scaling finished");
             transform.localScale = targetScale;
             return false;
         }

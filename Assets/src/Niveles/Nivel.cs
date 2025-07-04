@@ -137,7 +137,12 @@ public class Nivel : MonoBehaviour
                 return;
             }
             win = true;
-            iUNivelController.Win();
+            if (datosNivel.id == GetComponent<GestorNiveles>().GetLevelCount())
+            {
+                iUNivelController.Win(true);
+            }else{
+                iUNivelController.Win(false);   
+            }
             int nivelesPasados = PlayerPrefs.GetInt("MaxLevel");
             if(nivelesPasados <= datosNivel.id){
                 int nuevoNivel = datosNivel.id + 1;
@@ -172,7 +177,6 @@ public class Nivel : MonoBehaviour
         }
         if(!bloquesUsados.Contains(bloque)){
             bloquesUsados.Add(bloque);
-            Debug.Log("Añadimos un nuevo bloque, cantidad actual: " + bloquesUsados.Count + "nombre del bloque añadido: " + bloque.name);
         }
     }
 

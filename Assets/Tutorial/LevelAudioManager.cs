@@ -47,19 +47,19 @@ public class LevelAudioManager : MonoBehaviour
         if (!Directory.Exists(levelFolderPath))
         {
             Directory.CreateDirectory(levelFolderPath);
-            Debug.Log("📁 Carpeta creada: " + levelFolderPath);
+            Debug.Log("Carpeta creada: " + levelFolderPath);
         }
          for (int i = 0; i < tutorialTexts.Count; i++)
         {
             string audioFilePath = Path.Combine(levelFolderPath, "tutorial_" + i + ".mp3"); 
             if (!File.Exists(audioFilePath))
             {
-                Debug.Log($"🎵 Audio {i} no encontrado, descargando...");
+                Debug.Log($"Audio {i} no encontrado, descargando...");
                 yield return StartCoroutine(DownloadAudio(tutorialTexts[i], audioFilePath));
             }
             else
             {
-                Debug.Log($"✅ El audio {i} ya existe: " + audioFilePath);
+                Debug.Log($"El audio {i} ya existe: " + audioFilePath);
             }
         }
     }
@@ -84,7 +84,7 @@ public class LevelAudioManager : MonoBehaviour
             if (audioData != null && audioData.Length > 0)
             {
                 File.WriteAllBytes(filePath, audioData);
-                Debug.Log("✅ Audio descargado en: " + filePath);
+                Debug.Log("Audio descargado en: " + filePath);
             }
             else
             {
@@ -99,16 +99,16 @@ public class LevelAudioManager : MonoBehaviour
     }
     public void PlayAudio(int levelNumber, int currentMessageIndex)
     {
-        Debug.Log($"▶️ Iniciando PlayAudio con levelNumber: {levelNumber + 1}, currentMessageIndex: {currentMessageIndex}");
+        Debug.Log($"Iniciando PlayAudio con levelNumber: {levelNumber + 1}, currentMessageIndex: {currentMessageIndex}");
         AudioClip audioClip = Resources.Load<AudioClip>($"Tutorial/Nivel_{levelNumber + 1}/tutorial_{currentMessageIndex}");
 
         if (audioClip != null)
         {
-            Debug.Log("✅ Archivo de audio encontrado, procediendo a reproducir.");
+            Debug.Log("Archivo de audio encontrado, procediendo a reproducir.");
 
             if (currentAudioSource != null && currentAudioSource.isPlaying)
             {
-                Debug.Log("⏹️ Deteniendo y eliminando el audio anterior.");
+                Debug.Log("Deteniendo y eliminando el audio anterior.");
                 currentAudioSource.Stop();
                 Destroy(currentAudioSource);
                 currentAudioSource = null;

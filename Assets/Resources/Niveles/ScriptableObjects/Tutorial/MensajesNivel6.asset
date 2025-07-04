@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23e68548a882cf498f2066d939946f4, type: 3}
+  m_Name: MensajesNivel6
+  m_EditorClassIdentifier: 
+  id: 5
+  mensajesBasicos:
+  - En este caso tenemos algo muy parecido al nivel anterior con el bloque IF
+  - Tenemos dos nuevos bloques de accion
+  - "Uno servira para hacer al personaje que lo use se haga mas peque\xF1o"
+  - Mientras que el otro hara que sea mas grande, dependiendo de las flechas
+  pistas:
+  - Si no entiendes bien el IF, vuelve al nivel anterior para interiorizar mejor
+    ese bloque
